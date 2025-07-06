@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ownersheep – Own. Predict. Monetize.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -13,112 +13,120 @@
       font-family: 'Inter', sans-serif;
     }
     body {
-      background: #0d0d0d;
-      color: #fff;
+      background: #ffffff;
+      color: #333;
+      font-size: 14px;
       line-height: 1.6;
       overflow-x: hidden;
     }
     header {
-      padding: 2rem;
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1a1a1a;
-      border-bottom: 1px solid #333;
+      background: #f8f8f8;
+      border-bottom: 1px solid #e0e0e0;
     }
     .logo {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      color: #00ffc8;
+      color: #000;
     }
     nav a {
-      color: #fff;
+      color: #000;
       margin-left: 1.5rem;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 500;
       transition: color 0.3s ease;
     }
     nav a:hover {
-      color: #00ffc8;
+      color: #00b8a9;
     }
     .hero {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 5rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
-      background: radial-gradient(circle at center, #121212, #000);
     }
     .hero h1 {
-      font-size: 3rem;
-      max-width: 800px;
+      font-size: 2.2rem;
+      max-width: 700px;
+      color: #000;
     }
     .hero p {
       margin-top: 1rem;
-      max-width: 600px;
-      color: #ccc;
+      max-width: 550px;
+      color: #555;
     }
     .cta {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
     .cta a {
-      padding: 1rem 2rem;
-      background: #00ffc8;
-      color: #000;
-      font-weight: 700;
-      border-radius: 50px;
+      padding: 0.8rem 1.5rem;
+      background: #00b8a9;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 25px;
       text-decoration: none;
       transition: background 0.3s ease;
     }
     .cta a:hover {
-      background: #00d1a3;
+      background: #009f91;
     }
     .features {
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      background: #111;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      background: #fafafa;
     }
     .feature-card {
-      background: #1d1d1d;
-      border: 1px solid #333;
-      border-radius: 1rem;
-      padding: 2rem;
-      transition: transform 0.3s ease;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      transition: box-shadow 0.3s ease;
     }
     .feature-card:hover {
-      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
     }
     .feature-card h3 {
-      color: #00ffc8;
-      margin-bottom: 1rem;
+      color: #00b8a9;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
     }
     .apk-download {
-      background: #000;
+      background: #fff;
       text-align: center;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
     }
     .apk-download h2 {
-      font-size: 2rem;
+      font-size: 1.6rem;
       margin-bottom: 1rem;
+      color: #000;
     }
     .apk-download a {
-      background: #00ffc8;
-      padding: 1rem 2rem;
-      color: #000;
-      font-weight: bold;
-      border-radius: 50px;
+      background: #00b8a9;
+      padding: 0.8rem 1.5rem;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 25px;
       text-decoration: none;
       display: inline-block;
     }
+    .apk-download p {
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
     footer {
-      background: #1a1a1a;
-      padding: 2rem;
+      background: #f2f2f2;
+      padding: 1.5rem;
       text-align: center;
-      font-size: 0.9rem;
-      color: #666;
+      font-size: 0.8rem;
+      color: #777;
     }
   </style>
 </head>
@@ -134,7 +142,7 @@
 
   <section class="hero">
     <h1>Turn Your Ideas into Digital Assets</h1>
-    <p>Own your intellectual capital, visualize it, value it, and prepare for the human-brand IPO era.</p>
+    <p>Ownersheep lets you submit your thoughts, get AI-powered feedback, and own your ideas as real intellectual property.</p>
     <div class="cta">
       <a href="#download">Download Android App</a>
     </div>
@@ -142,26 +150,34 @@
 
   <section class="features" id="features">
     <div class="feature-card">
-      <h3>AI-Powered Prompt Analysis</h3>
-      <p>Submit your original idea or method and get instant feedback, valuation, and ownership rights through AI.</p>
+      <h3>AI-Powered Prompt Evaluation</h3>
+      <p>Submit ideas, concepts, methods or frameworks and receive instant analysis with trend potential, uniqueness, and value prediction.</p>
     </div>
     <div class="feature-card">
-      <h3>Ownership Certificate</h3>
-      <p>Each approved prompt gives you a certificate of digital ownership — build your portfolio of valuable IP.</p>
+      <h3>Auto Metadata Generation</h3>
+      <p>AI automatically creates a title, description, tags, hashtags, and contextual insights for every submitted prompt.</p>
     </div>
     <div class="feature-card">
-      <h3>Visualized Intelligence</h3>
-      <p>Get auto-generated visuals like mind maps, SWOTs, and trend graphs to enhance your idea's potential.</p>
+      <h3>Prompt Visualization</h3>
+      <p>Access mind maps, trend graphs, and SWOT visuals to understand the scope and strength of your ideas.</p>
     </div>
     <div class="feature-card">
-      <h3>Mini-IPOs & Human Brand Launches</h3>
-      <p>Once your portfolio grows, prepare to launch micro-investments and human IPOs in the next-gen economy.</p>
+      <h3>Build Your Idea Portfolio</h3>
+      <p>Create your own digital library of prompts that reflect your intellectual capital and creative evolution.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Gamified Experience</h3>
+      <p>Earn badges and unlock milestones as you submit more ideas and level up your innovation score.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Futuristic Ownership Model</h3>
+      <p>Prepare for an era where individual intelligence is an asset class—start documenting your ideas now.</p>
     </div>
   </section>
 
   <section class="apk-download" id="download">
     <h2>Get the Android App</h2>
-    <p>Start turning thoughts into tradable digital value. Download the APK now and own your intelligence.</p>
+    <p>Start turning your thoughts into digital assets. Download Ownersheep now and take control of your creative capital.</p>
     <a href="/downloads/ownersheep-latest.apk" download>📲 Download APK</a>
   </section>
 
