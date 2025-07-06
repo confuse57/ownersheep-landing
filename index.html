@@ -2,18 +2,171 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OwnerSheep – By Tagbudy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ownersheep – Own. Predict. Monetize.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 50px; background: #f7f7f7; }
-    h1 { font-size: 3em; color: #333; }
-    p { font-size: 1.2em; color: #666; max-width: 600px; margin: 0 auto; }
-    a { display: inline-block; margin-top: 30px; text-decoration: none; padding: 10px 20px; background: #000; color: #fff; border-radius: 5px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    header {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a1a1a;
+      border-bottom: 1px solid #333;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00ffc8;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #00ffc8;
+    }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5rem 2rem;
+      text-align: center;
+      background: radial-gradient(circle at center, #121212, #000);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      max-width: 800px;
+    }
+    .hero p {
+      margin-top: 1rem;
+      max-width: 600px;
+      color: #ccc;
+    }
+    .cta {
+      margin-top: 2rem;
+    }
+    .cta a {
+      padding: 1rem 2rem;
+      background: #00ffc8;
+      color: #000;
+      font-weight: 700;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .cta a:hover {
+      background: #00d1a3;
+    }
+    .features {
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      background: #111;
+    }
+    .feature-card {
+      background: #1d1d1d;
+      border: 1px solid #333;
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    .feature-card h3 {
+      color: #00ffc8;
+      margin-bottom: 1rem;
+    }
+    .apk-download {
+      background: #000;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .apk-download h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .apk-download a {
+      background: #00ffc8;
+      padding: 1rem 2rem;
+      color: #000;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    footer {
+      background: #1a1a1a;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
   </style>
 </head>
 <body>
-  <h1>👑 OwnerSheep</h1>
-  <p>Redefining ownership in the digital age. A unique initiative under Tagbudy Services Pvt. Ltd.</p>
-  <a href="mailto:bhavin.patel@tagbudy.com">Contact Us</a>
+  <header>
+    <div class="logo">OWNERSHEEP</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#download">Download</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Turn Your Ideas into Digital Assets</h1>
+    <p>Own your intellectual capital, visualize it, value it, and prepare for the human-brand IPO era.</p>
+    <div class="cta">
+      <a href="#download">Download Android App</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="feature-card">
+      <h3>AI-Powered Prompt Analysis</h3>
+      <p>Submit your original idea or method and get instant feedback, valuation, and ownership rights through AI.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Ownership Certificate</h3>
+      <p>Each approved prompt gives you a certificate of digital ownership — build your portfolio of valuable IP.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Visualized Intelligence</h3>
+      <p>Get auto-generated visuals like mind maps, SWOTs, and trend graphs to enhance your idea's potential.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Mini-IPOs & Human Brand Launches</h3>
+      <p>Once your portfolio grows, prepare to launch micro-investments and human IPOs in the next-gen economy.</p>
+    </div>
+  </section>
+
+  <section class="apk-download" id="download">
+    <h2>Get the Android App</h2>
+    <p>Start turning thoughts into tradable digital value. Download the APK now and own your intelligence.</p>
+    <a href="/downloads/ownersheep-latest.apk" download>📲 Download APK</a>
+  </section>
+
+  <footer id="contact">
+    <p>© 2025 Ownersheep. Built with purpose by Bhavin Patel.</p>
+  </footer>
 </body>
 </html>
