@@ -261,23 +261,12 @@
 <body>
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+      <!-- Logo only, Responsive Menu removed -->
       <div class="logo" aria-label="Ownersheep Logo and Title">
         <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep.png" alt="Ownersheep Logo" />
         <span style="color:#111;font-weight:bold;">Ownersheep</span>
       </div>
-      <!-- Responsive Menu -->
-      <input type="checkbox" id="nav-toggle" style="display:none;">
-      <label for="nav-toggle" id="nav-toggle-label" style="display:none;cursor:pointer;padding:10px 12px;">
-        <span style="display:block;width:26px;height:3px;background:#111;margin:5px 0;border-radius:2px;"></span>
-        <span style="display:block;width:26px;height:3px;background:#111;margin:5px 0;border-radius:2px;"></span>
-        <span style="display:block;width:26px;height:3px;background:#111;margin:5px 0;border-radius:2px;"></span>
-      </label>
-      <ul class="main-menu" style="display:flex;gap:2.2rem;align-items:center;list-style:none;margin:0;">
-        <li><a href="#features" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Features</a></li>
-        <li><a href="#valuation" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Valuation</a></li>
-        <li><a href="#download" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Download</a></li>
-        <li><a href="#contact" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Contact</a></li>
-      </ul>
+      <!-- Responsive Menu removed -->
     </div>
     <style>
       @media (max-width: 900px) {
@@ -347,9 +336,9 @@
   <!-- IDEA HEADER SECTION: moved above hero, improved design -->
   <header class="idea-header" style="background:linear-gradient(90deg,#e0f2ff 60%,#f8fafc 100%);padding:1.0rem 0 2.2rem 0;">
     <div class="container" style="max-width:600px;margin:auto;">
-      <div style="position:relative;background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(15,98,254,0.10);padding:2.2rem 2rem 1.7rem 2rem;">
+      <div style="position:relative;background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(15,98,254,0.10);padding:3.2rem 2rem 1.7rem 2rem;">
         <!-- Small badge at top-right -->
-        <span style="position: absolute; left: 25px; top: 4px; z-index: 2; font-size: 14px; font-weight: bold; padding: 2px 10px; border-radius: 14px; box-shadow: 0 1px 4px rgba(15, 98, 254, 0.08); letter-spacing: 0.01em; background:#e0e0e0; color:#111;">
+        <span style="position: absolute; left: 25px; top: 12px; z-index: 2; font-size: 14px; font-weight: bold; padding: 2px 10px; border-radius: 14px; box-shadow: 0 1px 4px rgba(15, 98, 254, 0.08); letter-spacing: 0.01em; background:#e0e0e0; color:#111;">
           Your Idea / Prompt
         </span>
        
@@ -361,26 +350,37 @@
           <span id="typing-cursor" style="position:absolute;right:1.5rem;bottom:1.2rem;font-size:1.3rem;color:#0f62fe;opacity:1;">|</span>
         </div>
         <!-- AI Response Card -->
-        <div id="ai-chat-response" style="display:none;max-width:420px;margin:28px auto 0;">
-          <div style="display:flex;align-items:flex-start;gap:0.7rem;">
-            <div style="flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#e0f2ff;display:flex;align-items:center;justify-content:center;">
-              <svg width="22" height="22" fill="#0f62fe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>
+        <div id="ai-chat-response" style="display:none;max-width:420px;margin:18px auto 0;">
+          <div style="display:flex;align-items:flex-start;gap:0.6rem;">
+            <!-- AI avatar -->
+            <div style="flex-shrink:0;width:34px;height:34px;border-radius:50%;background:#e0e0e0;display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" fill="#111" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>
             </div>
-            <div style="background:#f8fafc;border-radius:0.8rem 0.8rem 0.8rem 0.3rem;padding:0.7rem 1rem;box-shadow:0 1px 6px rgba(15,98,254,0.04);flex:1;max-width:340px;">
-              <div style="font-size:0.98rem;font-weight:600;margin-bottom:0.18rem;color:#111;">AI</div>
-              <div>
-                <div style="font-size:0.98rem;font-weight:500;margin-bottom:0.13rem;">💡 <span style="color:#111;">Estimated Value:</span></div>
-                <div class="valuation-price" id="animated-value-chat" style="font-size:1.18rem;margin:0 0 0.2rem 0;color:#111;font-weight:bold;"></div>
-                <div style="color:#444;font-size:0.92rem;line-height:1.4;">
-                  <span style="display:block;">AI has analyzed your idea.</span>
-                  <span style="display:block;">You now own this as a digital asset!</span>
-                </div>
-                <div id="ai-extra-msg" style="color:#111;font-size:0.92rem;line-height:1.5;margin-top:0.7rem;display:none;font-weight:bold;">
-                  <span style="display:block;">Your ₹350 idea doesn't just sit in a notebook.</span>
-                </div>
-                <div id="ai-monetize-msg" style="color:#111;font-size:0.92rem;line-height:1.5;margin-top:0.3rem;display:none;font-weight:bold;">
-                  <span style="display:block;">Monetize your idea and let it grow like a stock.</span>
-                </div>
+            <!-- Chat bubble -->
+            <div style="background:#f6f6f6;border-radius:1.1rem 1.1rem 1.1rem 0.5rem;padding:0.65rem 1.05rem 0.7rem 1.05rem;box-shadow:0 1px 6px rgba(0,0,0,0.04);flex:1;max-width:340px;position:relative;">
+              <div style="font-size:0.97rem;font-weight:600;color:#111;margin-bottom:0.12rem;display:flex;align-items:center;gap:0.4rem;">
+                <span style="background:#e0e0e0;color:#111;border-radius:0.7rem;padding:2px 10px 2px 8px;font-size:0.93rem;font-weight:700;letter-spacing:0.01em;">AI</span>
+                <span style="font-size:0.93rem;font-weight:500;color:#888;">responded</span>
+              </div>
+              <div style="font-size:0.98rem;font-weight:500;margin-bottom:0.13rem;">
+                💡 <span style="color:#111;">Estimated Value:</span>
+                <span class="valuation-price" id="animated-value-chat" style="font-size:1.13rem;margin-left:0.3rem;color:#111;font-weight:bold;"></span>
+              </div>
+              <div style="color:#444;font-size:0.93rem;line-height:1.5;margin-bottom:0.2rem;">
+                <span style="display:block;">AI has analyzed your idea and assigned a value.</span>
+                <span style="display:block;">You now own this as a digital asset!</span>
+              </div>
+              <div id="ai-extra-msg" style="color:#111;font-size:0.92rem;line-height:1.5;margin-top:0.5rem;display:none;font-weight:bold;">
+                <span style="display:block;">Your ₹350 idea doesn't just sit in a notebook.</span>
+              </div>
+              <div id="ai-monetize-msg" style="color:#111;font-size:0.92rem;line-height:1.5;margin-top:0.2rem;display:none;font-weight:bold;">
+                <span style="display:block;">Monetize your idea and let it grow like a stock.</span>
+              </div>
+              <!-- Submit idea button, hidden by default, shown after AI response -->
+              <div id="ai-submit-btn-wrap" style="display:none;margin-top:1.1rem;text-align:center;">
+                <button id="ai-submit-btn" style="background:#111;color:#fff;border:none;padding:0.7rem 2.1rem;font-size:1.07rem;font-weight:bold;border-radius:0.7rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.07);transition:background 0.2s;">
+                  Submit idea
+                </button>
               </div>
             </div>
           </div>
@@ -522,15 +522,20 @@ function typeIdea() {
 }
 // Remove/replace showValue and animateValue for chat style
 function showValueChat() {
-  aiChat.style.display = 'block';
-  animateValueChat(0, 350, 900);
-  setTimeout(() => {
-    document.getElementById('ai-extra-msg').style.display = 'block';
+    aiChat.style.display = 'block';
+    animateValueChat(0, 350, 900);
     setTimeout(() => {
-      document.getElementById('ai-monetize-msg').style.display = 'block';
-    }, 1200);
-  }, 1500);
-}
+      document.getElementById('ai-extra-msg').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('ai-monetize-msg').style.display = 'block';
+        // Show submit button after all AI messages
+        setTimeout(() => {
+          var btnWrap = document.getElementById('ai-submit-btn-wrap');
+          if (btnWrap) btnWrap.style.display = 'block';
+        }, 700);
+      }, 1200);
+    }, 1500);
+  }
 function animateValueChat(start, end, duration) {
   let startTime = null;
   function animate(ts) {
@@ -584,6 +589,65 @@ window.addEventListener('DOMContentLoaded', () => {
     <div class="container">
       © 2025 Ownersheep Platform. Reclaim your ideas.
     </div>
+    <div style="background:#f8fafc;border-top:1px solid #e2e8f0;margin-top:2.5rem;padding:2.2rem 0 1.5rem 0;">
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem;">
+        <div style="min-width:150px;">
+          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Product</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li><a href="#features" style="color:#444;text-decoration:none;">Features</a></li>
+            <li><a href="#valuation" style="color:#444;text-decoration:none;">Idea Valuation</a></li>
+            <li><a href="#download" style="color:#444;text-decoration:none;">Download App</a></li>
+            <li><a href="#pricing" style="color:#444;text-decoration:none;">Pricing</a></li>
+            <li><a href="#roadmap" style="color:#444;text-decoration:none;">Roadmap</a></li>
+          </ul>
+        </div>
+        <div style="min-width:150px;">
+          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Company</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li><a href="#about" style="color:#444;text-decoration:none;">About Us</a></li>
+            <li><a href="#team" style="color:#444;text-decoration:none;">Team</a></li>
+            <li><a href="#careers" style="color:#444;text-decoration:none;">Careers</a></li>
+            <li><a href="#blog" style="color:#444;text-decoration:none;">Blog</a></li>
+            <li><a href="#press" style="color:#444;text-decoration:none;">Press</a></li>
+          </ul>
+        </div>
+        <div style="min-width:150px;">
+          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Support</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li><a href="#help" style="color:#444;text-decoration:none;">Help Center</a></li>
+            <li><a href="#faq" style="color:#444;text-decoration:none;">FAQ</a></li>
+            <li><a href="#contact" style="color:#444;text-decoration:none;">Contact</a></li>
+            <li><a href="#support" style="color:#444;text-decoration:none;">Support</a></li>
+            <li><a href="#privacy" style="color:#444;text-decoration:none;">Privacy Policy</a></li>
+            <li><a href="#terms" style="color:#444;text-decoration:none;">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div style="min-width:150px;">
+          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Account</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li><a href="#login" style="color:#444;text-decoration:none;">Login</a></li>
+            <li><a href="#register" style="color:#444;text-decoration:none;">Register</a></li>
+            <li><a href="#dashboard" style="color:#444;text-decoration:none;">Dashboard</a></li>
+            <li><a href="#portfolio" style="color:#444;text-decoration:none;">My Portfolio</a></li>
+            <li><a href="#settings" style="color:#444;text-decoration:none;">Settings</a></li>
+          </ul>
+        </div>
+        <div style="min-width:150px;">
+          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Connect</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li><a href="mailto:support@ownersheep.com" style="color:#444;text-decoration:none;">Email Us</a></li>
+            <li><a href="https://twitter.com/" target="_blank" style="color:#444;text-decoration:none;">Twitter</a></li>
+            <li><a href="https://linkedin.com/" target="_blank" style="color:#444;text-decoration:none;">LinkedIn</a></li>
+            <li><a href="https://facebook.com/" target="_blank" style="color:#444;text-decoration:none;">Facebook</a></li>
+            <li><a href="https://instagram.com/" target="_blank" style="color:#444;text-decoration:none;">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align:center;color:#aaa;font-size:0.93rem;margin-top:2.2rem;">
+        Site Map &mdash; All rights reserved &copy; 2025 Ownersheep
+      </div>
+    </div>
   </footer>
 </body>
+</html>
 </html>
