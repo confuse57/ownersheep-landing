@@ -3,188 +3,587 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ownersheep – Own. Predict. Monetize.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Ownersheep - Own Your Ideas</title>
+  <meta name="description" content="Turn your ideas into valuable digital assets. Submit, evaluate, and monetize your thoughts with Ownersheep's AI-powered valuation platform." />
+  <meta property="og:title" content="Ownersheep - Own Your Ideas" />
+  <meta property="og:description" content="An AI platform to turn ideas into digital assets. Evaluate, own, and monetize your creativity." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep.png" />
+  <meta property="og:url" content="https://ownersheep.com" />
+  <meta name="theme-color" content="#0f62fe" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep.png" />
   <style>
+    :root {
+      --primary: #111; /* changed from #0f62fe to black/dark */
+      --bg-light: #f8fafc;
+      --bg-gradient: linear-gradient(to right, #f0f4f8, #ffffff);
+      --text-dark: #111;
+      --text-medium: #444;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
     }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: #ffffff;
-      color: #333;
-      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: var(--text-dark);
       line-height: 1.6;
-      overflow-x: hidden;
     }
-    header {
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #f8f8f8;
-      border-bottom: 1px solid #e0e0e0;
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
     }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .navbar {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 1rem 0;
+      background-color: #fff;
+    }
+
     .logo {
-      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       font-weight: 700;
-      color: #000;
+      font-size: 1.5rem;
     }
-    nav a {
-      color: #000;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #00b8a9;
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 30px;
     }
     .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 2rem;
+      background: linear-gradient(to right, #f0f4f8, #ffffff);
+      /* padding: 4rem 0; */
       text-align: center;
     }
     .hero h1 {
-      font-size: 2.2rem;
-      max-width: 700px;
-      color: #000;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    .hero h1 span {
+      color: var(--primary); /* was #0f62fe */
+      font-weight: bold;
     }
     .hero p {
-      margin-top: 1rem;
-      max-width: 550px;
-      color: #555;
-    }
-    .cta {
-      margin-top: 1.5rem;
-    }
-    .cta a {
-      padding: 0.8rem 1.5rem;
-      background: #ffffff;
-      color: #000000;
-      font-weight: 600;
-      border-radius: 25px;
-      text-decoration: none;
-      transition: background 0.3s ease;
-      border: 1px solid black;
-    }
-    .cta a:hover {
-      background: #fffffff;
+      font-size: 1.125rem;
+      color: #444;
+      max-width: 700px;
+      margin: 1rem auto 0;
     }
     .features {
-      padding: 3rem 2rem;
+      /* padding: 4rem 0; */
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: var(--primary); /* make all section titles dark/bold */
+    }
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      background: #fafafa;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2.2rem 2.2rem;
+      margin-top: 1.2rem;
     }
     .feature-card {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      transition: box-shadow 0.3s ease;
+      border: 0;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+      padding: 2.1rem 1.5rem 1.7rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.7rem;
+      background: linear-gradient(120deg, #f8fafc 70%, #f0f4f8 100%);
     }
     .feature-card:hover {
-      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      transform: translateY(-5px);
     }
     .feature-card h3 {
-      color: #000000;
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
+      font-size: 1.125rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: var(--primary); /* make feature titles dark/bold */
     }
-    .apk-download {
-      background: #fff;
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+    .valuation {
+      background-color: #f8fafc;
+      padding: 4rem 0;
+    }
+    .example-text {
       text-align: center;
-      padding: 3rem 2rem;
-    }
-    .apk-download h2 {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-      color: #000;
-    }
-    .apk-download a {
-      background: #ffffff;
-      padding: 0.8rem 1.5rem;
-      color: #000000;
-      font-weight: 600;
-      border-radius: 25px;
-      text-decoration: none;
-      display: inline-block;
-      border: 1px solid black;
-    }
-    .apk-download p {
-      color: #555;
       max-width: 600px;
-      margin: 0 auto 1.5rem;
+      margin: 1rem auto 2rem;
+      color: #555;
     }
-    footer {
-      background: #f2f2f2;
-      padding: 1.5rem;
+    .valuation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .valuation-item {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e2e8f0;
+    }
+    .valuation-summary {
+      background-color: #e0f2ff;
+      padding: 2rem;
       text-align: center;
-      font-size: 0.8rem;
+      border-radius: 1rem;
+    }
+    .valuation-price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary); /* was #0f62fe */
+      margin: 0.5rem 0;
+    }
+    .cta {
+      /* padding: 4rem 0; */
+      text-align: center;
+    }
+    .btn-download {
+      display: inline-block;
+      background-color: var(--primary); /* was #0f62fe */
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+    }
+    .btn-download:hover {
+      background-color: #222; /* darker on hover */
+    }
+    .footer {
+      border-top: 1px solid #e2e8f0;
+      padding: 2rem 0;
+      font-size: 0.875rem;
+      text-align: center;
       color: #777;
     }
+    .valuation-process {
+  background: #f8fafc;
+  padding: 4rem 0 2rem 0;
+}
+.valuation-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.valuation-step {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  max-width: 320px;
+  flex: 1 1 220px;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  border-left: 5px solid #0f62fe;
+  position: relative;
+}
+.step-number {
+  background: var(--primary); /* was #0f62fe */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(15,98,254,0.08);
+}
+.step-content strong {
+  font-size: 1.1rem;
+  color: var(--primary); /* was #0f62fe */
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+.step-content p, .step-content ul {
+  color: #444;
+  font-size: 1rem;
+  margin: 0.2rem 0 0 0;
+}
+.step-content ul {
+  padding-left: 1.1rem;
+  margin-top: 0.3rem;
+}
+.valuation-price {
+  color: var(--primary); /* was #0f62fe */
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+@media (max-width: 900px) {
+  .valuation-steps { flex-direction: column; align-items: stretch; }
+  .valuation-step { max-width: 100%; }
+}
+@keyframes fadeInVal {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">OWNERSHEEP</div>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#download">Download</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+      <div class="logo" aria-label="Ownersheep Logo and Title">
+        <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep.png" alt="Ownersheep Logo" />
+        <span style="color:#111;font-weight:bold;">Ownersheep</span>
+      </div>
+      <!-- Responsive Menu -->
+      <input type="checkbox" id="nav-toggle" style="display:none;">
+      <label for="nav-toggle" id="nav-toggle-label" style="display:none;cursor:pointer;padding:10px 12px;">
+        <span style="display:block;width:26px;height:3px;background:#111;margin:5px 0;border-radius:2px;"></span>
+        <span style="display:block;width:26px;height:3px;background:#111;margin:5px 0;border-radius:2px;"></span>
+        <span style="display:block;width:26px;height:3px;background:#111;margin:5px 0;border-radius:2px;"></span>
+      </label>
+      <ul class="main-menu" style="display:flex;gap:2.2rem;align-items:center;list-style:none;margin:0;">
+        <li><a href="#features" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Features</a></li>
+        <li><a href="#valuation" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Valuation</a></li>
+        <li><a href="#download" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Download</a></li>
+        <li><a href="#contact" class="menu-link" style="color:#111;font-weight:bold;text-decoration:none;font-size:1.07rem;">Contact</a></li>
+      </ul>
+    </div>
+    <style>
+      @media (max-width: 900px) {
+        .main-menu {
+          position: absolute;
+          top: 62px;
+          right: 0;
+          background: #fff;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+          border-radius: 0 0 0.7rem 0.7rem;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          width: 180px;
+          padding: 0.7rem 0 0.7rem 0.7rem;
+          display: none;
+          z-index: 100;
+        }
+        #nav-toggle:checked ~ .main-menu {
+          display: flex !important;
+        }
+        #nav-toggle-label {
+          display: block !important;
+        }
+      }
+      @media (min-width: 901px) {
+        #nav-toggle-label { display: none !important; }
+        .main-menu { display: flex !important; position:static; box-shadow:none; background:none; border-radius:0; padding:0; }
+      }
+    </style>
+    <script>
+      // Mobile menu: open on hamburger, close on link click or outside click
+      document.addEventListener('DOMContentLoaded', function() {
+        var navToggle = document.getElementById('nav-toggle');
+        var menuLinks = document.querySelectorAll('.main-menu a');
+        var navLabel = document.getElementById('nav-toggle-label');
+        // Hide menu by default on mobile
+        function closeMenu() { navToggle.checked = false; }
+        // Close menu on link click (mobile)
+        menuLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+            if(window.innerWidth <= 900) closeMenu();
+          });
+        });
+        // Open menu on hamburger click
+        navLabel.addEventListener('click', function(e) {
+          e.stopPropagation();
+          navToggle.checked = !navToggle.checked;
+        });
+        // Close menu if click outside menu/hamburger
+        document.addEventListener('click', function(e) {
+          if(window.innerWidth > 900) return;
+          var menu = document.querySelector('.main-menu');
+          if (
+            navToggle.checked &&
+            !menu.contains(e.target) &&
+            e.target !== navLabel &&
+            e.target !== navToggle
+          ) {
+            closeMenu();
+          }
+        });
+      });
+    </script>
+  </nav>
+
+  <!-- IDEA HEADER SECTION: moved above hero, improved design -->
+  <header class="idea-header" style="background:linear-gradient(90deg,#e0f2ff 60%,#f8fafc 100%);padding:1.0rem 0 2.2rem 0;">
+    <div class="container" style="max-width:600px;margin:auto;">
+      <div style="position:relative;background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(15,98,254,0.10);padding:2.2rem 2rem 1.7rem 2rem;">
+        <!-- Small badge at top-right -->
+        <span style="position: absolute; left: 25px; top: 4px; z-index: 2; font-size: 14px; font-weight: bold; padding: 2px 10px; border-radius: 14px; box-shadow: 0 1px 4px rgba(15, 98, 254, 0.08); letter-spacing: 0.01em; background:#e0e0e0; color:#111;">
+          Your Idea / Prompt
+        </span>
+       
+        
+        <div style="position:relative;">
+          <textarea id="demo-idea" readonly
+            style="width:100%;height:110px;resize:none;padding:1.1rem 1.3rem 1.1rem 1.3rem;font-size:1.09rem;line-height:1.7;border:1.7px solid #111;border-radius:0.8rem;background:linear-gradient(120deg,#f0f4ff 60%,#e0f2ff 100%);color:#222;letter-spacing:0.01em;overflow-x:auto;overflow-y:auto;box-shadow:0 2px 16px rgba(15,98,254,0.09);transition:box-shadow 0.2s;font-weight:bold;">
+          </textarea>
+          <span id="typing-cursor" style="position:absolute;right:1.5rem;bottom:1.2rem;font-size:1.3rem;color:#0f62fe;opacity:1;">|</span>
+        </div>
+        <!-- AI Response Card -->
+        <div id="ai-chat-response" style="display:none;max-width:420px;margin:28px auto 0;">
+          <div style="display:flex;align-items:flex-start;gap:0.7rem;">
+            <div style="flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#e0f2ff;display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" fill="#0f62fe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /></svg>
+            </div>
+            <div style="background:#f8fafc;border-radius:0.8rem 0.8rem 0.8rem 0.3rem;padding:0.7rem 1rem;box-shadow:0 1px 6px rgba(15,98,254,0.04);flex:1;max-width:340px;">
+              <div style="font-size:0.98rem;font-weight:600;margin-bottom:0.18rem;color:#111;">AI</div>
+              <div>
+                <div style="font-size:0.98rem;font-weight:500;margin-bottom:0.13rem;">💡 <span style="color:#111;">Estimated Value:</span></div>
+                <div class="valuation-price" id="animated-value-chat" style="font-size:1.18rem;margin:0 0 0.2rem 0;color:#111;font-weight:bold;"></div>
+                <div style="color:#444;font-size:0.92rem;line-height:1.4;">
+                  <span style="display:block;">AI has analyzed your idea.</span>
+                  <span style="display:block;">You now own this as a digital asset!</span>
+                </div>
+                <div id="ai-extra-msg" style="color:#111;font-size:0.92rem;line-height:1.5;margin-top:0.7rem;display:none;font-weight:bold;">
+                  <span style="display:block;">Your ₹350 idea doesn't just sit in a notebook.</span>
+                </div>
+                <div id="ai-monetize-msg" style="color:#111;font-size:0.92rem;line-height:1.5;margin-top:0.3rem;display:none;font-weight:bold;">
+                  <span style="display:block;">Monetize your idea and let it grow like a stock.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="container">
+      <h1>Own Your Idea. <span>Shape the Future.</span></h1>
+      <p>Introducing a new-age AI platform where your ideas become real assets. Submit, value, and own your thoughts like intellectual property.</p>
+      <!-- Images row below hero -->
+      <div style="display:flex;justify-content:center;align-items:center;gap:2.2rem;margin:2.5rem auto 0 auto;max-width:700px;flex-wrap:wrap;">
+        <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/idea%20350.png" alt="Idea 350" style="max-width:320px;width:100%;border-radius:1.1rem;box-shadow:0 2px 16px rgba(0,0,0,0.07);background:#fff;">
+        <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/idea%20grow.png" alt="Idea Grow" style="max-width:320px;width:100%;border-radius:1.1rem;box-shadow:0 2px 16px rgba(0,0,0,0.07);background:#fff;">
+      </div>
+    </div>
+  </header>
+  <section class="features">
+  <!-- <div class="container">
+    <h2 class="section-title" style="font-size:2.2rem;letter-spacing:0.01em;color:#111;margin-bottom:1.2rem;font-weight:bold;">
+      🚀 Turn Ideas Into Assets
+    </h2>
+    <div style="font-size:1.13rem;color:#444;text-align:center;max-width:600px;margin:0 auto 2.2rem;font-weight:bold;">
+      Submit, get AI value, and own your ideas as digital assets.
+    </div>
+    <div class="features-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:2.2rem 2.2rem;margin-top:1.2rem;">
+      <div class="feature-card" style="border:0;box-shadow:0 2px 16px rgba(0,0,0,0.07);padding:2.1rem 1.5rem 1.7rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem;background:linear-gradient(120deg,#f8fafc 70%,#f0f4f8 100%);">
+        <span style="font-size:2rem;font-weight:bold;background:#e0e0e0;border-radius:50%;padding:0.5rem 0.8rem 0.5rem 0.8rem;color:#111;margin-bottom:0.2rem;">💡</span>
+        <h3>Submit Original Ideas</h3>
+        <p>Submit original ideas, prompts, questions, solutions, or frameworks</p>
+      </div>
+      <div class="feature-card" style="border:0;box-shadow:0 2px 16px rgba(0,0,0,0.07);padding:2.1rem 1.5rem 1.7rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem;background:linear-gradient(120deg,#f8fafc 70%,#f0f4f8 100%);">
+        <span style="font-size:2rem;font-weight:bold;background:#e0e0e0;border-radius:50%;padding:0.5rem 0.8rem 0.5rem 0.8rem;color:#111;margin-bottom:0.2rem;">🤖</span>
+        <h3>AI Evaluation</h3>
+        <p>AI evaluates your submission's uniqueness, trend potential, and relevance</p>
+      </div>
+      <div class="feature-card" style="border:0;box-shadow:0 2px 16px rgba(0,0,0,0.07);padding:2.1rem 1.5rem 1.7rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem;background:linear-gradient(120deg,#f8fafc 70%,#f0f4f8 100%);">
+        <span style="font-size:2rem;font-weight:bold;background:#e0e0e0;border-radius:50%;padding:0.5rem 0.8rem 0.5rem 0.8rem;color:#111;margin-bottom:0.2rem;">🏷️</span>
+        <h3>Smart Metadata</h3>
+        <p>Get automatic metadata: title, type, tags, insights, categories</p>
+      </div>
+      <div class="feature-card" style="border:0;box-shadow:0 2px 16px rgba(0,0,0,0.07);padding:2.1rem 1.5rem 1.7rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem;background:linear-gradient(120deg,#f8fafc 70%,#f0f4f8 100%);">
+        <span style="font-size:2rem;font-weight:bold;background:#e0e0e0;border-radius:50%;padding:0.5rem 0.8rem 0.5rem 0.8rem;color:#111;margin-bottom:0.2rem;">💰</span>
+        <h3>Idea Valuation</h3>
+        <p>Receive an idea valuation score (ownership value)</p>
+      </div>
+      <div class="feature-card" style="border:0;box-shadow:0 2px 16px rgba(0,0,0,0.07);padding:2.1rem 1.5rem 1.7rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem;background:linear-gradient(120deg,#f8fafc 70%,#f0f4f8 100%);">
+        <span style="font-size:2rem;font-weight:bold;background:#e0e0e0;border-radius:50%;padding:0.5rem 0.8rem 0.5rem 0.8rem;color:#111;margin-bottom:0.2rem;">📁</span>
+        <h3>Digital Portfolio</h3>
+        <p>Build your portfolio of digital ideas</p>
+      </div>
+      <div class="feature-card" style="border:0;box-shadow:0 2px 16px rgba(0,0,0,0.07);padding:2.1rem 1.5rem 1.7rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem;background:linear-gradient(120deg,#f8fafc 70%,#f0f4f8 100%);">
+        <span style="font-size:2rem;font-weight:bold;background:#e0e0e0;border-radius:50%;padding:0.5rem 0.8rem 0.5rem 0.8rem;color:#111;margin-bottom:0.2rem;">🛒</span>
+        <h3>Marketplace (Coming)</h3>
+        <p>Upcoming: Buy/Sell marketplace for intellectual assets</p>
+      </div>
+      <div class="feature-card" style="border:0;box-shadow:0 2px 16px rgba(0,0,0,0.07);padding:2.1rem 1.5rem 1.7rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.7rem;background:linear-gradient(120deg,#f8fafc 70%,#f0f4f8 100%);">
+        <span style="font-size:2rem;font-weight:bold;background:#e0e0e0;border-radius:50%;padding:0.5rem 0.8rem 0.5rem 0.8rem;color:#111;margin-bottom:0.2rem;">📈</span>
+        <h3>Mini-IPOs <span style="color:#111;font-size:0.95em;font-weight:600;">(Coming Soon)</span></h3>
+        <p>
+          Raise micro-investment in your idea portfolio.<br>
+          <span style="color:#111;font-weight:bold;">Others will be able to invest in your brand profile by buying shares at your idea's share price.</span>
+        </p>
+      </div>
+    </div>
+    </div> -->
+  </section>
+  <section class="valuation">
+   <section class="valuation-process">
+  <div class="container">
+    <h2 class="section-title" style="margin-bottom:2.2rem;color:#111;font-weight:bold;">How Idea Valuation Works</h2>
+    <div style="display:flex;justify-content:center;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:2.5rem;">
+      <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
+        <div style="background:#e0e0e0;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:0.5rem;">
+          <span style="font-size:1.7rem;color:#111;font-weight:bold;">📝</span>
+        </div>
+        <div style="font-size:1.01rem;font-weight:bold;color:#111;text-align:center;">Submit</div>
+        <div style="font-size:0.93rem;color:#555;text-align:center;">Your Idea</div>
+      </div>
+      <div style="align-self:center;">
+        <span style="display:inline-block;width:38px;height:4px;background:linear-gradient(90deg,#e0e0e0,#111);border-radius:2px;"></span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
+        <div style="background:#e0e0e0;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:0.5rem;">
+          <span style="font-size:1.7rem;color:#111;font-weight:bold;">🤖</span>
+        </div>
+        <div style="font-size:1.01rem;font-weight:bold;color:#111;text-align:center;">AI</div>
+        <div style="font-size:0.93rem;color:#555;text-align:center;">Analysis</div>
+      </div>
+      <div style="align-self:center;">
+        <span style="display:inline-block;width:38px;height:4px;background:linear-gradient(90deg,#e0e0e0,#111);border-radius:2px;"></span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
+        <div style="background:#e0e0e0;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:0.5rem;">
+          <span style="font-size:1.7rem;color:#111;font-weight:bold;">📊</span>
+        </div>
+        <div style="font-size:1.01rem;font-weight:bold;color:#111;text-align:center;">Scores</div>
+        <div style="font-size:0.93rem;color:#555;text-align:center;">& Insights</div>
+      </div>
+      <div style="align-self:center;">
+        <span style="display:inline-block;width:38px;height:4px;background:linear-gradient(90deg,#e0e0e0,#111);border-radius:2px;"></span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;min-width:90px;">
+        <div style="background:#e0e0e0;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:0.5rem;">
+          <span style="font-size:1.7rem;color:#111;font-weight:bold;">🏆</span>
+        </div>
+        <div style="font-size:1.01rem;font-weight:bold;color:#111;text-align:center;">Ownership</div>
+        <div style="font-size:0.93rem;color:#555;text-align:center;">Value</div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+const ideaText = `A mobile app that connects local artists with event organizers for live performances, featuring real-time booking, artist portfolios, secure payments, and AI-driven event recommendations. The platform supports virtual showcases, reviews, and community engagement, empowering both emerging and established artists to monetize their talent and reach new audiences. Organizers can filter by genre, budget, and location, while artists gain exposure and analytics. The app integrates with social media, offers promotional tools, and fosters a vibrant ecosystem for creative collaboration and cultural growth in urban and rural areas alike.`;
+const ideaValue = '₹350';
+const typingSpeed = 18; // ms per character (slower for longer text)
+const valueDelay = 1200; // ms after typing before showing value
 
-  <section class="hero">
-    <h1>Turn Your Ideas into Digital Assets</h1>
-    <p>Ownersheep lets you submit your thoughts, get AI-powered feedback, and own your ideas as real intellectual property.</p>
-    <div class="cta">
-      <a href="#download">Download Android App</a>
+const input = document.getElementById('demo-idea');
+const cursor = document.getElementById('typing-cursor');
+const valBox = document.getElementById('valuation-anim'); // old, now unused
+const valText = document.getElementById('animated-value');
+const aiChat = document.getElementById('ai-chat-response');
+const aiValText = document.getElementById('animated-value-chat');
+
+let i = 0;
+function typeIdea() {
+  if (i <= ideaText.length) {
+    input.value = ideaText.slice(0, i);
+    input.scrollTop = input.scrollHeight; // auto scroll to bottom
+    i++;
+    setTimeout(typeIdea, typingSpeed);
+  } else {
+    cursor.style.opacity = 0;
+    setTimeout(showValueChat, valueDelay + Math.random()*1000);
+  }
+}
+// Remove/replace showValue and animateValue for chat style
+function showValueChat() {
+  aiChat.style.display = 'block';
+  animateValueChat(0, 350, 900);
+  setTimeout(() => {
+    document.getElementById('ai-extra-msg').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('ai-monetize-msg').style.display = 'block';
+    }, 1200);
+  }, 1500);
+}
+function animateValueChat(start, end, duration) {
+  let startTime = null;
+  function animate(ts) {
+    if (!startTime) startTime = ts;
+    const progress = Math.min((ts - startTime) / duration, 1);
+    const value = Math.floor(progress * (end - start) + start);
+    aiValText.textContent = '₹' + value;
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      aiValText.textContent = ideaValue;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+window.addEventListener('DOMContentLoaded', () => {
+  input.value = '';
+  // valBox.style.display = 'none'; // old
+  aiChat.style.display = 'none';
+  cursor.style.opacity = 1;
+  setTimeout(typeIdea, 600);
+  // blinking cursor
+  setInterval(() => {
+    cursor.style.opacity = cursor.style.opacity === '1' ? '0' : '1';
+  }, 500);
+});
+</script>
+   
+   
+   
+  </section>
+  <section class="cta">
+    <div class="container">
+      <h2 class="section-title">Try It Now (Beta Version)</h2>
+      <p>Submit your first idea and own your thoughts like never before.</p>
+      <div style="display:flex;justify-content:center;">
+        <div style="background:#fff;border-radius:1.1rem;box-shadow:0 4px 24px rgba(15,98,254,0.09);padding:2rem 2.2rem 1.5rem 2.2rem;max-width:370px;width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.1rem;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="width:180px;max-width:100%;margin-bottom:0.7rem;cursor:pointer;" onclick="window.open('https://play.google.com/store/apps/details?id=YOUR_APP_ID','_blank')">
+          <div style="font-size:1.09rem;color:#222;font-weight:500;margin-bottom:0.3rem;">
+            <span style="color:#0f62fe;font-weight:700;">Download Ownersheep</span> from Google Play Store
+          </div>
+          <div style="font-size:0.97rem;color:#555;">
+            Fast, secure, and always up-to-date.<br>
+            <span style="color:#0f62fe;">No APK needed!</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
-
-  <section class="features" id="features">
-    <div class="feature-card">
-      <h3>AI-Powered Prompt Evaluation</h3>
-      <p>Submit ideas, concepts, methods or frameworks and receive instant analysis with trend potential, uniqueness, and value prediction.</p>
+  <footer class="footer">
+    <div class="container">
+      © 2025 Ownersheep Platform. Reclaim your ideas.
     </div>
-    <div class="feature-card">
-      <h3>Auto Metadata Generation</h3>
-      <p>AI automatically creates a title, description, tags, hashtags, and contextual insights for every submitted prompt.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Prompt Visualization</h3>
-      <p>Access mind maps, trend graphs, and SWOT visuals to understand the scope and strength of your ideas.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Build Your Idea Portfolio</h3>
-      <p>Create your own digital library of prompts that reflect your intellectual capital and creative evolution.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Gamified Experience</h3>
-      <p>Earn badges and unlock milestones as you submit more ideas and level up your innovation score.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Futuristic Ownership Model</h3>
-      <p>Prepare for an era where individual intelligence is an asset class—start documenting your ideas now.</p>
-    </div>
-  </section>
-
-  <section class="apk-download" id="download">
-    <h2>Get the Android App</h2>
-    <p>Start turning your thoughts into digital assets. Download Ownersheep now and take control of your creative capital.</p>
-    <a href="/downloads/ownersheep-latest.apk" download>📲 Download APK</a>
-  </section>
-
-  <footer id="contact">
-    <p>© 2025 Ownersheep. Built with purpose by Bhavin Patel.</p>
   </footer>
 </body>
 </html>
