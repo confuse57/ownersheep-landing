@@ -76,7 +76,7 @@
       text-align: center;
     }
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.0rem;
       font-weight: 700;
     }
     .hero h1 span {
@@ -333,7 +333,22 @@
     </script>
   </nav>
 
-  <!-- IDEA HEADER SECTION: moved above hero, improved design -->
+  <!-- HERO SECTION (move to top, before idea-header) -->
+  <header class="hero">
+    <div class="container">
+      <h1>Transform Your Ideas into digital assets, instantly</h1>
+      <p>Introducing a new-age AI platform where your ideas become real assets. Submit, value, and own your thoughts like intellectual property.</p>
+     
+      
+      <!-- Images row below hero -->
+      <div style="display:flex;justify-content:center;align-items:center;gap:2.2rem;margin:2.5rem auto 0 auto;max-width:700px;flex-wrap:wrap;">
+        <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/idea%20350.png" alt="Idea 350" style="max-width:320px;width:100%;border-radius:1.1rem;box-shadow:0 2px 16px rgba(0,0,0,0.07);background:#fff;">
+        <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/idea%20grow.png" alt="Idea Grow" style="max-width:320px;width:100%;border-radius:1.1rem;box-shadow:0 2px 16px rgba(0,0,0,0.07);background:#fff;">
+      </div>
+    </div>
+  </header>
+
+  <!-- IDEA HEADER SECTION: moved below hero, improved design -->
   <header class="idea-header" style="background:linear-gradient(90deg,#e0f2ff 60%,#f8fafc 100%);padding:1.0rem 0 2.2rem 0;">
     <div class="container" style="max-width:600px;margin:auto;">
       <div style="position:relative;background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(15,98,254,0.10);padding:3.2rem 2rem 1.7rem 2rem;">
@@ -385,18 +400,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </header>
-  <!-- HERO SECTION -->
-  <header class="hero">
-    <div class="container">
-      <h1>Own Your Idea. <span>Shape the Future.</span></h1>
-      <p>Introducing a new-age AI platform where your ideas become real assets. Submit, value, and own your thoughts like intellectual property.</p>
-      <!-- Images row below hero -->
-      <div style="display:flex;justify-content:center;align-items:center;gap:2.2rem;margin:2.5rem auto 0 auto;max-width:700px;flex-wrap:wrap;">
-        <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/idea%20350.png" alt="Idea 350" style="max-width:320px;width:100%;border-radius:1.1rem;box-shadow:0 2px 16px rgba(0,0,0,0.07);background:#fff;">
-        <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/idea%20grow.png" alt="Idea Grow" style="max-width:320px;width:100%;border-radius:1.1rem;box-shadow:0 2px 16px rgba(0,0,0,0.07);background:#fff;">
       </div>
     </div>
   </header>
@@ -509,6 +512,9 @@ const aiChat = document.getElementById('ai-chat-response');
 const aiValText = document.getElementById('animated-value-chat');
 
 let i = 0;
+let typingStarted = false;
+let typingTriggered = false;
+
 function typeIdea() {
   if (i <= ideaText.length) {
     input.value = ideaText.slice(0, i);
@@ -520,6 +526,44 @@ function typeIdea() {
     setTimeout(showValueChat, valueDelay + Math.random()*1000);
   }
 }
+
+// Intersection Observer logic to trigger typing when .idea-header is in view
+function startTypingIfVisible() {
+  if (typingStarted || typingTriggered) return;
+  typingTriggered = true;
+  setTimeout(() => {
+    typingStarted = true;
+    typeIdea();
+  }, 200); // small delay for smoothness
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  input.value = '';
+  // valBox.style.display = 'none'; // old
+  aiChat.style.display = 'none';
+  cursor.style.opacity = 1;
+  // blinking cursor
+  setInterval(() => {
+    cursor.style.opacity = cursor.style.opacity === '1' ? '0' : '1';
+  }, 500);
+
+  // Intersection Observer setup
+  const ideaHeader = document.querySelector('.idea-header');
+  if ('IntersectionObserver' in window && ideaHeader) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !typingStarted) {
+          startTypingIfVisible();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(ideaHeader);
+  } else {
+    // fallback: start typing after delay if IntersectionObserver not supported
+    setTimeout(startTypingIfVisible, 800);
+  }
+});
+
 // Remove/replace showValue and animateValue for chat style
 function showValueChat() {
     aiChat.style.display = 'block';
@@ -551,17 +595,6 @@ function animateValueChat(start, end, duration) {
   }
   requestAnimationFrame(animate);
 }
-window.addEventListener('DOMContentLoaded', () => {
-  input.value = '';
-  // valBox.style.display = 'none'; // old
-  aiChat.style.display = 'none';
-  cursor.style.opacity = 1;
-  setTimeout(typeIdea, 600);
-  // blinking cursor
-  setInterval(() => {
-    cursor.style.opacity = cursor.style.opacity === '1' ? '0' : '1';
-  }, 500);
-});
 </script>
    
    
@@ -589,65 +622,10 @@ window.addEventListener('DOMContentLoaded', () => {
     <div class="container">
       © 2025 Ownersheep Platform. Reclaim your ideas.
     </div>
-    <div style="background:#f8fafc;border-top:1px solid #e2e8f0;margin-top:2.5rem;padding:2.2rem 0 1.5rem 0;">
-      <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem;">
-        <div style="min-width:150px;">
-          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Product</div>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="#features" style="color:#444;text-decoration:none;">Features</a></li>
-            <li><a href="#valuation" style="color:#444;text-decoration:none;">Idea Valuation</a></li>
-            <li><a href="#download" style="color:#444;text-decoration:none;">Download App</a></li>
-            <li><a href="#pricing" style="color:#444;text-decoration:none;">Pricing</a></li>
-            <li><a href="#roadmap" style="color:#444;text-decoration:none;">Roadmap</a></li>
-          </ul>
-        </div>
-        <div style="min-width:150px;">
-          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Company</div>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="#about" style="color:#444;text-decoration:none;">About Us</a></li>
-            <li><a href="#team" style="color:#444;text-decoration:none;">Team</a></li>
-            <li><a href="#careers" style="color:#444;text-decoration:none;">Careers</a></li>
-            <li><a href="#blog" style="color:#444;text-decoration:none;">Blog</a></li>
-            <li><a href="#press" style="color:#444;text-decoration:none;">Press</a></li>
-          </ul>
-        </div>
-        <div style="min-width:150px;">
-          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Support</div>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="#help" style="color:#444;text-decoration:none;">Help Center</a></li>
-            <li><a href="#faq" style="color:#444;text-decoration:none;">FAQ</a></li>
-            <li><a href="#contact" style="color:#444;text-decoration:none;">Contact</a></li>
-            <li><a href="#support" style="color:#444;text-decoration:none;">Support</a></li>
-            <li><a href="#privacy" style="color:#444;text-decoration:none;">Privacy Policy</a></li>
-            <li><a href="#terms" style="color:#444;text-decoration:none;">Terms of Service</a></li>
-          </ul>
-        </div>
-        <div style="min-width:150px;">
-          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Account</div>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="#login" style="color:#444;text-decoration:none;">Login</a></li>
-            <li><a href="#register" style="color:#444;text-decoration:none;">Register</a></li>
-            <li><a href="#dashboard" style="color:#444;text-decoration:none;">Dashboard</a></li>
-            <li><a href="#portfolio" style="color:#444;text-decoration:none;">My Portfolio</a></li>
-            <li><a href="#settings" style="color:#444;text-decoration:none;">Settings</a></li>
-          </ul>
-        </div>
-        <div style="min-width:150px;">
-          <div style="font-weight:bold;color:#111;margin-bottom:0.7rem;">Connect</div>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li><a href="mailto:support@ownersheep.com" style="color:#444;text-decoration:none;">Email Us</a></li>
-            <li><a href="https://twitter.com/" target="_blank" style="color:#444;text-decoration:none;">Twitter</a></li>
-            <li><a href="https://linkedin.com/" target="_blank" style="color:#444;text-decoration:none;">LinkedIn</a></li>
-            <li><a href="https://facebook.com/" target="_blank" style="color:#444;text-decoration:none;">Facebook</a></li>
-            <li><a href="https://instagram.com/" target="_blank" style="color:#444;text-decoration:none;">Instagram</a></li>
-          </ul>
-        </div>
-      </div>
-      <div style="text-align:center;color:#aaa;font-size:0.93rem;margin-top:2.2rem;">
-        Site Map &mdash; All rights reserved &copy; 2025 Ownersheep
-      </div>
+    <div style="text-align:center;color:#444;font-size:1.05rem;margin-top:1.7rem;font-weight:bold;">
+      This is just the beginning — only Login & Register live now. Stay tuned for more!
     </div>
   </footer>
 </body>
 </html>
-</html>
+    
