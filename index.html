@@ -1,184 +1,965 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ownersheep - Own Your Ideas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ownersheep - Own Your Ideas as Digital Assets</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-    body {
-      background: #f7f9fc;
-      color: #222;
-      line-height: 1.6;
-      text-align: center;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #222 0%, #111 100%);
+            --secondary-gradient: linear-gradient(135deg, #444 0%, #111 100%);
+            --accent-gradient: linear-gradient(135deg, #fff 0%, #bbb 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #fff;
+            --text-secondary: #bbb;
+            --shadow-glow: 0 0 40px rgba(0,0,0,0.2);
+        }
 
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1976d2;
-      margin-bottom: 10px;
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    .tagline {
-      font-size: 20px;
-      color: #555;
-      margin-bottom: 30px;
-    }
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--primary-gradient);
+            overflow: hidden;
+        }
 
-    .hero-title {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, #222 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #444 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, #bbb 0%, transparent 50%);
+            animation: morphing 8s ease-in-out infinite;
+        }
 
-    .hero-subtitle {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
+        @keyframes morphing {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
 
-    .button {
-      background: #1976d2;
-      color: white;
-      padding: 12px 28px;
-      font-size: 16px;
-      border-radius: 30px;
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 50px;
-    }
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
 
-    .section {
-      margin-bottom: 60px;
-    }
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.06);
+            animation: float 15s infinite ease-in-out;
+        }
 
-    .section-title {
-      font-size: 28px;
-      color: #1976d2;
-      margin-bottom: 30px;
-    }
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            border-radius: 30%;
+            top: 60%;
+            right: 20%;
+            animation-delay: 2s;
+        }
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
+        .shape:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            border-radius: 20%;
+            bottom: 30%;
+            left: 70%;
+            animation-delay: 4s;
+        }
 
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-      color: #333;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(30px) rotate(240deg); }
+        }
 
-    .card p {
-      font-size: 14px;
-      color: #666;
-    }
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
 
-    .boost {
-      margin-top: 50px;
-    }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-    .play-btn {
-      margin-top: 20px;
-    }
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            background: none;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
 
-    footer {
-      background: #0d47a1;
-      color: white;
-      padding: 20px;
-      font-size: 13px;
-    }
+        .logo:hover {
+            color: #bbb;
+            filter: none;
+            transform: scale(1.05);
+        }
 
-    a {
-      color: #fff;
-      text-decoration: underline;
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+            padding-top: 100px; /* Add this line to push content below the fixed header */
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 24px;
+            color: #fff;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: clamp(1.1rem, 3vw, 1.7rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.8s both;
+            font-weight: 300;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .cta-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: #111;
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            background: #222;
+        }
+
+        .cta-secondary {
+            padding: 20px 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 18px;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .cta-secondary:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 150px 0;
+            position: relative;
+            background: #111;
+        }
+
+        .features-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .features h2 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: #fff;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+        }
+
+        .features-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 22px;
+            padding: 28px 24px 28px 24px;
+            backdrop-filter: blur(16px);
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            min-height: 220px;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #fff;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            background: rgba(255,255,255,0.09);
+        }
+
+        .feature-icon {
+            font-size: 2.1rem;
+            margin-bottom: 16px;
+            display: block;
+            color: #fff;
+            opacity: 0.92;
+        }
+
+        .feature-card h3 {
+            font-size: 1.13rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        /* AI Feature */
+        .ai-feature {
+            background: #181818;
+            border: 2px solid #222;
+            border-radius: 40px;
+            padding: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .ai-feature::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 2px, transparent 2px);
+            background-size: 50px 50px;
+            animation: pulse 4s infinite;
+        }
+
+        .ai-feature-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .ai-feature h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            color: #fff;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+        }
+
+        .ai-feature p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .robot-icon {
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+            color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+                .hero-content {
+        padding: 30px 20px;
     }
-  </style>
-</head>
+            
+            .features-content {
+                padding: 0 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .feature-card {
+                padding: 40px 30px;
+            }
+            
+            .ai-feature {
+                padding: 60px 30px;
+            }
+            
+            .cta-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(79, 172, 254, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: all 0.3s ease;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(79, 172, 254, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.6s ease;
+        }
+
+        /* Glowing Text Effect */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255,255,255,0.15);
+            color: #fff;
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: particleFloat 10s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+<style>
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        </style></head>
 <body>
-  <div class="container">
-    <div class="logo">Ownersheep</div>
-    <div class="tagline">Own Your Ideas as Digital Assets</div>
-    <h1 class="hero-title">Step into the future where your creativity holds real value.</h1>
-    <p class="hero-subtitle">Turn thoughts into tradable assets. Become a brand. Launch your mini-IPO.</p>
-    <a href="#" class="button">Download App</a>
-
-    <div class="section">
-      <h2 class="section-title">Features</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>🤖 AI-Powered Analysis</h3>
-          <p>AI evaluates your ideas for uniqueness, trend potential and virality.</p>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes" style="transform: translateY(0px);">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
         </div>
-        <div class="card">
-          <h3>🔒 Digital Ownership</h3>
-          <p>Get a secure ownership certificate for every submitted idea or prompt.</p>
-        </div>
-        <div class="card">
-          <h3>🌟 AI Test Lab</h3>
-          <p>Run prompt simulations to analyze its engagement score, SWOT, and more.</p>
-        </div>
-        <div class="card">
-          <h3>💸 Future Monetization</h3>
-          <p>Buy/Sell prompts and launch your own Mini-IPOs to earn from your creativity.</p>
-        </div>
-      </div>
     </div>
 
-    <div class="section">
-      <h2 class="section-title">How It Works</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>1. Submit Your Idea</h3>
-          <p>Enter your prompt, idea, or pitch using our chat-based UI.</p>
+    <!-- Particle System -->
+    <div class="particles" id="particles"><div class="particle" style="left: 88.0154%; animation-delay: 9.60345s; animation-duration: 15.274s;"></div><div class="particle" style="left: 49.1237%; animation-delay: 4.05474s; animation-duration: 16.702s;"></div><div class="particle" style="left: 21.3549%; animation-delay: 7.49852s; animation-duration: 16.3949s;"></div><div class="particle" style="left: 29.6368%; animation-delay: 3.15226s; animation-duration: 13.0292s;"></div><div class="particle" style="left: 18.3027%; animation-delay: 2.40349s; animation-duration: 11.2905s;"></div><div class="particle" style="left: 33.6854%; animation-delay: 3.38808s; animation-duration: 13.7517s;"></div><div class="particle" style="left: 43.9122%; animation-delay: 4.07938s; animation-duration: 16.9484s;"></div><div class="particle" style="left: 95.8235%; animation-delay: 2.28016s; animation-duration: 18.3616s;"></div><div class="particle" style="left: 6.34782%; animation-delay: 2.44238s; animation-duration: 18.6387s;"></div><div class="particle" style="left: 80.284%; animation-delay: 1.00488s; animation-duration: 19.9222s;"></div><div class="particle" style="left: 57.5991%; animation-delay: 9.49265s; animation-duration: 14.5423s;"></div><div class="particle" style="left: 54.8297%; animation-delay: 1.56037s; animation-duration: 19.631s;"></div><div class="particle" style="left: 16.0498%; animation-delay: 8.79147s; animation-duration: 14.806s;"></div><div class="particle" style="left: 69.444%; animation-delay: 7.9732s; animation-duration: 14.5464s;"></div><div class="particle" style="left: 30.3505%; animation-delay: 2.96078s; animation-duration: 19.7256s;"></div><div class="particle" style="left: 3.17635%; animation-delay: 3.68305s; animation-duration: 10.2372s;"></div><div class="particle" style="left: 76.0406%; animation-delay: 5.35072s; animation-duration: 13.8965s;"></div><div class="particle" style="left: 41.0292%; animation-delay: 3.73748s; animation-duration: 13.3279s;"></div><div class="particle" style="left: 71.5146%; animation-delay: 2.15064s; animation-duration: 19.3301s;"></div><div class="particle" style="left: 2.68841%; animation-delay: 4.12949s; animation-duration: 12.7505s;"></div><div class="particle" style="left: 83.3769%; animation-delay: 1.39373s; animation-duration: 13.372s;"></div><div class="particle" style="left: 68.069%; animation-delay: 5.40482s; animation-duration: 17.382s;"></div><div class="particle" style="left: 55.1871%; animation-delay: 0.386178s; animation-duration: 14.6367s;"></div><div class="particle" style="left: 39.0743%; animation-delay: 0.428176s; animation-duration: 15.1788s;"></div><div class="particle" style="left: 36.3579%; animation-delay: 1.61615s; animation-duration: 19.6896s;"></div><div class="particle" style="left: 80.1743%; animation-delay: 7.93994s; animation-duration: 18.2317s;"></div><div class="particle" style="left: 23.1352%; animation-delay: 3.37535s; animation-duration: 13.2839s;"></div><div class="particle" style="left: 94.2374%; animation-delay: 0.901464s; animation-duration: 16.2004s;"></div><div class="particle" style="left: 11.1015%; animation-delay: 5.43972s; animation-duration: 16.3628s;"></div><div class="particle" style="left: 88.5045%; animation-delay: 3.98415s; animation-duration: 17.6145s;"></div><div class="particle" style="left: 41.2717%; animation-delay: 4.5646s; animation-duration: 15.1945s;"></div><div class="particle" style="left: 3.59043%; animation-delay: 4.25791s; animation-duration: 14.5155s;"></div><div class="particle" style="left: 38.1671%; animation-delay: 4.4879s; animation-duration: 14.6272s;"></div><div class="particle" style="left: 69.707%; animation-delay: 9.58746s; animation-duration: 16.8716s;"></div><div class="particle" style="left: 42.3454%; animation-delay: 4.58093s; animation-duration: 13.5542s;"></div><div class="particle" style="left: 95.744%; animation-delay: 0.690062s; animation-duration: 11.6258s;"></div><div class="particle" style="left: 64.0019%; animation-delay: 9.30207s; animation-duration: 14.9976s;"></div><div class="particle" style="left: 79.0698%; animation-delay: 6.91163s; animation-duration: 18.2405s;"></div><div class="particle" style="left: 56.0185%; animation-delay: 6.14825s; animation-duration: 16.5367s;"></div><div class="particle" style="left: 70.8131%; animation-delay: 4.35523s; animation-duration: 13.0936s;"></div><div class="particle" style="left: 58.5888%; animation-delay: 0.268004s; animation-duration: 12.6254s;"></div><div class="particle" style="left: 28.7416%; animation-delay: 3.52693s; animation-duration: 15.6823s;"></div><div class="particle" style="left: 60.8483%; animation-delay: 7.4327s; animation-duration: 14.7647s;"></div><div class="particle" style="left: 46.8784%; animation-delay: 5.60921s; animation-duration: 17.1962s;"></div><div class="particle" style="left: 25.3709%; animation-delay: 6.41804s; animation-duration: 12.2843s;"></div><div class="particle" style="left: 51.3501%; animation-delay: 7.87022s; animation-duration: 14.2063s;"></div><div class="particle" style="left: 60.2908%; animation-delay: 5.63054s; animation-duration: 15.2193s;"></div><div class="particle" style="left: 18.6802%; animation-delay: 2.16832s; animation-duration: 10.9544s;"></div><div class="particle" style="left: 10.978%; animation-delay: 5.66163s; animation-duration: 12.8689s;"></div><div class="particle" style="left: 60.0271%; animation-delay: 3.89685s; animation-duration: 17.7844s;"></div></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" style="left: 1080px; top: 55px; transform: scale(1);"></div>
+    <div class="cursor-follower" style="left: 1108px; top: 326px; transform: scale(1);"></div>
+
+    <!-- Header -->
+    <!-- <header style="background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);">
+        <div class="header-content">
+            <a href="#" class="logo">Ownersheep</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="card">
-          <h3>2. AI Evaluates</h3>
-          <p>Our AI assigns title, valuation, score and suggestions instantly.</p>
+    </header> -->
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">✨ The Future of Creative Assets</div>
+            <h1 class="glow-text">Ownersheep</h1>
+            <p class="subtitle">Own Your Ideas as Digital Assets</p>
+            <h2 class="hero-description">Step into the future where your creativity holds real value.</h2>
+            <p class="hero-tagline">Turn thoughts into tradable assets. Become a brand. Launch your mini-IPO.</p>
+            <div class="cta-container">
+                <a href="#" class="cta-button">
+                    📱 Download App
+                </a>
+                <a href="#features" class="cta-secondary">
+                    🚀 Explore Features
+                </a>
+            </div>
         </div>
-        <div class="card">
-          <h3>3. Get Ownership</h3>
-          <p>Receive a certificate and store it in your personal IP portfolio.</p>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works" style="background:#181818; padding:100px 0;">
+        <div style="max-width:900px; margin:0 auto; padding:0 40px;">
+            <h2 style="text-align:center; font-size:2.8rem; font-weight:800; color:#fff; margin-bottom:50px;">How It Works</h2>
+            <ol style="list-style:none; counter-reset:step; padding:0; margin:0;">
+                <li style="display:flex; align-items:flex-start; margin-bottom:40px;">
+                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
+                        <span style="font-size:1.5rem;">1</span>
+                    </span>
+                    <div>
+                        <strong style="font-size:1.2rem; color:#fff;">Submit Your Idea</strong>
+                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">Start with your original idea, prompt, or concept. Just type it into our chat-based interface — fast and intuitive.</div>
+                    </div>
+                </li>
+                <li style="display:flex; align-items:flex-start; margin-bottom:40px;">
+                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
+                        <span style="font-size:1.5rem;">2</span>
+                    </span>
+                    <div>
+                        <strong style="font-size:1.2rem; color:#fff;">AI Evaluates & Assigns Value</strong>
+                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">Our AI instantly analyzes your idea’s uniqueness, trend potential, and market strength — and assigns a valuation.</div>
+                    </div>
+                </li>
+                <li style="display:flex; align-items:flex-start; margin-bottom:40px;">
+                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
+                        <span style="font-size:1.5rem;">3</span>
+                    </span>
+                    <div>
+                        <strong style="font-size:1.2rem; color:#fff;">Get Ownership of That Value</strong>
+                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">You get ownership of both the prompt and its AI-generated value. It’s added to your personal IP portfolio with secure access.</div>
+                    </div>
+                </li>
+                <li style="display:flex; align-items:flex-start;">
+                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
+                        <span style="font-size:1.5rem;">4</span>
+                    </span>
+                    <div>
+                        <strong style="font-size:1.2rem; color:#fff;">Build Value, Prepare to Monetize</strong>
+                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">Your prompt gains visibility. In future versions, you’ll be able to sell, resell, or launch a Mini-IPO — and turn your idea into real income.</div>
+                    </div>
+                </li>
+            </ol>
         </div>
-        <div class="card">
-          <h3>4. Grow and Monetize</h3>
-          <p>Use it in the marketplace or pitch it in a Mini-IPO.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-content">
+            <div class="features-header reveal active">
+                <h2>Revolutionary Features</h2>
+                <p class="features-subtitle">Transform your creative potential into digital wealth with cutting-edge technology</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">💎</span>
+                    <h3>Idea Tokenization</h3>
+                    <p>Turn your original ideas, prompts, or concepts into unique digital assets. Each submission gets a market-assigned valuation, ownership rights, and visibility on your IP portfolio.</p>
+                </div>
+                
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">🚀</span>
+                    <h3>Launch Your Brand</h3>
+                    <p>Create your personal brand account and start building your digital reputation.
+In the next phase, Ownersheep will let you launch your own Mini-IPO, where backers can support your top-performing ideas. (Coming Soon)</p>
+                </div>
+                
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">💰</span>
+                    <h3>Monetize Creativity</h3>
+                    <p>In the next phase, you’ll be able to sell or resell your prompts in the Ownersheep marketplace.
+High-performing prompts will become digital assets with real-world earning potential. (Feature coming soon)</p>
+                </div>
+                
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">📊</span>
+                    <h3>Prompt Analytics</h3>
+                    <p>Track idea performance — get views, usage stats, rating trends, and engagement graphs through a clean AI-powered analytics dashboard.</p>
+                </div>
+                
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">🌍</span>
+                    <h3>Global Marketplace</h3>
+                    <p>Your ideas can be viewed by users worldwide through the Explore tab and searchable discovery. Gain visibility beyond your network.</p>
+                </div>
+                
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">🤖</span>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>When you submit an idea, Ownersheep’s AI evaluates it in real-time for title, valuation, relevance, and trend potential. Smart scoring at your fingertips.</p>
+                </div>
+                
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">🔒</span>
+                    <h3>Digital Ownership</h3>
+                    <p>Each approved prompt is time-stamped and stored securely under your profile. You can share, reference, or upgrade ownership levels via Boost Packs.</p>
+                </div>
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">🌟</span>
+                    <h3>AI Test Lab</h3>
+                    <p>Test your own or others’ prompts using AI. Check engagement scores and preview how your ideas might perform. You get limited free credits; purchase more to test further. Advanced simulations coming soon.</p>
+                </div>
+                <div class="feature-card reveal active">
+                    <span class="feature-icon">💸</span>
+                    <h3>Future Monetization</h3>
+                    <p>Buy/Sell prompts and launch your own Mini-IPOs to earn from your creativity.</p>
+                </div>
+            </div>
+            
+            <div class="ai-feature reveal active">
+                <div class="ai-feature-content">
+                    <h3><span class="robot-icon">🤖</span>AI-Powered Evaluation (Live)</h3>
+                    <p>Our AI analyzes your idea or prompt to determine its uniqueness, relevance, and potential traction. It instantly assigns a title, a value, and key engagement insights — helping you understand how your idea stands in the digital market.</p>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Footer / Boost Pack -->
+    <footer style="background:#111; padding:60px 0 40px 0; text-align:center; border-top:1px solid #222; margin-top:60px;">
+        <div style="max-width:700px; margin:0 auto;">
+            <h3 style="color:#fff; font-size:2rem; font-weight:800; margin-bottom:18px;">Upgrade with Boost Pack</h3>
+            <div style="color:#bbb; font-size:1.1rem; line-height:1.7;">
+                Premium features including Mind Maps, SWOT, Use Case PDFs, and AI Test Credits.
+            </div>
+        </div>
+    </footer>
+    <div style=" left:0; right:0; bottom:0; background:#181818; color:#bbb; font-size:0.98rem; text-align:center; padding:12px 10px 10px 10px; border-top:1px solid #222; z-index:2000;">
+        © 2025 Ownersheep. All Rights Reserved. | <a href="#" style="color:#bbb;text-decoration:underline;">Terms</a> | <a href="#" style="color:#bbb;text-decoration:underline;">Privacy</a>
     </div>
 
-    <div class="boost">
-      <h2 class="section-title">Upgrade with Boost Pack</h2>
-      <p>Premium features including Mind Maps, SWOT, Use Case PDFs, and AI Test Credits.</p>
-      <div class="play-btn">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" alt="Download on Google Play" width="180">
-      </div>
-    </div>
-  </div>
+    <script>
+        // Particle System
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
 
-  <footer>
-    <p>© 2025 Ownersheep. All Rights Reserved. | <a href="#">Terms</a> | <a href="#">Privacy</a></p>
-  </footer>
-</body>
-</html>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .feature-card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursorFollower.style.transform = 'scale(1.5)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // Scroll Reveal Animation
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+                header.style.backdropFilter = 'blur(30px)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.8)';
+                header.style.backdropFilter = 'blur(20px)';
+            }
+            
+            revealElements();
+        });
+
+        // Ripple Effect for Buttons
+        document.querySelectorAll('.cta-button, .cta-secondary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-shapes');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            revealElements();
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Dynamic Text Animation
+        function animateText() {
+            const heroDescription = document.querySelector('.hero-description');
+            const text = heroDescription.textContent;
+            heroDescription.textContent = '';
+            
+            let i = 0;
+            const typeInterval = setInterval(() => {
+                heroDescription.textContent += text[i];
+                i++;
+                if (i >= text.length) {
+                    clearInterval(typeInterval);
+                }
+            }, 50);
+        }
+
+        // Trigger text animation after page loads
+        setTimeout(animateText, 2000);
+    </script>
+
+</body></html>
