@@ -321,6 +321,66 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+            background: #181818;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 50px;
+        }
+
+        .how-it-works ol {
+            list-style: none;
+            counter-reset: step;
+            padding: 0;
+            margin: 0;
+        }
+
+        .how-it-works li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .how-it-works li:last-child {
+            margin-bottom: 0;
+        }
+
+        .how-it-works span[style*="width:48px"] {
+            flex-shrink: 0;
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #111;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 24px;
+            border: 2px solid #333;
+            counter-increment: step;
+        }
+
+        .how-it-works strong {
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .how-it-works div[style*="color:#bbb"] {
+            color: #bbb;
+            font-size: 1rem;
+            margin-top: 6px;
+        }
+
         /* Features Section */
         .features {
             padding: 150px 0;
@@ -340,9 +400,9 @@
         }
 
         .features h2 {
-            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-size: clamp(2.1rem, 5vw, 2.7rem);
             font-weight: 800;
-            margin-bottom: 30px;
+            margin-bottom: 22px;
             color: #fff;
             background: none;
             -webkit-background-clip: unset;
@@ -351,11 +411,12 @@
         }
 
         .features-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.08rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
             font-weight: 300;
+            line-height: 1.6;
         }
 
         .features-grid {
@@ -505,30 +566,78 @@
                 display: none;
             }
             
-                .hero-content {
-        padding: 30px 20px;
-    }
+            .hero-content {
+                padding: 30px 20px;
+            }
             
             .features-content {
-                padding: 0 20px;
+                padding: 0 12px;
+            }
+            
+            .features-header {
+                margin-bottom: 48px;
+            }
+            
+            .features h2 {
+                font-size: 1.45rem;
+                margin-bottom: 14px;
+            }
+            
+            .features-subtitle {
+                font-size: 0.98rem;
+                line-height: 1.5;
             }
             
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 18px;
             }
             
             .feature-card {
-                padding: 40px 30px;
+                padding: 28px 14px;
             }
             
             .ai-feature {
-                padding: 60px 30px;
+                padding: 36px 10px;
             }
             
             .cta-container {
                 flex-direction: column;
                 gap: 20px;
+            }
+            
+            .how-it-works {
+                padding: 48px 0 !important;
+            }
+            
+            .how-it-works h2 {
+                font-size: 1.35rem !important;
+                margin-bottom: 28px !important;
+            }
+            
+            .how-it-works ol {
+                padding: 0;
+            }
+            
+            .how-it-works li {
+                margin-bottom: 22px !important;
+                align-items: flex-start;
+            }
+            
+            .how-it-works span[style*="width:48px"] {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 1.05rem !important;
+                margin-right: 12px !important;
+            }
+            
+            .how-it-works strong {
+                font-size: 1rem !important;
+            }
+            
+            .how-it-works div[style*="color:#bbb"] {
+                font-size: 0.92rem !important;
+                margin-top: 4px !important;
             }
         }
 
@@ -658,7 +767,7 @@
             <h1 class="glow-text">Ownersheep</h1>
             <p class="subtitle">Own Your Ideas as Digital Assets</p>
             <h2 class="hero-description">Step into the future where your creativity holds real value.</h2>
-            <p class="hero-tagline">Turn thoughts into tradable assets. Become a brand. Launch your mini-IPO.</p>
+            <p class="hero-tagline">Turn your thoughts into tradable assets. Build your brand. Mini-IPOs coming soon.</p>
             <div class="cta-container">
                 <a href="#" class="cta-button">
                     📱 Download App
@@ -674,6 +783,7 @@
     <section class="how-it-works" id="how-it-works" style="background:#181818; padding:100px 0;">
         <div style="max-width:900px; margin:0 auto; padding:0 40px;">
             <h2 style="text-align:center; font-size:2.8rem; font-weight:800; color:#fff; margin-bottom:50px;">How It Works</h2>
+            
             <ol style="list-style:none; counter-reset:step; padding:0; margin:0;">
                 <li style="display:flex; align-items:flex-start; margin-bottom:40px;">
                     <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
@@ -721,6 +831,7 @@
             <div class="features-header reveal active">
                 <h2>Revolutionary Features</h2>
                 <p class="features-subtitle">Transform your creative potential into digital wealth with cutting-edge technology</p>
+               
             </div>
             
             <div class="features-grid">
@@ -783,6 +894,12 @@ High-performing prompts will become digital assets with real-world earning poten
                 <div class="ai-feature-content">
                     <h3><span class="robot-icon">🤖</span>AI-Powered Evaluation (Live)</h3>
                     <p>Our AI analyzes your idea or prompt to determine its uniqueness, relevance, and potential traction. It instantly assigns a title, a value, and key engagement insights — helping you understand how your idea stands in the digital market.</p>
+                    <!-- Add Download App button at the end of AI feature for conversion -->
+                    <div style="margin-top:36px;">
+                        <a href="#" class="cta-button" style="font-size:1.05rem; padding:13px 30px;">
+                            📱 Download App
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -794,6 +911,12 @@ High-performing prompts will become digital assets with real-world earning poten
             <h3 style="color:#fff; font-size:2rem; font-weight:800; margin-bottom:18px;">Upgrade with Boost Pack</h3>
             <div style="color:#bbb; font-size:1.1rem; line-height:1.7;">
                 Premium features including Mind Maps, SWOT, Use Case PDFs, and AI Test Credits.
+            </div>
+            <!-- Add Download App button in footer for persistent CTA -->
+            <div style="margin-top:32px;">
+                <a href="#" class="cta-button" style="font-size:1.05rem; padding:13px 30px;">
+                    📱 Download App
+                </a>
             </div>
         </div>
     </footer>
