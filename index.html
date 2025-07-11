@@ -497,23 +497,6 @@
             backdrop-filter: blur(20px);
         }
 
-        .ai-feature::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.04) 2px, transparent 2px);
-            background-size: 50px 50px;
-            animation: pulse 4s infinite;
-        }
-
-        .ai-feature-content {
-            position: relative;
-            z-index: 2;
-        }
-
         .ai-feature h3 {
             font-size: 3rem;
             font-weight: 800;
@@ -536,12 +519,6 @@
             max-width: 800px;
             margin: 0 auto;
             font-weight: 300;
-        }
-
-        .robot-icon {
-            font-size: 4rem;
-            animation: bounce 2s infinite;
-            color: #fff;
         }
 
         /* Animations */
@@ -598,7 +575,24 @@
             }
             
             .ai-feature {
-                padding: 36px 10px;
+                padding: 28px 6px;
+                border-radius: 18px;
+            }
+            
+            .ai-feature h3 {
+                font-size: 1.15rem;
+                margin-bottom: 14px;
+                gap: 10px;
+            }
+            
+            .ai-feature p {
+                font-size: 0.98rem;
+                line-height: 1.5;
+                max-width: 98vw;
+            }
+            
+            .robot-icon {
+                font-size: 2.1rem;
             }
             
             .cta-container {
@@ -745,26 +739,16 @@
     <div class="cursor" style="left: 1080px; top: 55px; transform: scale(1);"></div>
     <div class="cursor-follower" style="left: 1108px; top: 326px; transform: scale(1);"></div>
 
-    <!-- Header -->
-    <!-- <header style="background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px);">
-        <div class="header-content">
-            <a href="#" class="logo">Ownersheep</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header> -->
+  
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-content">
+    
+    <div class="hero-content">
+            <!-- Logo prominently in hero for extra brand recall -->
+           
             <div class="hero-badge">✨ Where Ideas Become Valuable Assets</div>
-            <h1 class="glow-text">Ownersheep</h1>
+            <h1 class="glow-text" style="display: flex;    justify-content: center;"> <span style="margin-right: 5px;"><img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" style="height:50px; width:50px; border-radius:50%; margin-bottom:0px; box-shadow:0 2px 12px #0003; object-fit:cover;"></span> Ownersheep</h1>
             <p class="subtitle">Own Your Ideas as Digital Assets</p>
             <h2 class="hero-description">Step into the future where your creativity holds real value.</h2>
             <p class="hero-tagline">Turn your thoughts into tradable assets. Build your brand. Mini-IPOs coming soon.</p>
