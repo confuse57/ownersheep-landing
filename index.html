@@ -12,20 +12,20 @@
         }
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #222 0%, #111 100%);
-            --secondary-gradient: linear-gradient(135deg, #444 0%, #111 100%);
-            --accent-gradient: linear-gradient(135deg, #fff 0%, #bbb 100%);
-            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #fff;
-            --text-secondary: #bbb;
-            --shadow-glow: 0 0 40px rgba(0,0,0,0.2);
+            --primary-gradient: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+            --secondary-gradient: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+            --accent-gradient: linear-gradient(135deg, #222 0%, #444 100%);
+            --dark-gradient: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+            --glass-bg: rgba(0, 0, 0, 0.04);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --text-primary: #111;
+            --text-secondary: #444;
+            --shadow-glow: 0 0 40px rgba(0,0,0,0.04);
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0a;
+            background: #fff;
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.6;
@@ -50,8 +50,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 80%, #222 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, #444 0%, transparent 50%),
+            background: radial-gradient(circle at 20% 80%, #eee 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #e0e0e0 0%, transparent 50%),
                         radial-gradient(circle at 40% 40%, #bbb 0%, transparent 50%);
             animation: morphing 8s ease-in-out infinite;
         }
@@ -70,9 +70,9 @@
 
         .shape {
             position: absolute;
-            background: linear-gradient(45deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            background: linear-gradient(45deg, rgba(0,0,0,0.06), rgba(0,0,0,0.03));
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(0,0,0,0.06);
             animation: float 15s infinite ease-in-out;
         }
 
@@ -115,9 +115,9 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(255,255,255,0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid #eee;
             transition: all 0.3s ease;
         }
 
@@ -134,13 +134,13 @@
             font-size: 32px;
             font-weight: 800;
             background: none;
-            color: #fff;
+            color: #111;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .logo:hover {
-            color: #bbb;
+            color: #444;
             filter: none;
             transform: scale(1.05);
         }
@@ -169,7 +169,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #fff;
+            background: #111;
             transition: width 0.3s ease;
         }
 
@@ -191,6 +191,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            background: transparent;
         }
 
         .hero-content {
@@ -199,7 +200,7 @@
             padding: 0 40px;
             position: relative;
             z-index: 2;
-            padding-top: 100px; /* Add this line to push content below the fixed header */
+            padding-top: 100px;
         }
 
         .hero-badge {
@@ -213,13 +214,14 @@
             font-weight: 600;
             margin-bottom: 40px;
             animation: fadeInUp 1s ease-out;
+            color: #111;
         }
 
         .hero h1 {
             font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 900;
             margin-bottom: 24px;
-            color: #fff;
+            color: #111;
             background: none;
             -webkit-background-clip: unset;
             -webkit-text-fill-color: unset;
@@ -231,7 +233,7 @@
 
         .hero .subtitle {
             font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-            color: var(--text-secondary);
+            color: #444;
             margin-bottom: 20px;
             animation: fadeInUp 1s ease-out 0.4s both;
             font-weight: 400;
@@ -244,11 +246,12 @@
             margin-bottom: 16px;
             animation: fadeInUp 1s ease-out 0.6s both;
             letter-spacing: -0.01em;
+            color: #111;
         }
 
         .hero-tagline {
             font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-secondary);
+            color: #444;
             margin-bottom: 40px;
             animation: fadeInUp 1s ease-out 0.8s both;
             font-weight: 300;
@@ -277,7 +280,7 @@
             font-size: 18px;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
             overflow: hidden;
         }
 
@@ -288,7 +291,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
             transition: left 0.5s ease;
         }
 
@@ -298,7 +301,7 @@
 
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
             background: #222;
         }
 
@@ -307,7 +310,7 @@
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             border-radius: 50px;
-            color: var(--text-primary);
+            color: #111;
             font-weight: 600;
             font-size: 18px;
             text-decoration: none;
@@ -317,21 +320,21 @@
 
         .cta-secondary:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            background: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
 
         /* How It Works Section */
         .how-it-works {
             padding: 100px 0;
-            background: #181818;
+            background: #f5f5f5;
         }
 
         .how-it-works h2 {
             text-align: center;
             font-size: 2.8rem;
             font-weight: 800;
-            color: #fff;
+            color: #111;
             margin-bottom: 50px;
         }
 
@@ -358,25 +361,25 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: #111;
-            color: #fff;
+            background: #fff;
+            color: #111;
             font-weight: 700;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 24px;
-            border: 2px solid #333;
+            border: 2px solid #bbb;
             counter-increment: step;
         }
 
         .how-it-works strong {
             font-size: 1.2rem;
-            color: #fff;
+            color: #111;
         }
 
         .how-it-works div[style*="color:#bbb"] {
-            color: #bbb;
+            color: #444;
             font-size: 1rem;
             margin-top: 6px;
         }
@@ -385,7 +388,7 @@
         .features {
             padding: 150px 0;
             position: relative;
-            background: #111;
+            background: #fff;
         }
 
         .features-content {
@@ -403,7 +406,7 @@
             font-size: clamp(2.1rem, 5vw, 2.7rem);
             font-weight: 800;
             margin-bottom: 22px;
-            color: #fff;
+            color: #111;
             background: none;
             -webkit-background-clip: unset;
             -webkit-text-fill-color: unset;
@@ -412,7 +415,7 @@
 
         .features-subtitle {
             font-size: 1.08rem;
-            color: var(--text-secondary);
+            color: #444;
             max-width: 600px;
             margin: 0 auto;
             font-weight: 300;
@@ -435,7 +438,7 @@
             transition: all 0.3s cubic-bezier(.4,0,.2,1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
             min-height: 220px;
         }
 
@@ -446,7 +449,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: #fff;
+            background: #111;
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -457,15 +460,15 @@
 
         .feature-card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-            background: rgba(255,255,255,0.09);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            background: rgba(0,0,0,0.03);
         }
 
         .feature-icon {
             font-size: 2.1rem;
             margin-bottom: 16px;
             display: block;
-            color: #fff;
+            color: #111;
             opacity: 0.92;
         }
 
@@ -478,7 +481,7 @@
         }
 
         .feature-card p {
-            color: var(--text-secondary);
+            color: #444;
             font-size: 0.98rem;
             line-height: 1.6;
             font-weight: 400;
@@ -487,8 +490,8 @@
 
         /* AI Feature */
         .ai-feature {
-            background: #181818;
-            border: 2px solid #222;
+            background: #f5f5f5;
+            border: 2px solid #eee;
             border-radius: 40px;
             padding: 80px;
             text-align: center;
@@ -505,7 +508,7 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
-            color: #fff;
+            color: #111;
             background: none;
             -webkit-background-clip: unset;
             -webkit-text-fill-color: unset;
@@ -515,7 +518,7 @@
         .ai-feature p {
             font-size: 1.3rem;
             line-height: 1.8;
-            color: var(--text-secondary);
+            color: #444;
             max-width: 800px;
             margin: 0 auto;
             font-weight: 300;
@@ -651,19 +654,19 @@
         .cursor {
             width: 20px;
             height: 20px;
-            border: 2px solid rgba(79, 172, 254, 0.8);
+            border: 2px solid rgba(0, 0, 0, 0.8);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            mix-blend-mode: difference;
+            mix-blend-mode: multiply;
             transition: all 0.3s ease;
         }
 
         .cursor-follower {
             width: 40px;
             height: 40px;
-            background: rgba(79, 172, 254, 0.1);
+            background: rgba(0, 0, 0, 0.08);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
@@ -673,8 +676,8 @@
 
         /* Glowing Text Effect */
         .glow-text {
-            text-shadow: 0 0 20px rgba(255,255,255,0.15);
-            color: #fff;
+            text-shadow: 0 0 20px rgba(0,0,0,0.08);
+            color: #111;
         }
 
         /* Particle System */
@@ -692,7 +695,7 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #fff;
+            background: #111;
             border-radius: 50%;
             animation: particleFloat 10s infinite linear;
         }
@@ -724,13 +727,13 @@
         </style></head>
 <body>
     <!-- Animated Background -->
-    <div class="bg-animation">
+    <!-- <div class="bg-animation">
         <div class="floating-shapes" style="transform: translateY(0px);">
             <div class="shape"></div>
             <div class="shape"></div>
             <div class="shape"></div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Particle System -->
     <div class="particles" id="particles"><div class="particle" style="left: 88.0154%; animation-delay: 9.60345s; animation-duration: 15.274s;"></div><div class="particle" style="left: 49.1237%; animation-delay: 4.05474s; animation-duration: 16.702s;"></div><div class="particle" style="left: 21.3549%; animation-delay: 7.49852s; animation-duration: 16.3949s;"></div><div class="particle" style="left: 29.6368%; animation-delay: 3.15226s; animation-duration: 13.0292s;"></div><div class="particle" style="left: 18.3027%; animation-delay: 2.40349s; animation-duration: 11.2905s;"></div><div class="particle" style="left: 33.6854%; animation-delay: 3.38808s; animation-duration: 13.7517s;"></div><div class="particle" style="left: 43.9122%; animation-delay: 4.07938s; animation-duration: 16.9484s;"></div><div class="particle" style="left: 95.8235%; animation-delay: 2.28016s; animation-duration: 18.3616s;"></div><div class="particle" style="left: 6.34782%; animation-delay: 2.44238s; animation-duration: 18.6387s;"></div><div class="particle" style="left: 80.284%; animation-delay: 1.00488s; animation-duration: 19.9222s;"></div><div class="particle" style="left: 57.5991%; animation-delay: 9.49265s; animation-duration: 14.5423s;"></div><div class="particle" style="left: 54.8297%; animation-delay: 1.56037s; animation-duration: 19.631s;"></div><div class="particle" style="left: 16.0498%; animation-delay: 8.79147s; animation-duration: 14.806s;"></div><div class="particle" style="left: 69.444%; animation-delay: 7.9732s; animation-duration: 14.5464s;"></div><div class="particle" style="left: 30.3505%; animation-delay: 2.96078s; animation-duration: 19.7256s;"></div><div class="particle" style="left: 3.17635%; animation-delay: 3.68305s; animation-duration: 10.2372s;"></div><div class="particle" style="left: 76.0406%; animation-delay: 5.35072s; animation-duration: 13.8965s;"></div><div class="particle" style="left: 41.0292%; animation-delay: 3.73748s; animation-duration: 13.3279s;"></div><div class="particle" style="left: 71.5146%; animation-delay: 2.15064s; animation-duration: 19.3301s;"></div><div class="particle" style="left: 2.68841%; animation-delay: 4.12949s; animation-duration: 12.7505s;"></div><div class="particle" style="left: 83.3769%; animation-delay: 1.39373s; animation-duration: 13.372s;"></div><div class="particle" style="left: 68.069%; animation-delay: 5.40482s; animation-duration: 17.382s;"></div><div class="particle" style="left: 55.1871%; animation-delay: 0.386178s; animation-duration: 14.6367s;"></div><div class="particle" style="left: 39.0743%; animation-delay: 0.428176s; animation-duration: 15.1788s;"></div><div class="particle" style="left: 36.3579%; animation-delay: 1.61615s; animation-duration: 19.6896s;"></div><div class="particle" style="left: 80.1743%; animation-delay: 7.93994s; animation-duration: 18.2317s;"></div><div class="particle" style="left: 23.1352%; animation-delay: 3.37535s; animation-duration: 13.2839s;"></div><div class="particle" style="left: 94.2374%; animation-delay: 0.901464s; animation-duration: 16.2004s;"></div><div class="particle" style="left: 11.1015%; animation-delay: 5.43972s; animation-duration: 16.3628s;"></div><div class="particle" style="left: 88.5045%; animation-delay: 3.98415s; animation-duration: 17.6145s;"></div><div class="particle" style="left: 41.2717%; animation-delay: 4.5646s; animation-duration: 15.1945s;"></div><div class="particle" style="left: 3.59043%; animation-delay: 4.25791s; animation-duration: 14.5155s;"></div><div class="particle" style="left: 38.1671%; animation-delay: 4.4879s; animation-duration: 14.6272s;"></div><div class="particle" style="left: 69.707%; animation-delay: 9.58746s; animation-duration: 16.8716s;"></div><div class="particle" style="left: 42.3454%; animation-delay: 4.58093s; animation-duration: 13.5542s;"></div><div class="particle" style="left: 95.744%; animation-delay: 0.690062s; animation-duration: 11.6258s;"></div><div class="particle" style="left: 64.0019%; animation-delay: 9.30207s; animation-duration: 14.9976s;"></div><div class="particle" style="left: 79.0698%; animation-delay: 6.91163s; animation-duration: 18.2405s;"></div><div class="particle" style="left: 56.0185%; animation-delay: 6.14825s; animation-duration: 16.5367s;"></div><div class="particle" style="left: 70.8131%; animation-delay: 4.35523s; animation-duration: 13.0936s;"></div><div class="particle" style="left: 58.5888%; animation-delay: 0.268004s; animation-duration: 12.6254s;"></div><div class="particle" style="left: 28.7416%; animation-delay: 3.52693s; animation-duration: 15.6823s;"></div><div class="particle" style="left: 60.8483%; animation-delay: 7.4327s; animation-duration: 14.7647s;"></div><div class="particle" style="left: 46.8784%; animation-delay: 5.60921s; animation-duration: 17.1962s;"></div><div class="particle" style="left: 25.3709%; animation-delay: 6.41804s; animation-duration: 12.2843s;"></div><div class="particle" style="left: 51.3501%; animation-delay: 7.87022s; animation-duration: 14.2063s;"></div><div class="particle" style="left: 60.2908%; animation-delay: 5.63054s; animation-duration: 15.2193s;"></div><div class="particle" style="left: 18.6802%; animation-delay: 2.16832s; animation-duration: 10.9544s;"></div><div class="particle" style="left: 10.978%; animation-delay: 5.66163s; animation-duration: 12.8689s;"></div><div class="particle" style="left: 60.0271%; animation-delay: 3.89685s; animation-duration: 17.7844s;"></div></div>
@@ -890,10 +893,10 @@ High-performing prompts will become digital assets with real-world earning poten
     </section>
 
     <!-- Footer / Boost Pack -->
-    <footer style="background:#111; padding:60px 0 40px 0; text-align:center; border-top:1px solid #222; margin-top:60px;">
+    <footer style="background:#fff; padding:60px 0 40px 0; text-align:center; border-top:1px solid #eee; margin-top:60px;">
         <div style="max-width:700px; margin:0 auto;">
-            <h3 style="color:#fff; font-size:2rem; font-weight:800; margin-bottom:18px;">Upgrade with Boost Pack</h3>
-            <div style="color:#bbb; font-size:1.1rem; line-height:1.7;">
+            <h3 style="color:#111; font-size:2rem; font-weight:800; margin-bottom:18px;">Upgrade with Boost Pack</h3>
+            <div style="color:#444; font-size:1.1rem; line-height:1.7;">
                 Premium features including Mind Maps, SWOT, Use Case PDFs, and AI Test Credits.
             </div>
             <!-- Add Download App button in footer for persistent CTA -->
@@ -904,8 +907,8 @@ High-performing prompts will become digital assets with real-world earning poten
             </div>
         </div>
     </footer>
-    <div style=" left:0; right:0; bottom:0; background:#181818; color:#bbb; font-size:0.98rem; text-align:center; padding:12px 10px 10px 10px; border-top:1px solid #222; z-index:2000;">
-        © 2025 Ownersheep. All Rights Reserved. | <a href="#" style="color:#bbb;text-decoration:underline;">Terms</a> | <a href="#" style="color:#bbb;text-decoration:underline;">Privacy</a>
+    <div style=" left:0; right:0; bottom:0; background:#f5f5f5; color:#444; font-size:0.98rem; text-align:center; padding:12px 10px 10px 10px; border-top:1px solid #eee; z-index:2000;">
+        © 2025 Ownersheep. All Rights Reserved. | <a href="#" style="color:#444;text-decoration:underline;">Terms</a> | <a href="#" style="color:#444;text-decoration:underline;">Privacy</a>
     </div>
 
     <script>
