@@ -761,7 +761,7 @@
             <p class="hero-tagline">Turn your thoughts into <span class="highlight">tradable assets</span>. Build your brand. Mini-IPOs coming soon.</p>
 
             <div class="cta-container">
-                <a href="#" class="cta-button">
+                <a href="#" class="cta-button download-app-btn">
                     📱 Download Beta App (.apk)
                 </a>
                 <a href="#features" class="cta-secondary">
@@ -890,7 +890,7 @@ High-performing prompts will become digital assets with real-world earning poten
                     <p>Our AI analyzes your idea or prompt to determine its uniqueness, relevance, and potential traction. It instantly assigns a title, a value, and key engagement insights — helping you understand how your idea stands in the digital market.</p>
                     <!-- Add Download App button at the end of AI feature for conversion -->
                     <div style="margin-top:36px;">
-                        <a href="#" class="cta-button" style="font-size:1.05rem; padding:13px 30px;">
+                        <a href="#" class="cta-button download-app-btn" style="font-size:1.05rem; padding:13px 30px;">
                             📱 Download Beta App (.apk)
                         </a>
                     </div>
@@ -910,7 +910,7 @@ High-performing prompts will become digital assets with real-world earning poten
             </div>
             <!-- Add Download App button in footer for persistent CTA -->
             <div style="margin-top:32px;">
-                <a href="#" class="cta-button" style="font-size:1.05rem; padding:13px 30px;">
+                <a href="#" class="cta-button download-app-btn" style="font-size:1.05rem; padding:13px 30px;">
                     📱 Download Beta App (.apk)
                 </a>
             </div>
@@ -919,6 +919,64 @@ High-performing prompts will become digital assets with real-world earning poten
     <div style=" left:0; right:0; bottom:0; background:#f5f5f5; color:#444; font-size:0.98rem; text-align:center; padding:12px 10px 10px 10px; border-top:1px solid #eee; z-index:2000;">
         © 2025 Ownersheep. All Rights Reserved. | <a href="#" style="color:#444;text-decoration:underline;">Terms</a> | <a href="#" style="color:#444;text-decoration:underline;">Privacy</a>
     </div>
+
+    <!-- Modal Popup HTML -->
+    <div id="downloadAppModal" class="ownersheep-modal">
+        <div class="ownersheep-modal-content">
+            <span class="ownersheep-modal-close" id="ownersheepModalClose">&times;</span>
+            <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" style="height:48px;width:48px;border-radius:50%;margin-bottom:12px;">
+            <h2 style="margin-bottom:10px;">Download Ownersheep Beta App?</h2>
+            <p style="font-size:1.08rem; color:#444; margin-bottom:18px;">
+                Ownersheep lets you own and monetize your ideas as digital assets.
+            </p>
+            <div style="display:flex; gap:18px; justify-content:center;">
+                <button id="ownersheepModalYes" class="cta-button" style="padding:10px 28px; font-size:1rem;">Yes, Download</button>
+                <button id="ownersheepModalNo" class="cta-secondary" style="padding:10px 28px; font-size:1rem;">No, Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal CSS -->
+    <style>
+/* Ownersheep Modal Styles */
+.ownersheep-modal {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.32);
+    justify-content: center;
+    align-items: center;
+}
+.ownersheep-modal-content {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 38px 32px 28px 32px;
+    max-width: 350px;
+    width: 90vw;
+    text-align: center;
+    position: relative;
+    animation: fadeInUp 0.5s;
+}
+.ownersheep-modal-close {
+    position: absolute;
+    top: 16px; right: 18px;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.ownersheep-modal-close:hover {
+    color: #111;
+}
+@media (max-width: 600px) {
+    .ownersheep-modal-content {
+        padding: 22px 8px 18px 8px;
+        max-width: 98vw;
+    }
+}
+    </style>
 
     <script>
         // Particle System
@@ -1079,6 +1137,43 @@ High-performing prompts will become digital assets with real-world earning poten
 
         // Trigger text animation after page loads
         setTimeout(animateText, 2000);
+
+        // Ownersheep Download Modal Logic
+const modal = document.getElementById('downloadAppModal');
+const modalClose = document.getElementById('ownersheepModalClose');
+const modalYes = document.getElementById('ownersheepModalYes');
+const modalNo = document.getElementById('ownersheepModalNo');
+const downloadButtons = document.querySelectorAll('.download-app-btn');
+const apkUrl = "https://www.ownersheep.app/download_/OwnerSheep_v1.0.apk";
+
+// Show modal on download button click
+downloadButtons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.style.display = 'flex';
+    });
+});
+
+// Close modal on X or No
+modalClose.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+modalNo.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// Yes: redirect to APK
+modalYes.addEventListener('click', () => {
+    modal.style.display = 'none';
+    window.location.href = apkUrl;
+});
+
+// Optional: close modal on outside click
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
     </script>
 
 </body></html>
