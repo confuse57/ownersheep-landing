@@ -26,8 +26,8 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fff;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, #181824 0%, #23233a 40%, #000 100%);
+            color: #e6e6e6;
             overflow-x: hidden;
             line-height: 1.6;
         }
@@ -325,6 +325,280 @@
             box-shadow: 0 4px 16px rgba(0,0,0,0.08);
         }
 
+        /* Mobile-Friendly Hero Section */
+        .os-hero {
+            position: relative;
+            background: transparent; /* Remove section bg */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            overflow: hidden;
+        }
+        .os-hero-dots {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: transparent;
+        }
+        .os-hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        }
+        .os-hero-badge {
+            display: inline-block;
+            background: #f5f5f7;
+            color: #23272f;
+            font-size: 0.98rem;
+            font-weight: 600;
+            border-radius: 999px;
+            padding: 8px 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            letter-spacing: 0.01em;
+        }
+        .os-hero-logo-wrap {
+            margin-bottom: 10px;
+        }
+        .os-hero-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            box-shadow: 0 2px 12px #0001;
+            object-fit: cover;
+            background: #fff;
+        }
+        .os-hero-brand {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #ffb347;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 12px #0006;
+            transition: font-size 0.2s, color 0.2s;
+        }
+        .os-hero-subtitle {
+            color: #C0C0C0;
+            font-size: 1.08rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+        .os-hero-heading {
+            font-size: 1.32rem;
+            font-weight: 700;
+            color: #C0C0C0;
+            margin-bottom: 14px;
+            line-height: 1.25;
+        }
+        .os-hero-highlight {
+            color: #ffb347;
+            font-weight: 700;
+        }
+        .os-hero-desc {
+            color: #6c6f7b;
+            font-size: 1.01rem;
+            font-weight: 400;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .os-hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .os-hero-btn {
+            display: inline-block;
+            border-radius: 999px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            padding: 14px 32px;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            margin-bottom: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            position: relative;
+        }
+        .os-hero-btn-primary {
+            background: #111;
+            color: #fff;
+        }
+        .os-hero-btn-primary:hover,
+        .os-hero-btn-primary:focus {
+            background: #23272f;
+            color: #fff;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .os-hero-btn-secondary {
+            background: #f5f5f7;
+            color: #111;
+            border: 1px solid #e5e5e5;
+        }
+        .os-hero-btn-secondary:hover,
+        .os-hero-btn-secondary:focus {
+            background: #ececec;
+            color: #111;
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        /* Section Styles */
+        .os-section {
+            position: relative;
+            background: transparent; /* Remove section bg */
+            padding: 64px 0 64px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .os-section-dots {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .os-section-content,
+        .os-footer-content {
+            max-width: 540px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            box-sizing: border-box;
+        }
+        .os-features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 48px;
+            width: 100%;
+        }
+        @media (max-width: 900px) {
+            .os-section-content,
+            .os-footer-content {
+                max-width: 98vw;
+                padding: 0 8vw;
+            }
+            .os-features-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .os-feature-card {
+                min-height: 120px;
+                padding: 18px 10px;
+            }
+        }
+        @media (max-width: 600px) {
+            .os-section-content,
+            .os-footer-content {
+                max-width: 100vw;
+                padding: 0 2vw;
+            }
+            .os-section {
+                padding: 32px 0 32px 0;
+            }
+            .os-hero-content {
+                max-width: 98vw;
+                padding: 0 4vw;
+            }
+            .os-hero-heading {
+                font-size: 1.08rem;
+            }
+            .os-hero-brand {
+                font-size: 1.45rem;
+                color: #ffb347;
+                text-shadow: 0 1px 6px #0004;
+            }
+            .os-hero-btn {
+                font-size: 0.98rem;
+                padding: 12px 18px;
+            }
+            .os-hero-badge {
+                font-size: 0.98rem;
+                padding: 8px 16px;
+            }
+            .os-hero-logo {
+                width: 40px;
+                height: 40px;
+            }
+            .os-hero-cta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .os-steps li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 12px 8px 12px 8px;
+            }
+            .os-step-num {
+                margin-bottom: 8px;
+                margin-right: 0;
+            }
+            .os-feature-card {
+                min-height: 100px;
+                padding: 12px 8px;
+            }
+            .os-ai-feature {
+                padding: 16px 6px;
+            }
+            .os-section-title {
+                font-size: 1.15rem;
+            }
+            .os-section-badge {
+                font-size: 0.92rem;
+                padding: 6px 12px;
+            }
+            .os-section-desc {
+                font-size: 0.98rem;
+            }
+            .os-footer-title {
+                font-size: 1.08rem;
+            }
+            .os-footer-desc {
+                font-size: 0.98rem;
+            }
+            .os-footer-copyright {
+                font-size: 0.92rem;
+            }
+            .ownersheep-modal-content {
+                padding: 18px 4px 12px 4px;
+                max-width: 98vw;
+            }
+        }
+
+        /* Animated Dots (Particles) */
+        .os-hero-dots {
+            width: 100%;
+            height: 100%;
+        }
+        .os-hero-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #23272f;
+            border-radius: 50%;
+            opacity: 0.13;
+            animation: os-dot-float 8s linear infinite;
+        }
+        @keyframes os-dot-float {
+            0% { transform: translateY(0) scale(1);}
+            50% { transform: translateY(-12px) scale(1.2);}
+            100% { transform: translateY(0) scale(1);}
+        }
+
         /* How It Works Section */
         .how-it-works {
             padding: 100px 0;
@@ -491,7 +765,7 @@
 
         /* AI Feature */
         .ai-feature {
-            background: #f5f5f5;
+            background: #fafbfc;
             border: 2px solid #eee;
             border-radius: 40px;
             padding: 80px;
@@ -537,408 +811,8 @@
             }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                padding: 15px 20px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-content {
-                padding: 30px 20px;
-            }
-            
-            .features-content {
-                padding: 0 12px;
-            }
-            
-            .features-header {
-                margin-bottom: 48px;
-            }
-            
-            .features h2 {
-                font-size: 1.45rem;
-                margin-bottom: 14px;
-            }
-            
-            .features-subtitle {
-                font-size: 0.98rem;
-                line-height: 1.5;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 18px;
-            }
-            
-            .feature-card {
-                padding: 28px 14px;
-            }
-            
-            .ai-feature {
-                padding: 28px 6px;
-                border-radius: 18px;
-            }
-            
-            .ai-feature h3 {
-                font-size: 1.15rem;
-                margin-bottom: 14px;
-                gap: 10px;
-            }
-            
-            .ai-feature p {
-                font-size: 0.98rem;
-                line-height: 1.5;
-                max-width: 98vw;
-            }
-            
-            .robot-icon {
-                font-size: 2.1rem;
-            }
-            
-            .cta-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .how-it-works {
-                padding: 48px 0 !important;
-            }
-            
-            .how-it-works h2 {
-                font-size: 1.35rem !important;
-                margin-bottom: 28px !important;
-            }
-            
-            .how-it-works ol {
-                padding: 0;
-            }
-            
-            .how-it-works li {
-                margin-bottom: 22px !important;
-                align-items: flex-start;
-            }
-            
-            .how-it-works span[style*="width:48px"] {
-                width: 32px !important;
-                height: 32px !important;
-                font-size: 1.05rem !important;
-                margin-right: 12px !important;
-            }
-            
-            .how-it-works strong {
-                font-size: 1rem !important;
-            }
-            
-            .how-it-works div[style*="color:#bbb"] {
-                font-size: 0.92rem !important;
-                margin-top: 4px !important;
-            }
-        }
-
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Custom Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(0, 0, 0, 0.8);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: multiply;
-            transition: all 0.3s ease;
-        }
-
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.08);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.6s ease;
-        }
-
-        /* Glowing Text Effect */
-        .glow-text {
-            text-shadow: 0 0 20px rgba(0,0,0,0.08);
-            color: #111;
-        }
-
-        /* Particle System */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #111;
-            border-radius: 50%;
-            animation: particleFloat 10s infinite linear;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
-<style>
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        </style></head>
-<body>
-    <!-- Animated Background -->
-    <!-- <div class="bg-animation">
-        <div class="floating-shapes" style="transform: translateY(0px);">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-    </div> -->
-
-    <!-- Particle System -->
-    <div class="particles" id="particles"><div class="particle" style="left: 88.0154%; animation-delay: 9.60345s; animation-duration: 15.274s;"></div><div class="particle" style="left: 49.1237%; animation-delay: 4.05474s; animation-duration: 16.702s;"></div><div class="particle" style="left: 21.3549%; animation-delay: 7.49852s; animation-duration: 16.3949s;"></div><div class="particle" style="left: 29.6368%; animation-delay: 3.15226s; animation-duration: 13.0292s;"></div><div class="particle" style="left: 18.3027%; animation-delay: 2.40349s; animation-duration: 11.2905s;"></div><div class="particle" style="left: 33.6854%; animation-delay: 3.38808s; animation-duration: 13.7517s;"></div><div class="particle" style="left: 43.9122%; animation-delay: 4.07938s; animation-duration: 16.9484s;"></div><div class="particle" style="left: 95.8235%; animation-delay: 2.28016s; animation-duration: 18.3616s;"></div><div class="particle" style="left: 6.34782%; animation-delay: 2.44238s; animation-duration: 18.6387s;"></div><div class="particle" style="left: 80.284%; animation-delay: 1.00488s; animation-duration: 19.9222s;"></div><div class="particle" style="left: 57.5991%; animation-delay: 9.49265s; animation-duration: 14.5423s;"></div><div class="particle" style="left: 54.8297%; animation-delay: 1.56037s; animation-duration: 19.631s;"></div><div class="particle" style="left: 16.0498%; animation-delay: 8.79147s; animation-duration: 14.806s;"></div><div class="particle" style="left: 69.444%; animation-delay: 7.9732s; animation-duration: 14.5464s;"></div><div class="particle" style="left: 30.3505%; animation-delay: 2.96078s; animation-duration: 19.7256s;"></div><div class="particle" style="left: 3.17635%; animation-delay: 3.68305s; animation-duration: 10.2372s;"></div><div class="particle" style="left: 76.0406%; animation-delay: 5.35072s; animation-duration: 13.8965s;"></div><div class="particle" style="left: 41.0292%; animation-delay: 3.73748s; animation-duration: 13.3279s;"></div><div class="particle" style="left: 71.5146%; animation-delay: 2.15064s; animation-duration: 19.3301s;"></div><div class="particle" style="left: 2.68841%; animation-delay: 4.12949s; animation-duration: 12.7505s;"></div><div class="particle" style="left: 83.3769%; animation-delay: 1.39373s; animation-duration: 13.372s;"></div><div class="particle" style="left: 68.069%; animation-delay: 5.40482s; animation-duration: 17.382s;"></div><div class="particle" style="left: 55.1871%; animation-delay: 0.386178s; animation-duration: 14.6367s;"></div><div class="particle" style="left: 39.0743%; animation-delay: 0.428176s; animation-duration: 15.1788s;"></div><div class="particle" style="left: 36.3579%; animation-delay: 1.61615s; animation-duration: 19.6896s;"></div><div class="particle" style="left: 80.1743%; animation-delay: 7.93994s; animation-duration: 18.2317s;"></div><div class="particle" style="left: 23.1352%; animation-delay: 3.37535s; animation-duration: 13.2839s;"></div><div class="particle" style="left: 94.2374%; animation-delay: 0.901464s; animation-duration: 16.2004s;"></div><div class="particle" style="left: 11.1015%; animation-delay: 5.43972s; animation-duration: 16.3628s;"></div><div class="particle" style="left: 88.5045%; animation-delay: 3.98415s; animation-duration: 17.6145s;"></div><div class="particle" style="left: 41.2717%; animation-delay: 4.5646s; animation-duration: 15.1945s;"></div><div class="particle" style="left: 3.59043%; animation-delay: 4.25791s; animation-duration: 14.5155s;"></div><div class="particle" style="left: 38.1671%; animation-delay: 4.4879s; animation-duration: 14.6272s;"></div><div class="particle" style="left: 69.707%; animation-delay: 9.58746s; animation-duration: 16.8716s;"></div><div class="particle" style="left: 42.3454%; animation-delay: 4.58093s; animation-duration: 13.5542s;"></div><div class="particle" style="left: 95.744%; animation-delay: 0.690062s; animation-duration: 11.6258s;"></div><div class="particle" style="left: 64.0019%; animation-delay: 9.30207s; animation-duration: 14.9976s;"></div><div class="particle" style="left: 79.0698%; animation-delay: 6.91163s; animation-duration: 18.2405s;"></div><div class="particle" style="left: 56.0185%; animation-delay: 6.14825s; animation-duration: 16.5367s;"></div><div class="particle" style="left: 70.8131%; animation-delay: 4.35523s; animation-duration: 13.0936s;"></div><div class="particle" style="left: 58.5888%; animation-delay: 0.268004s; animation-duration: 12.6254s;"></div><div class="particle" style="left: 28.7416%; animation-delay: 3.52693s; animation-duration: 15.6823s;"></div><div class="particle" style="left: 60.8483%; animation-delay: 7.4327s; animation-duration: 14.7647s;"></div><div class="particle" style="left: 46.8784%; animation-delay: 5.60921s; animation-duration: 17.1962s;"></div><div class="particle" style="left: 25.3709%; animation-delay: 6.41804s; animation-duration: 12.2843s;"></div><div class="particle" style="left: 51.3501%; animation-delay: 7.87022s; animation-duration: 14.2063s;"></div><div class="particle" style="left: 60.2908%; animation-delay: 5.63054s; animation-duration: 15.2193s;"></div><div class="particle" style="left: 18.6802%; animation-delay: 2.16832s; animation-duration: 10.9544s;"></div><div class="particle" style="left: 10.978%; animation-delay: 5.66163s; animation-duration: 12.8689s;"></div><div class="particle" style="left: 60.0271%; animation-delay: 3.89685s; animation-duration: 17.7844s;"></div></div>
-
-    <!-- Custom Cursor -->
-    <div class="cursor" style="left: 1080px; top: 55px; transform: scale(1);"></div>
-    <div class="cursor-follower" style="left: 1108px; top: 326px; transform: scale(1);"></div>
-
-  
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <!-- Logo and Brand in Hero -->
-            <div class="hero-badge">✨ Where <span class="highlight">Ideas</span> Become Valuable Assets</div>
-            <div class="hero-title-flex" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png"
-                     alt="Ownersheep Logo"
-                     style="height:50px; width:50px; border-radius:50%; margin-bottom:0px; box-shadow:0 2px 12px #0003; object-fit:cover;">
-                <h1 class="glow-text" style="margin: 0;">Ownersheep</h1>
-            </div>
-            <p class="subtitle">Own Your <span class="highlight">Ideas</span> as Digital Assets</p>
-            <h2 class="hero-description">Step into the <span class="highlight">AI-powered future</span> where your creativity holds real value.</h2>
-            <p class="hero-tagline">Turn your thoughts into <span class="highlight">tradable assets</span>. Build your brand. Mini-IPOs coming soon.</p>
-
-            <div class="cta-container">
-                <a href="#" class="cta-button download-app-btn">
-                    📱 Download Beta App (.apk)
-                </a>
-                <a href="#features" class="cta-secondary">
-                    🚀 Explore Features
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="how-it-works" style="background:#181818; padding:100px 0;">
-        <div style="max-width:900px; margin:0 auto; padding:0 40px;">
-            <h2 style="text-align:center; font-size:2.8rem; font-weight:800; color:#fff; margin-bottom:50px;">
-                How It <span class="highlight">Works</span>
-            </h2>
-            
-            <ol style="list-style:none; counter-reset:step; padding:0; margin:0;">
-                <li style="display:flex; align-items:flex-start; margin-bottom:40px;">
-                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
-                        <span style="font-size:1.5rem;">1</span>
-                    </span>
-                    <div>
-                        <strong style="font-size:1.2rem; color:#fff;">Submit Your Idea</strong>
-                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">Start with your original idea, prompt, or concept. Just type it into our chat-based interface — fast and intuitive.</div>
-                    </div>
-                </li>
-                <li style="display:flex; align-items:flex-start; margin-bottom:40px;">
-                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
-                        <span style="font-size:1.5rem;">2</span>
-                    </span>
-                    <div>
-                        <strong style="font-size:1.2rem; color:#fff;">AI Evaluates & Assigns Value</strong>
-                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">Our AI instantly analyzes your idea’s uniqueness, trend potential, and market strength — and assigns a valuation.</div>
-                    </div>
-                </li>
-                <li style="display:flex; align-items:flex-start; margin-bottom:40px;">
-                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
-                        <span style="font-size:1.5rem;">3</span>
-                    </span>
-                    <div>
-                        <strong style="font-size:1.2rem; color:#fff;">Get Ownership of That Value</strong>
-                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">You get ownership of both the prompt and its AI-generated value. It’s added to your personal IP portfolio with secure access.</div>
-                    </div>
-                </li>
-                <li style="display:flex; align-items:flex-start;">
-                    <span style="flex-shrink:0; display:inline-block; width:48px; height:48px; border-radius:50%; background:#111; color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; margin-right:24px; border:2px solid #333; counter-increment:step;">
-                        <span style="font-size:1.5rem;">4</span>
-                    </span>
-                    <div>
-                        <strong style="font-size:1.2rem; color:#fff;">Build Value, Prepare to Monetize</strong>
-                        <div style="color:#bbb; font-size:1rem; margin-top:6px;">Your prompt gains visibility. In future versions, you’ll be able to sell, resell, or launch a Mini-IPO — and turn your idea into real income.</div>
-                    </div>
-                </li>
-            </ol>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="features-content">
-            <div class="features-header reveal active">
-                <h2>Revolutionary <span class="highlight">Features</span></h2>
-                <p class="features-subtitle">Transform your creative potential into <span class="highlight">digital wealth</span> with cutting-edge technology</p>
-               
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">💎</span>
-                    <h3>Idea Tokenization</h3>
-                    <p>Turn your original ideas, prompts, or concepts into unique digital assets. Each submission gets a market-assigned valuation, ownership rights, and visibility on your IP portfolio.</p>
-                </div>
-                
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">🚀</span>
-                    <h3>Launch Your Brand</h3>
-                    <p>Create your personal brand account and start building your digital reputation.
-In the next phase, Ownersheep will let you launch your own Mini-IPO, where backers can support your top-performing ideas. (Coming Soon)</p>
-                </div>
-                
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">💰</span>
-                    <h3>Monetize Creativity</h3>
-                    <p>In the next phase, you’ll be able to sell or resell your prompts in the Ownersheep marketplace.
-High-performing prompts will become digital assets with real-world earning potential. (Feature coming soon)</p>
-                </div>
-                
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">📊</span>
-                    <h3>Prompt Analytics</h3>
-                    <p>Track idea performance — get views, usage stats, rating trends, and engagement graphs through a clean AI-powered analytics dashboard.</p>
-                </div>
-                
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">🌍</span>
-                    <h3>Global Marketplace</h3>
-                    <p>Your ideas can be viewed by users worldwide through the Explore tab and searchable discovery. Gain visibility beyond your network.</p>
-                </div>
-                
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">🤖</span>
-                    <h3>AI-Powered Analysis</h3>
-                    <p>When you submit an idea, Ownersheep’s AI evaluates it in real-time for title, valuation, relevance, and trend potential. Smart scoring at your fingertips.</p>
-                </div>
-                
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">🔒</span>
-                    <h3>Digital Ownership</h3>
-                    <p>Each approved prompt is time-stamped and stored securely under your profile. You can share, reference, or upgrade ownership levels via Boost Packs.</p>
-                </div>
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">🌟</span>
-                    <h3>AI Test Lab</h3>
-                    <p>Test your own or others’ prompts using AI. Check engagement scores and preview how your ideas might perform. You get limited free credits; purchase more to test further. Advanced simulations coming soon.</p>
-                </div>
-                <div class="feature-card reveal active">
-                    <span class="feature-icon">💸</span>
-                    <h3>Future Monetization</h3>
-                    <p>Buy/Sell prompts and launch your own Mini-IPOs to earn from your creativity.</p>
-                </div>
-            </div>
-            
-            <div class="ai-feature reveal active">
-                <div class="ai-feature-content">
-                    <h3><span class="robot-icon">🤖</span>AI-Powered Evaluation (Live)</h3>
-                    <p>Our AI analyzes your idea or prompt to determine its uniqueness, relevance, and potential traction. It instantly assigns a title, a value, and key engagement insights — helping you understand how your idea stands in the digital market.</p>
-                    <!-- Add Download App button at the end of AI feature for conversion -->
-                    <div style="margin-top:36px;">
-                        <a href="#" class="cta-button download-app-btn" style="font-size:1.05rem; padding:13px 30px;">
-                            📱 Download Beta App (.apk)
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / Boost Pack -->
-    <footer style="background:#fff; padding:60px 0 40px 0; text-align:center; border-top:1px solid #eee; margin-top:60px;">
-        <div style="max-width:700px; margin:0 auto;">
-            <h3 style="font-size:2rem; font-weight:800; margin-bottom:18px;">
-                Upgrade with <span class="highlight">Boost Pack</span>
-            </h3>
-            <div style="font-size:1.1rem; line-height:1.7;">
-                Premium features including <span class="highlight">Mind Maps</span>, <span class="highlight">SWOT</span>, Use Case PDFs, and <span class="highlight">AI Test Credits</span>.
-            </div>
-            <!-- Add Download App button in footer for persistent CTA -->
-            <div style="margin-top:32px;">
-                <a href="#" class="cta-button download-app-btn" style="font-size:1.05rem; padding:13px 30px;">
-                    📱 Download Beta App (.apk)
-                </a>
-            </div>
-        </div>
-    </footer>
-    <div style=" left:0; right:0; bottom:0; background:#f5f5f5; color:#444; font-size:0.98rem; text-align:center; padding:12px 10px 10px 10px; border-top:1px solid #eee; z-index:2000;">
-        © 2025 Ownersheep. All Rights Reserved. | <a href="#" style="color:#444;text-decoration:underline;">Terms</a> | <a href="#" style="color:#444;text-decoration:underline;">Privacy</a>
-    </div>
-
-    <!-- Modal Popup HTML -->
-    <div id="downloadAppModal" class="ownersheep-modal">
-        <div class="ownersheep-modal-content">
-            <span class="ownersheep-modal-close" id="ownersheepModalClose">&times;</span>
-            <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" style="height:48px;width:48px;border-radius:50%;margin-bottom:12px;">
-            <h2 style="margin-bottom:10px;">Download Ownersheep Beta App?</h2>
-            <p style="font-size:1.08rem; color:#444; margin-bottom:18px;">
-                Ownersheep lets you own and monetize your ideas as digital assets.
-            </p>
-            <div style="display:flex; gap:18px; justify-content:center;">
-                <button id="ownersheepModalYes" class="cta-button" style="padding:10px 28px; font-size:1rem;">Yes, Download</button>
-                <button id="ownersheepModalNo" class="cta-secondary" style="padding:10px 28px; font-size:1rem;">No, Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal CSS -->
-    <style>
-/* Ownersheep Modal Styles */
+        /* Modal Styles */
+        /* Ownersheep Modal Styles */
 .ownersheep-modal {
     display: none;
     position: fixed;
@@ -976,10 +850,298 @@ High-performing prompts will become digital assets with real-world earning poten
         max-width: 98vw;
     }
 }
-    </style>
 
+/* Superhuman-inspired Section */
+.superhuman-hero {
+  background: linear-gradient(135deg, #181824 0%, #23233a 40%, #000 100%);
+  color: #e6e6e6;
+  padding: 80px 0 100px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 80px 0 #000a, 0 0 180px 0 #a14fff22 inset;
+}
+.superhuman-container {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+}
+.superhuman-title {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.98rem;
+  color: #bdbdd7;
+  font-weight: 700;
+  margin-bottom: 22px;
+  opacity: 0.92;
+  text-shadow: 0 2px 8px #0008;
+}
+.superhuman-headline {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 22px;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 16px #a14fff33, 0 1px 4px #0008;
+}
+.superhuman-subtext {
+  color: #c0c0c0;
+  font-size: 1.13rem;
+  font-weight: 400;
+  margin-bottom: 38px;
+  opacity: 0.95;
+  text-shadow: 0 1px 6px #0005;
+}
+.superhuman-signup-btn {
+  display: inline-block;
+  padding: 15px 44px;
+  font-size: 1.09rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #A14FFF 0%, #F15CCB 100%);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 24px 0 #a14fff44, 0 0 16px #fff2 inset;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: none;
+  outline: none;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 8px #0008;
+}
+.superhuman-signup-btn:hover, .superhuman-signup-btn:focus {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 32px 0 #f15ccb55, 0 0 24px #fff4 inset;
+  color: #fff;
+  background: linear-gradient(90deg, #F15CCB 0%, #A14FFF 100%);
+}
+@media (max-width: 600px) {
+  .superhuman-hero {
+    padding: 48px 0 60px 0;
+  }
+  .superhuman-headline {
+    font-size: 1.25rem;
+  }
+  .superhuman-container {
+    padding: 0 8px;
+  }
+  .superhuman-signup-btn {
+    padding: 12px 22px;
+    font-size: 0.98rem;
+  }
+}
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <!-- <div class="bg-animation">
+        <div class="floating-shapes" style="transform: translateY(0px);">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div> -->
+
+    <!-- Particle System -->
+    <div class="particles" id="particles"><div class="particle" style="left: 88.0154%; animation-delay: 9.60345s; animation-duration: 15.274s;"></div><div class="particle" style="left: 49.1237%; animation-delay: 4.05474s; animation-duration: 16.702s;"></div><div class="particle" style="left: 21.3549%; animation-delay: 7.49852s; animation-duration: 16.3949s;"></div><div class="particle" style="left: 29.6368%; animation-delay: 3.15226s; animation-duration: 13.0292s;"></div><div class="particle" style="left: 18.3027%; animation-delay: 2.40349s; animation-duration: 11.2905s;"></div><div class="particle" style="left: 33.6854%; animation-delay: 3.38808s; animation-duration: 13.7517s;"></div><div class="particle" style="left: 43.9122%; animation-delay: 4.07938s; animation-duration: 16.9484s;"></div><div class="particle" style="left: 95.8235%; animation-delay: 2.28016s; animation-duration: 18.3616s;"></div><div class="particle" style="left: 6.34782%; animation-delay: 2.44238s; animation-duration: 18.6387s;"></div><div class="particle" style="left: 80.284%; animation-delay: 1.00488s; animation-duration: 19.9222s;"></div><div class="particle" style="left: 57.5991%; animation-delay: 9.49265s; animation-duration: 14.5423s;"></div><div class="particle" style="left: 54.8297%; animation-delay: 1.56037s; animation-duration: 19.631s;"></div><div class="particle" style="left: 16.0498%; animation-delay: 8.79147s; animation-duration: 14.806s;"></div><div class="particle" style="left: 69.444%; animation-delay: 7.9732s; animation-duration: 14.5464s;"></div><div class="particle" style="left: 30.3505%; animation-delay: 2.96078s; animation-duration: 19.7256s;"></div><div class="particle" style="left: 3.17635%; animation-delay: 3.68305s; animation-duration: 10.2372s;"></div><div class="particle" style="left: 76.0406%; animation-delay: 5.35072s; animation-duration: 13.8965s;"></div><div class="particle" style="left: 41.0292%; animation-delay: 3.73748s; animation-duration: 13.3279s;"></div><div class="particle" style="left: 71.5146%; animation-delay: 2.15064s; animation-duration: 19.3301s;"></div><div class="particle" style="left: 2.68841%; animation-delay: 4.12949s; animation-duration: 12.7505s;"></div><div class="particle" style="left: 83.3769%; animation-delay: 1.39373s; animation-duration: 13.372s;"></div><div class="particle" style="left: 68.069%; animation-delay: 5.40482s; animation-duration: 17.382s;"></div><div class="particle" style="left: 55.1871%; animation-delay: 0.386178s; animation-duration: 14.6367s;"></div><div class="particle" style="left: 39.0743%; animation-delay: 0.428176s; animation-duration: 15.1788s;"></div><div class="particle" style="left: 36.3579%; animation-delay: 1.61615s; animation-duration: 19.6896s;"></div><div class="particle" style="left: 80.1743%; animation-delay: 7.93994s; animation-duration: 18.2317s;"></div><div class="particle" style="left: 23.1352%; animation-delay: 3.37535s; animation-duration: 13.2839s;"></div><div class="particle" style="left: 94.2374%; animation-delay: 0.901464s; animation-duration: 16.2004s;"></div><div class="particle" style="left: 11.1015%; animation-delay: 5.43972s; animation-duration: 16.3628s;"></div><div class="particle" style="left: 88.5045%; animation-delay: 3.98415s; animation-duration: 17.6145s;"></div><div class="particle" style="left: 41.2717%; animation-delay: 4.5646s; animation-duration: 15.1945s;"></div><div class="particle" style="left: 3.59043%; animation-delay: 4.25791s; animation-duration: 14.5155s;"></div><div class="particle" style="left: 38.1671%; animation-delay: 4.4879s; animation-duration: 14.6272s;"></div><div class="particle" style="left: 69.707%; animation-delay: 9.58746s; animation-duration: 16.8716s;"></div><div class="particle" style="left: 42.3454%; animation-delay: 4.58093s; animation-duration: 13.5542s;"></div><div class="particle" style="left: 95.744%; animation-delay: 0.690062s; animation-duration: 11.6258s;"></div><div class="particle" style="left: 64.0019%; animation-delay: 9.30207s; animation-duration: 14.9976s;"></div><div class="particle" style="left: 79.0698%; animation-delay: 6.91163s; animation-duration: 18.2405s;"></div><div class="particle" style="left: 56.0185%; animation-delay: 6.14825s; animation-duration: 16.5367s;"></div><div class="particle" style="left: 70.8131%; animation-delay: 4.35523s; animation-duration: 13.0936s;"></div><div class="particle" style="left: 58.5888%; animation-delay: 0.268004s; animation-duration: 12.6254s;"></div><div class="particle" style="left: 28.7416%; animation-delay: 3.52693s; animation-duration: 15.6823s;"></div><div class="particle" style="left: 60.8483%; animation-delay: 7.4327s; animation-duration: 14.7647s;"></div><div class="particle" style="left: 46.8784%; animation-delay: 5.60921s; animation-duration: 17.1962s;"></div><div class="particle" style="left: 25.3709%; animation-delay: 6.41804s; animation-duration: 12.2843s;"></div><div class="particle" style="left: 51.3501%; animation-delay: 7.87022s; animation-duration: 14.2063s;"></div><div class="particle" style="left: 60.2908%; animation-delay: 5.63054s; animation-duration: 15.2193s;"></div><div class="particle" style="left: 18.6802%; animation-delay: 2.16832s; animation-duration: 10.9544s;"></div><div class="particle" style="left: 10.978%; animation-delay: 5.66163s; animation-duration: 12.8689s;"></div><div class="particle" style="left: 60.0271%; animation-delay: 3.89685s; animation-duration: 17.7844s;"></div></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" style="left: 1080px; top: 55px; transform: scale(1);"></div>
+    <div class="cursor-follower" style="left: 1108px; top: 326px; transform: scale(1);"></div>
+
+  
+
+    <!-- Hero Section -->
+    <!-- <section class="hero" id="home">
+        <div class="hero-content">
+            <!-- Logo and Brand in Hero -->
+            <!-- <div class="hero-badge">✨ Where <span class="highlight">Ideas</span> Become Valuable Assets</div>
+            <div class="hero-title-flex" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+                
+                <h1 class="glow-text" style="display: flex;"><img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png"
+                     alt="Ownersheep Logo"
+                     style="height:40px; width:40px; border-radius:50%; margin-right:10px; box-shadow:0 2px 12px #0003; object-fit:cover;"> Ownersheep</h1>
+            </div>
+            <p class="subtitle">Own Your <span class="highlight">Ideas</span> as Digital Assets</p>
+            <h2 class="hero-description">Step into the <span class="highlight">AI-powered future</span> where your creativity holds real value.</h2>
+            <p class="hero-tagline">Turn your thoughts into <span class="highlight">tradable assets</span>. Build your brand. Mini-IPOs coming soon.</p>
+
+            <div class="cta-container">
+                <a href="#" class="cta-button download-app-btn">
+                    📱 Download Beta App (.apk)
+                </a>
+                <a href="#features" class="cta-secondary">
+                    🚀 Explore Features
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Mobile-Friendly Hero Section -->
+    <section class="os-hero">
+        <!-- Animated dots background -->
+        <div class="os-hero-dots"></div>
+        <div class="os-hero-content">
+            <div class="os-hero-badge">
+                ✨ Where Ideas Become Valuable Assets
+            </div>
+            <div class="os-hero-logo-wrap">
+                <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png"
+                    alt="Ownersheep Logo"
+                    class="os-hero-logo">
+            </div>
+            <h1 class="os-hero-brand">Ownersheep</h1>
+            <div class="os-hero-subtitle">Own Your Ideas as Digital Assets</div>
+            <h2 class="os-hero-heading">
+                Step into the <span class="os-hero-highlight">AI-powered future</span> where your creativity holds real value.
+            </h2>
+            <p class="os-hero-desc">
+                Turn your thoughts into <span class="os-hero-highlight">tradable assets</span>. Build your brand. Mini-IPOs coming soon.
+            </p>
+            <div class="os-hero-cta">
+                <a href="#" class="os-hero-btn os-hero-btn-primary">📱 Download Beta App (.apk)</a>
+                <a href="#features" class="os-hero-btn os-hero-btn-secondary">🚀 Explore Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Popup HTML -->
+    <div id="downloadAppModal" class="ownersheep-modal">
+        <div class="ownersheep-modal-content">
+            <span class="ownersheep-modal-close" id="ownersheepModalClose">&times;</span>
+            <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" style="height:48px;width:48px;border-radius:50%;margin-bottom:12px;">
+            <h2 style="margin-bottom:10px;">Download Ownersheep Beta App?</h2>
+            <p style="font-size:1.08rem; color:#444; margin-bottom:18px;">
+                Ownersheep lets you own and monetize your ideas as digital assets.
+            </p>
+            <div style="display:flex; gap:18px; justify-content:center;">
+                <button id="ownersheepModalYes" class="cta-button" style="padding:10px 28px; font-size:1rem;">Yes, Download</button>
+                <button id="ownersheepModalNo" class="cta-secondary" style="padding:10px 28px; font-size:1rem;">No, Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Sections -->
+    <!-- Modern How It Works Section -->
+    <section class="os-section os-howitworks" id="how-it-works">
+    <div class="os-section-dots"></div>
+    <div class="os-section-content">
+        <div class="os-section-badge">How It Works</div>
+        <h2 class="os-section-title">Turn Ideas Into <span class="os-hero-highlight">Digital Assets</span></h2>
+        <ol class="os-steps">
+            <li>
+                <span class="os-step-num">1</span>
+                <div>
+                    <strong>Submit Your Idea</strong>
+                    <div class="os-step-desc">Start with your original idea, prompt, or concept. Just type it into our chat-based interface — fast and intuitive.</div>
+                </div>
+            </li>
+            <li>
+                <span class="os-step-num">2</span>
+                <div>
+                    <strong>AI Evaluates & Assigns Value</strong>
+                    <div class="os-step-desc">Our AI instantly analyzes your idea’s uniqueness, trend potential, and market strength — and assigns a valuation.</div>
+                </div>
+            </li>
+            <li>
+                <span class="os-step-num">3</span>
+                <div>
+                    <strong>Get Ownership of That Value</strong>
+                    <div class="os-step-desc">You get ownership of both the prompt and its AI-generated value. It’s added to your personal IP portfolio with secure access.</div>
+                </div>
+            </li>
+            <li>
+                <span class="os-step-num">4</span>
+                <div>
+                    <strong>Build Value, Prepare to Monetize</strong>
+                    <div class="os-step-desc">Your prompt gains visibility. In future versions, you’ll be able to sell, resell, or launch a Mini-IPO — and turn your idea into real income.</div>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<!-- Modern Features Section -->
+<section class="os-section os-features" id="features">
+    <div class="os-section-dots"></div>
+    <div class="os-section-content">
+        <div class="os-section-badge">Features</div>
+        <h2 class="os-section-title">Revolutionary <span class="os-hero-highlight">Features</span></h2>
+        <p class="os-section-desc">Transform your creative potential into <span class="os-hero-highlight">digital wealth</span> with cutting-edge technology.</p>
+        <div class="os-features-grid">
+            <div class="os-feature-card"><span>💎</span><h3>Idea Tokenization</h3><p>Turn your original ideas, prompts, or concepts into unique digital assets. Each submission gets a market-assigned valuation, ownership rights, and visibility on your IP portfolio.</p></div>
+            <div class="os-feature-card"><span>🚀</span><h3>Launch Your Brand</h3><p>Create your personal brand account and start building your digital reputation. Mini-IPO coming soon.</p></div>
+            <div class="os-feature-card"><span>💰</span><h3>Monetize Creativity</h3><p>Sell or resell your prompts in the Ownersheep marketplace. High-performing prompts become digital assets with real-world earning potential.</p></div>
+            <div class="os-feature-card"><span>📊</span><h3>Prompt Analytics</h3><p>Track idea performance — get views, usage stats, rating trends, and engagement graphs through a clean AI-powered analytics dashboard.</p></div>
+            <div class="os-feature-card"><span>🌍</span><h3>Global Marketplace</h3><p>Your ideas can be viewed by users worldwide through the Explore tab and searchable discovery. Gain visibility beyond your network.</p></div>
+            <div class="os-feature-card"><span>🤖</span><h3>AI-Powered Analysis</h3><p>When you submit an idea, Ownersheep’s AI evaluates it in real-time for title, valuation, relevance, and trend potential. Smart scoring at your fingertips.</p></div>
+            <div class="os-feature-card"><span>🔒</span><h3>Digital Ownership</h3><p>Each approved prompt is time-stamped and stored securely under your profile. You can share, reference, or upgrade ownership levels via Boost Packs.</p></div>
+            <div class="os-feature-card"><span>🌟</span><h3>AI Test Lab</h3><p>Test your own or others’ prompts using AI. Check engagement scores and preview how your ideas might perform. Limited free credits; purchase more to test further.</p></div>
+            <div class="os-feature-card"><span>💸</span><h3>Future Monetization</h3><p>Buy/Sell prompts and launch your own Mini-IPOs to earn from your creativity.</p></div>
+        </div>
+        <div class="os-ai-feature">
+            <h3><span>🤖</span> AI-Powered Evaluation (Live)</h3>
+            <p>Our AI analyzes your idea or prompt to determine its uniqueness, relevance, and potential traction. It instantly assigns a title, a value, and key engagement insights — helping you understand how your idea stands in the digital market.</p>
+            <div style="margin-top:32px;">
+                <a href="#" class="os-hero-btn os-hero-btn-primary">📱 Download Beta App (.apk)</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modern Footer Section -->
+<footer class="os-footer">
+    <div class="os-section-dots"></div>
+    <div class="os-footer-content">
+        <div class="os-section-badge">Upgrade</div>
+        <h3 class="os-footer-title">Upgrade with <span class="os-hero-highlight">Boost Pack</span></h3>
+        <div class="os-footer-desc">
+            Premium features including <span class="os-hero-highlight">Mind Maps</span>, <span class="os-hero-highlight">SWOT</span>, Use Case PDFs, and <span class="os-hero-highlight">AI Test Credits</span>.
+        </div>
+        <div style="margin-top:28px;">
+            <a href="#" class="os-hero-btn os-hero-btn-primary">📱 Download Beta App (.apk)</a>
+        </div>
+        <div class="os-footer-copyright">
+            © 2025 Ownersheep. All Rights Reserved. | <a href="#">Terms</a> | <a href="#">Privacy</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- Scripts -->
     <script>
-        // Particle System
+// Generate random dots for hero background
+(function() {
+    const dotsContainer = document.querySelector('.os-hero-dots');
+    const dotCount = window.innerWidth < 600 ? 16 : 28;
+    for (let i = 0; i < dotCount; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'os-hero-dot';
+        dot.style.left = (Math.random() * 100) + '%';
+        dot.style.top = (Math.random() * 100) + '%';
+        dot.style.animationDelay = (Math.random() * 8) + 's';
+        dot.style.opacity = (Math.random() * 0.18 + 0.08).toFixed(2);
+        dotsContainer.appendChild(dot);
+    }
+})();
+
+// Generate random dots for all .os-section-dots
+(function() {
+    document.querySelectorAll('.os-section-dots').forEach(dotsContainer => {
+        const dotCount = window.innerWidth < 600 ? 10 : 18;
+        for (let i = 0; i < dotCount; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'os-section-dot';
+            dot.style.left = (Math.random() * 100) + '%';
+            dot.style.top = (Math.random() * 100) + '%';
+            dot.style.animationDelay = (Math.random() * 8) + 's';
+            dot.style.opacity = (Math.random() * 0.13 + 0.07).toFixed(2);
+            dotsContainer.appendChild(dot);
+        }
+    });
+})();
+
+// Particle System
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 50;
@@ -1176,4 +1338,5 @@ window.addEventListener('click', function(event) {
 });
     </script>
 
-</body></html>
+</body>
+</html>
