@@ -1010,7 +1010,7 @@
     <div id="downloadAppModal" class="ownersheep-modal">
         <div class="ownersheep-modal-content">
             <span class="ownersheep-modal-close" id="ownersheepModalClose">&times;</span>
-            <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" style="height:48px;width:48px;border-radius:50%;margin-bottom:12px;">
+            <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" style="height:48px;width:48px; border-radius:50%; margin-bottom:12px;">
             <h2 style="margin-bottom:10px;">Download Ownersheep Beta App?</h2>
             <p style="font-size:1.08rem; color:#444; margin-bottom:18px;">
                 Ownersheep lets you own and monetize your ideas as digital assets.
@@ -1126,7 +1126,7 @@
             <h3 style="display:flex; align-items:center; justify-content:center; gap:10px;"><span>🤖</span> AI-Powered Evaluation (Live)</h3>
             <p>Our AI analyzes your idea or prompt to determine its uniqueness, relevance, and potential traction. It instantly assigns a title, a value, and key engagement insights — helping you understand how your idea stands in the digital market.</p>
             <div style="margin-top:32px;">
-                <a href="#" class="os-hero-btn os-hero-btn-primary">📱 Download Beta App (.apk)</a>
+                <a href="#" class="os-hero-btn os-hero-btn-primary download-app-btn">📱 Download Beta App (.apk)</a>
             </div>
         </div>
     </div>
@@ -1307,6 +1307,43 @@
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             revealElements();
+
+            // Ownersheep Download Modal Logic (move inside DOMContentLoaded)
+            const modal = document.getElementById('downloadAppModal');
+            const modalClose = document.getElementById('ownersheepModalClose');
+            const modalYes = document.getElementById('ownersheepModalYes');
+            const modalNo = document.getElementById('ownersheepModalNo');
+            const downloadButtons = document.querySelectorAll('.download-app-btn');
+            const apkUrl = "https://www.ownersheep.app/download_/OwnerSheep.apk";
+
+            // Show modal on download button click
+            downloadButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'flex';
+                });
+            });
+
+            // Close modal on X or No
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            modalNo.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            // Yes: redirect to APK
+            modalYes.addEventListener('click', () => {
+                modal.style.display = 'none';
+                window.location.href = apkUrl;
+            });
+
+            // Optional: close modal on outside click
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         });
 
         // Add CSS for ripple animation
@@ -1339,43 +1376,6 @@
 
         // Trigger text animation after page loads
         setTimeout(animateText, 2000);
-
-        // Ownersheep Download Modal Logic
-const modal = document.getElementById('downloadAppModal');
-const modalClose = document.getElementById('ownersheepModalClose');
-const modalYes = document.getElementById('ownersheepModalYes');
-const modalNo = document.getElementById('ownersheepModalNo');
-const downloadButtons = document.querySelectorAll('.download-app-btn');
-const apkUrl = "https://www.ownersheep.app/download_/OwnerSheep.apk";
-
-// Show modal on download button click
-downloadButtons.forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        modal.style.display = 'flex';
-    });
-});
-
-// Close modal on X or No
-modalClose.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-modalNo.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-// Yes: redirect to APK
-modalYes.addEventListener('click', () => {
-    modal.style.display = 'none';
-    window.location.href = apkUrl;
-});
-
-// Optional: close modal on outside click
-window.addEventListener('click', function(event) {
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
     </script>
 
 </body>
