@@ -1,1382 +1,1029 @@
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ownersheep - Own Your Ideas as Digital Assets</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-gradient: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
-            --secondary-gradient: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
-            --accent-gradient: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
-            --dark-gradient: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
-            --glass-bg: rgba(0, 0, 0, 0.04);
-            --glass-border: rgba(0, 0, 0, 0.08);
-            --text-primary: #23272f; /* dark gray */
-            --text-secondary: #6c6f7b; /* lighter gray */
-            --text-accent: #ffb347; /* accent color for highlights */
-            --shadow-glow: 0 0 40px rgba(0,0,0,0.04);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #181824 0%, #23233a 40%, #000 100%);
-            color: #e6e6e6;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: var(--primary-gradient);
-            overflow: hidden;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 80%, #eee 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, #e0e0e0 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, #bbb 0%, transparent 50%);
-            animation: morphing 8s ease-in-out infinite;
-        }
-
-        @keyframes morphing {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(180deg); }
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .shape {
-            position: absolute;
-            background: linear-gradient(45deg, rgba(0,0,0,0.06), rgba(0,0,0,0.03));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0,0,0,0.06);
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            width: 60px;
-            height: 60px;
-            border-radius: 30%;
-            top: 60%;
-            right: 20%;
-            animation-delay: 2s;
-        }
-
-        .shape:nth-child(3) {
-            width: 40px;
-            height: 40px;
-            border-radius: 20%;
-            bottom: 30%;
-            left: 70%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-30px) rotate(120deg); }
-            66% { transform: translateY(30px) rotate(240deg); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid #eee;
-            transition: all 0.3s ease;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: 800;
-            background: none;
-            color: #111;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            color: #444;
-            filter: none;
-            transform: scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 8px 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #111;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background: transparent;
-        }
-
-        .hero-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 2;
-            padding-top: 40px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 12px 24px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out;
-            color: #111;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 900;
-            margin-bottom: 24px;
-            color: #111;
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
-            animation: fadeInUp 1s ease-out 0.2s both;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .hero .subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-            color: #444;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease-out 0.4s both;
-            font-weight: 400;
-        }
-
-        .hero-description {
-            font-size: clamp(1.1rem, 3vw, 1.7rem);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            animation: fadeInUp 1s ease-out 0.6s both;
-            letter-spacing: -0.01em;
-            color: #111;
-        }
-
-        .hero-tagline {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: #444;
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out 0.8s both;
-            font-weight: 300;
-        }
-
-        .cta-container {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 1s both;
-        }
-
-        .cta-button {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 20px 40px;
-            background: #111;
-            border: none;
-            border-radius: 50px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 18px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-            background: #222;
-        }
-
-        .cta-secondary {
-            padding: 20px 40px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            color: #111;
-            font-weight: 600;
-            font-size: 18px;
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .cta-secondary:hover {
-            transform: translateY(-5px);
-            background: rgba(0, 0, 0, 0.08);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        }
-
-        /* Mobile-Friendly Hero Section */
-        .os-hero {
-            position: relative;
-            background: transparent; /* Remove section bg */
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 16px;
-            overflow: hidden;
-        }
-        .os-hero-dots {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background: transparent;
-        }
-        .os-hero-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 420px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-        }
-        .os-hero-badge {
-            display: inline-block;
-            background: #f5f5f7;
-            color: #23272f;
-            font-size: 0.60rem;
-            font-weight: 600;
-            border-radius: 999px;
-            padding: 8px 22px;
-            margin-bottom: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            letter-spacing: 0.01em;
-        }
-        .os-hero-logo-wrap {
-            margin-bottom: 10px;
-        }
-        .os-hero-logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            box-shadow: 0 2px 12px #0001;
-            object-fit: cover;
-            background: #fff;
-        }
-        .os-hero-brand {
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-            font-size: 3.4rem;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
-            text-shadow: 0 2px 12px #0006;
-            transition: font-size 0.2s, color 0.2s;
-        }
-        .os-hero-subtitle {
-            color: #ffffff;
-            font-size: 1.08rem;
-            font-weight: 500;
-            margin-bottom: 18px;
-        }
-        .os-hero-heading {
-            font-size: 1.32rem;
-            font-weight: 700;
-            color: #C0C0C0;
-            margin-bottom: 14px;
-            line-height: 1.25;
-        }
-        .os-hero-highlight {
-            color: #ffb347;
-            font-weight: 700;
-        }
-        .os-hero-desc {
-            color: #6c6f7b;
-            font-size: 1.01rem;
-            font-weight: 400;
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-        .os-hero-cta {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .os-hero-btn {
-            display: inline-block;
-            border-radius: 999px;
-            font-size: 1.08rem;
-            font-weight: 600;
-            padding: 14px 32px;
-            text-decoration: none;
-            transition: all 0.2s;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            margin-bottom: 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            position: relative;
-        }
-        .os-hero-btn-primary {
-            background: linear-gradient(90deg, #ffb347 0%, #23233a 100%);
-            color: #fff;
-            border: none;
-        }
-        .os-hero-btn-primary:hover,
-        .cta-button.download-app-btn:hover {
-            background: linear-gradient(90deg, #23233a 0%, #ffb347 100%);
-            color: #fff;
-        }
-        .os-hero-btn-secondary {
-            background: #f5f5f7;
-            color: #111;
-            border: 1px solid #e5e5e5;
-        }
-        .os-hero-btn-secondary:hover,
-        .os-hero-btn-secondary:focus {
-            background: #ececec;
-            color: #111;
-            transform: translateY(-2px) scale(1.03);
-        }
-
-        /* Section Styles */
-        .os-section {
-            position: relative;
-            background: transparent; /* Remove section bg */
-            padding: 64px 0 64px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .os-section-dots {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .os-section-content,
-        .os-footer-content {
-            max-width: 540px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 24px;
-            box-sizing: border-box;
-        }
-        .os-features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 48px;
-            width: 100%;
-        }
-        @media (max-width: 900px) {
-            .os-section-content,
-            .os-footer-content {
-                max-width: 98vw;
-                padding: 0 8vw;
-            }
-            .os-features-grid {
-                grid-template-columns: 1fr;
-                gap: 14px;
-            }
-            .os-feature-card {
-                min-height: 120px;
-                padding: 18px 10px;
-            }
-        }
-        @media (max-width: 600px) {
-            .os-section-content,
-            .os-footer-content {
-                max-width: 100vw;
-                padding: 0 2vw;
-            }
-            .os-section {
-                padding: 32px 0 32px 0;
-            }
-            .os-hero-content {
-                max-width: 98vw;
-                padding: 0 4vw;
-            }
-            .os-hero-heading {
-                font-size: 1.08rem;
-            }
-            .os-hero-brand {
-                font-size: 3.45rem;
-                color: #ffb347;
-                text-shadow: 0 1px 6px #0004;
-            }
-            .os-hero-btn {
-                font-size: 0.98rem;
-                padding: 12px 18px;
-            }
-            .os-hero-badge {
-                font-size: 0.80rem;
-                padding: 8px 16px;
-            }
-            .os-hero-logo {
-                width: 40px;
-                height: 40px;
-            }
-            .os-hero-cta {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .os-steps li {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 12px 8px 12px 8px;
-            }
-            .os-step-num {
-                margin-bottom: 8px;
-                margin-right: 0;
-            }
-            .os-feature-card {
-                min-height: 100px;
-                padding: 12px 8px;
-            }
-            .os-ai-feature {
-                padding: 16px 6px;
-            }
-            .os-section-title {
-                font-size: 1.15rem;
-            }
-            .os-section-badge {
-                font-size: 0.92rem;
-                padding: 6px 12px;
-            }
-            .os-section-desc {
-                font-size: 0.98rem;
-            }
-            .os-footer-title {
-                font-size: 1.08rem;
-            }
-            .os-footer-desc {
-                font-size: 0.98rem;
-            }
-            .os-footer-copyright {
-                font-size: 0.92rem;
-            }
-            .ownersheep-modal-content {
-                padding: 18px 4px 12px 4px;
-                max-width: 98vw;
-            }
-        }
-
-        /* Animated Dots (Particles) */
-        .os-hero-dots {
-            width: 100%;
-            height: 100%;
-        }
-        .os-hero-dot {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #23272f;
-            border-radius: 50%;
-            opacity: 0.13;
-            animation: os-dot-float 8s linear infinite;
-        }
-        @keyframes os-dot-float {
-            0% { transform: translateY(0) scale(1);}
-            50% { transform: translateY(-12px) scale(1.2);}
-            100% { transform: translateY(0) scale(1);}
-        }
-
-        /* How It Works Section */
-        .how-it-works {
-            padding: 100px 0;
-            background: #f5f5f5;
-        }
-
-        .how-it-works h2 {
-            text-align: center;
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 50px;
-        }
-
-        .how-it-works ol {
-            list-style: none;
-            counter-reset: step;
-            padding: 0;
-            margin: 0;
-        }
-
-        .how-it-works li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 40px;
-        }
-
-        .how-it-works li:last-child {
-            margin-bottom: 0;
-        }
-
-        .how-it-works span[style*="width:48px"] {
-            flex-shrink: 0;
-            display: inline-block;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #fff;
-            color: #111;
-            font-weight: 700;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 24px;
-            border: 2px solid #bbb;
-            counter-increment: step;
-        }
-
-        .how-it-works strong {
-            font-size: 1.2rem;
-            color: #111;
-        }
-
-        .how-it-works div[style*="color:#bbb"] {
-            color: #444;
-            font-size: 1rem;
-            margin-top: 6px;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 60px 0;
-            position: relative;
-            background: #fff;
-        }
-
-        .features-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .features-header {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-
-        .features h2 {
-            font-size: clamp(2.1rem, 5vw, 2.7rem);
-            font-weight: 800;
-            margin-bottom: 22px;
-            color: #111;
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
-        }
-
-        .features-subtitle {
-            font-size: 1.08rem;
-            color: #444;
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 300;
-            line-height: 1.6;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 28px;
-            margin-bottom: 80px;
-        }
-
-        .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 22px;
-            padding: 28px 24px 28px 24px;
-            backdrop-filter: blur(16px);
-            transition: all 0.3s cubic-bezier(.4,0,.2,1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-            min-height: 220px;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #111;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-            background: rgba(0,0,0,0.03);
-        }
-
-        .feature-icon {
-            font-size: 2.1rem;
-            margin-bottom: 16px;
-            display: block;
-            color: #111;
-            opacity: 0.92;
-        }
-
-        .feature-card h3 {
-            font-size: 1.13rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            letter-spacing: -0.01em;
-        }
-
-        .feature-card p {
-            color: #444;
-            font-size: 0.98rem;
-            line-height: 1.6;
-            font-weight: 400;
-            margin-bottom: 0;
-        }
-
-        /* AI Feature */
-        .ai-feature {
-            background: #fafbfc;
-            border: 2px solid #eee;
-            border-radius: 40px;
-            padding: 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-        }
-
-        .ai-feature h3 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            color: #111;
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
-        }
-
-        .ai-feature p {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #444;
-            max-width: 800px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Modal Styles */
-        /* Ownersheep Modal Styles */
-.ownersheep-modal {
-    display: none;
-    position: fixed;
-    z-index: 99999;
-    left: 0; top: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.32);
-    justify-content: center;
-    align-items: center;
-}
-.ownersheep-modal-content {
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    padding: 38px 32px 28px 32px;
-    max-width: 350px;
-    width: 90vw;
-    text-align: center;
-    position: relative;
-    animation: fadeInUp 0.5s;
-}
-.ownersheep-modal-close {
-    position: absolute;
-    top: 16px; right: 18px;
-    font-size: 1.5rem;
-    color: #888;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-.ownersheep-modal-close:hover {
-    color: #111;
-}
-@media (max-width: 600px) {
-    .ownersheep-modal-content {
-        padding: 22px 8px 18px 8px;
-        max-width: 98vw;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ownersheep - Ideas valued. Ownership secured.</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+/* --- COLOR TOKENS --- */
+:root {
+  --primary: #5F33B8;
+  --secondary: #BF55F9;
+  --gradient-main: linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);
+  --bg-main: #000002;
+  --bg-secondary: #10002b;
+  --text-main: #fff;
+  --text-muted: #efedfd99;
+  --text-gradient: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.7) 100%);
+  --border: #ffffff19;
+  --panel-bg: rgba(255,255,255,0.05);
 }
 
-/* Superhuman-inspired Section */
-.superhuman-hero {
-  background: linear-gradient(135deg, #181824 0%, #23233a 40%, #000 100%);
-  color: #e6e6e6;
-  padding: 80px 0 100px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 80px 0 #000a, 0 0 180px 0 #a14fff22 inset;
+/* --- GLOBAL RESETS & TYPOGRAPHY --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.superhuman-container {
-  max-width: 520px;
+html, body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+  scroll-behavior: smooth;
+}
+img, video {
+  max-width: 100%;
+  border-radius: 10px;
+}
+a { color: inherit; text-decoration: none; transition: color .2s; }
+
+.container {
+  width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
-  padding: 0 20px;
 }
-.superhuman-title {
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.98rem;
-  color: #bdbdd7;
+
+h1, h2, h3, h4, h5 {
   font-weight: 700;
-  margin-bottom: 22px;
-  opacity: 0.92;
-  text-shadow: 0 2px 8px #0008;
+  line-height: 1.1;
 }
-.superhuman-headline {
-  font-size: 2.3rem;
-  font-weight: 800;
+h1 {
+  font-size: 2.8rem;
+  letter-spacing: -2px;
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+  color: #ffffffb2;
+}
+
+/* --- NAVBAR --- */
+.navbar {
+  background: var(--bg-main);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  position: sticky; top: 0; z-index: 99;
+}
+.nav-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 2rem;
+  color: var(--text-main);
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-links a.active,
+.nav-links a:hover {
+  color: var(--primary);
+}
+.btn.primary {
+  background: var(--primary);
   color: #fff;
-  margin-bottom: 22px;
-  line-height: 1.18;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 16px #a14fff33, 0 1px 4px #0008;
-}
-.superhuman-subtext {
-  color: #c0c0c0;
-  font-size: 1.13rem;
-  font-weight: 400;
-  margin-bottom: 38px;
-  opacity: 0.95;
-  text-shadow: 0 1px 6px #0005;
-}
-.superhuman-signup-btn {
-  display: inline-block;
-  padding: 15px 44px;
-  font-size: 1.09rem;
-  font-weight: 700;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #A14FFF 0%, #F15CCB 100%);
-  color: #fff;
-  text-decoration: none;
-  box-shadow: 0 4px 24px 0 #a14fff44, 0 0 16px #fff2 inset;
-  transition: transform 0.15s, box-shadow 0.15s;
+  padding: 12px 36px;
   border: none;
   outline: none;
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 8px #0008;
+  border-radius: 100px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.2s;
 }
-.superhuman-signup-btn:hover, .superhuman-signup-btn:focus {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 32px 0 #f15ccb55, 0 0 24px #fff4 inset;
+.btn.primary:hover {
+  background: var(--secondary);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  background: var(--bg-main);
+  padding: 56px 0 56px 0;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+}
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 48px;
+}
+.hero-text { flex: 1 1 340px; }
+.hero-btn {
+  margin-top: 20px;
+  background: var(--primary);
   color: #fff;
-  background: linear-gradient(90deg, #F15CCB 0%, #A14FFF 100%);
+  padding: 12px 36px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 16px 0 var(--primary)22;
 }
-@media (max-width: 600px) {
-  .superhuman-hero {
-    padding: 48px 0 60px 0;
-  }
-  .superhuman-headline {
-    font-size: 1.25rem;
-  }
-  .superhuman-container {
-    padding: 0 8px;
-  }
-  .superhuman-signup-btn {
-    padding: 12px 22px;
-    font-size: 0.98rem;
-  }
+.hero-btn:hover {
+  background: var(--secondary);
 }
-    </style>
-</head>
+.hero-video { flex: 1 1 400px; }
+.hero-video video {
+  border-radius: 10px;
+  box-shadow: 0 2px 24px 0 #21034c44;
+  width: 100%;
+  min-height: 270px;
+}
+
+/* --- FEATURE GRID --- */
+.features {
+  background: var(--bg-main);
+  padding: 64px 0;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+}
+.feature {
+  background: #000002;
+  border: 1px solid var(--border);
+  padding: 38px 22px 26px 22px;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px #24124422;
+  text-align: center;
+  transition: background .3s;
+}
+.feature:hover {
+  background: linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, var(--primary) 124.43%, var(--secondary) 155.23%);
+}
+.feature img {
+  height: 40px;
+  margin-bottom: 18px;
+}
+.feature h3 {
+  color: var(--text-main);
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+}
+.feature p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* --- GENERIC SECTIONS --- */
+section {
+  padding: 60px 0;
+  background: var(--bg-main);
+}
+.about, .research, .faq, .newsletter, .contact {
+  border-top: 1px solid var(--border);
+}
+section h2 {
+  text-align: center;
+}
+
+.testimonials {
+  background: linear-gradient(225deg,rgba(3,0,20,0)0%,rgb(0,0,2)100%);
+}
+.testimonials-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+  max-width: 920px;
+  margin: 2rem auto 0 auto;
+}
+blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 30px;
+  color: #fff;
+  font-size: 1.1rem;
+}
+blockquote footer {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.faq dl {
+  max-width: 680px;
+  margin: 32px auto 0 auto;
+}
+.faq dt {
+  margin-top: 24px;
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 1.15rem;
+}
+.faq dd {
+  color: #ffffffb2;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.newsletter form {
+  margin: 2.5rem auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+}
+.newsletter input[type="email"] {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #1a1233;
+  color: #fff;
+  font-size: 1rem;
+  width: 66%;
+}
+.newsletter button.btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* --- CONTACT SECTION --- */
+.contact form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact input, .contact textarea {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #1a1233;
+  color: #fff;
+  font-size: 1rem;
+}
+.contact .btn.primary {
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+/* --- FOOTER --- */
+.footer {
+  background: var(--bg-main);
+  border-top: 1px solid var(--border);
+  padding: 56px 0 44px 0;
+  font-size: 1.05rem;
+}
+.footer-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-nav {
+  display: flex;
+  gap: 28px;
+}
+.footer-nav a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 900px) {
+  .hero-content { flex-direction: column; gap: 32px; }
+  .footer-flex { flex-direction: column; gap: 28px; align-items: flex-start; }
+}
+@media (max-width: 650px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.3rem; }
+  .hero, section { padding: 32px 0; }
+  .footer {padding: 36px 0 22px 0;}
+}
+@media (max-width: 420px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 0.7rem; }
+}
+
+/* --- CORE SECTION --- */
+.core-section {
+  background: var(--bg-main);
+  padding: 60px 0;
+  text-align: center;
+}
+.core-title-flex {
+  display: flex;
+  margin: 0px;
+  height: auto;
+  width: 100%;
+  max-width: fit-content;
+  max-height: 35px;
+  position: relative;
+  padding: 5px 12px 5px 12px;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 0px;
+  row-gap: 0px;
+  background-color: #000002;
+  border-radius: 32px;
+  background: linear-gradient(90deg, rgba(229, 156, 255, 0.24) 0.01%, rgba(186, 156, 255, 0.24) 50.01%, rgba(156, 178, 255, 0.24) 100%);
+}
+.core-title-flex h2 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 1px;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  color: var(--primary);
+}
+.core-section h3 {
+  font-size: 1.4rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.core-section p {
+  max-width: 600px;
+  margin: 0 auto 1.2rem auto;
+  color: #ffffffb2;
+  font-size: 1.08rem;
+}
+
+.how-section-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0 30px 0;
+  background: var(--bg-main);
+  text-align: center;
+}
+.how-title-flex {
+  display: flex;
+  margin: 0px;
+  height: auto;
+  width: 100%;
+  max-width: fit-content;
+  max-height: 35px;
+  position: relative;
+  padding: 5px 12px 5px 12px;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 0px;
+  row-gap: 0px;
+  background-color: #000002;
+  border-radius: 32px;
+  background: linear-gradient(90deg, rgba(229, 156, 255, 0.24) 0.01%, rgba(186, 156, 255, 0.24) 50.01%, rgba(156, 178, 255, 0.24) 100%);
+}
+.how-title-flex span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+.how-main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 24px 0 12px 0;
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.how-desc {
+  max-width: 600px;
+  margin: 0 auto 1.2rem auto;
+  color: #ffffffb2;
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* --- HEADER --- */
+header {
+  position: relative;
+  z-index: 10;
+}
+
+/* --- SERVICE SECTION --- */
+.service-section {
+  padding: 60px 0;
+  background: var(--bg-main);
+}
+.service-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.service-title h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.service-title p {
+  color: #ffffffb2;
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+.service-item {
+  background: #000002;
+  border: 1px solid var(--border);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s, background 0.3s;
+}
+.service-item:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, var(--primary) 124.43%, var(--secondary) 155.23%);
+}
+.service-item img {
+  max-width: 80px;
+  margin-bottom: 20px;
+}
+.service-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+.service-item p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+</style>
 <body>
-    <!-- Animated Background -->
-    <!-- <div class="bg-animation">
-        <div class="floating-shapes" style="transform: translateY(0px);">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
+  <!-- Header/Nav -->
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a class="logo" href="#">Ownersheep</a>
+      <nav class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Testimonial</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="#contact" class="btn primary">Get Started</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>Ideas valued. Ownership secured.</h1>
+        <p>Transform your groundbreaking ideas into tangible assets with Ownersheep. Our AI-powered platform offers valuation, digital ownership, and a future IP marketplace. Unleash your innovation today!</p>
+        <a href="#about" class="btn hero-btn">Know more</a>
+      </div>
+      <div class="hero-video">
+        <video src="https://assets-v2.codedesign.ai/storage/v1/object/public/685a38bb1be5a6957cc7c130_da5ac127/asset-63e44766" autoplay loop muted playsinline poster="https://assets-v2.codedesign.ai/storage/v1/object/public/685a38bb1be5a6957cc7c130_da5ac127/_video-thumbnails/asset-63e44766-thumb"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container features-grid">
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-02f21fb0" alt="AI Valuation" />
+        <h3>AI Valuation</h3>
+        <p>Instant, data-driven insights.</p>
+      </div>
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-e13991e8" alt="Digital Ownership" />
+        <h3>Digital Ownership</h3>
+        <p>Secure, verifiable, transparent.</p>
+      </div>
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-ce8813ed" alt="Prompt Lab" />
+        <h3>Prompt Lab</h3>
+        <p>Experiment, refine, innovate.</p>
+      </div>
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-8c4baa73" alt="IP Marketplace" />
+        <h3>IP Marketplace</h3>
+        <p>Trade ideas seamlessly.</p>
+      </div>
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-6a381056" alt="Future-Proofing" />
+        <h3>Future-Proofing</h3>
+        <p>Innovate with confidence.</p>
+      </div>
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-dac8cb4f" alt="Idea Submission" />
+        <h3>Idea Submission</h3>
+        <p>Share your vision.</p>
+      </div>
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-df49d662" alt="Collaboration" />
+        <h3>Collaboration</h3>
+        <p>Connect with innovators.</p>
+      </div>
+      <div class="feature">
+        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-6154ff4b" alt="Monetization" />
+        <h3>Monetization</h3>
+        <p>Unlock your idea's potential.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Section (centered, new) -->
+  <section class="core-section">
+    <div class="container">
+      <div class="core-title-flex" style="margin-left:auto; margin-right:auto;">
+        <h2>Our Core</h2>
+      </div>
+      <h2 class="how-main-title">What We Offer</h2>
+      <p>Ownersheep provides a suite of services designed to empower innovators. From AI-driven idea valuation to secure digital ownership and a future IP marketplace, we're here to support your journey.</p>
+      <div data-cdhs="zoom-out" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivY5K3" data-clientid="DivY5K3" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
+        <div data-cdhs="right" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init" id="DivpvH2" data-clientid="DivpvH2" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 470px; position: relative;">
+          <span id="q-f6418f24.pngGZnt" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 100%; height: 230px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="q-f6418f24.pngGZnt" id="q-f6418f24.pngGZnt-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-8ca5effd" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="q-f6418f24.pngGZnt" cssobj="[object Object]" cssstring="[object Object]" parent_id="DivpvH2" name="q-f6418f24.png" componentstyle="[object Object]"><style id="style-section-DivpvH2-q-f6418f24.pngGZnt">[data-clientId="q-f6418f24.pngGZnt"]{width:100%;height:100%;object-fit:cover;}</style></span>
+          <div data-type="grid-layout" class="react-grid-item  false  cd-padding      " id="DiveCKH" data-clientid="DiveCKH" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
+            <span id="Icon (1)qqqh" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 37px; height: 30px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="Icon (1)qqqh" id="Icon (1)qqqh-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-c9dbb061" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="Icon (1)qqqh" cssobj="[object Object]" cssstring="[object Object]" parent_id="DiveCKH" name="Icon (1)" componentstyle="[object Object]"><style id="style-section-DiveCKH-Icon (1)qqqh">[data-clientId="Icon (1)qqqh"]{width:100%;height:100%;object-fit:contain;}</style></span>
+            <span id="Spanq4zf" data-clientid="Spanq4zf" data-displayname="Text" class="react-grid-item  false   " style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
+              <p>Our AI-powered valuation service analyzes your idea's market potential, competitive landscape, and feasibility, providing you with a comprehensive report to understand its true worth. </p> <style id="style-section-DiveCKH-Spanq4zf">[data-clientId="Spanq4zf"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:400;color:#FFFFFFB2;letter-spacing:0px;line-height:24px;padding:12px 0px 0px 0px;text-align:left;opacity:100%;}</style>
+            </span>
+            <style id="style-section-DivpvH2-DiveCKH">[data-clientId="DiveCKH"]{padding:24px 24px 24px 24px;flex-direction:column;column-gap:0px;row-gap:0px;}</style>
+          </div>
+          <style id="style-section-DivY5K3-DivpvH2">[data-clientId="DivpvH2"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;border-width:1px 1px 1px 1px ;border-style:solid solid solid solid ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
         </div>
-    </div> -->
+        <div data-cdhs="left" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init" id="Dive3jY" data-clientid="Dive3jY" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 470px; position: relative;">
+          <span id="q-f6418f24.pngYqzF" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 100%; height: 230px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="q-f6418f24.pngYqzF" id="q-f6418f24.pngYqzF-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-f419ce7e" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="q-f6418f24.pngYqzF" cssobj="[object Object]" cssstring="[object Object]" parent_id="Dive3jY" name="q-f6418f24.png" componentstyle="[object Object]"><style id="style-section-Dive3jY-q-f6418f24.pngYqzF">[data-clientId="q-f6418f24.pngYqzF"]{width:100%;height:100%;object-fit:cover;}</style></span>
+          <div data-type="grid-layout" class="react-grid-item  false  cd-padding      " id="DivQqgU" data-clientid="DivQqgU" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
+            <span id="Icon (1)MZ9t" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 37px; height: 30px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="Icon (1)MZ9t" id="Icon (1)MZ9t-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-2fda06a0" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="Icon (1)MZ9t" cssobj="[object Object]" cssstring="[object Object]" parent_id="DivQqgU" name="Icon (1)" componentstyle="[object Object]"><style id="style-section-DivQqgU-Icon (1)MZ9t">[data-clientId="Icon (1)MZ9t"]{width:100%;height:100%;object-fit:contain;}</style></span>
+            <span id="SpanXY1r" data-clientid="SpanXY1r" data-displayname="Text" class="react-grid-item  false   " style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
+              <p>Our digital ownership service ensures that your ideas are securely registered and protected, providing you with verifiable proof of ownership in the digital realm. </p> <style id="style-section-DivQqgU-SpanXY1r">[data-clientId="SpanXY1r"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:400;color:#FFFFFFB2;letter-spacing:0px;line-height:24px;padding:12px 0px 0px 0px;text-align:left;opacity:100%;}</style>
+            </span>
+            <style id="style-section-Dive3jY-DivQqgU">[data-clientId="DivQqgU"]{padding:24px 24px 24px 24px;flex-direction:column;column-gap:0px;row-gap:0px;}</style>
+          </div>
+          <style id="style-section-DivY5K3-Dive3jY">[data-clientId="Dive3jY"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;border-width:1px 1px 1px 1px ;border-style:solid solid solid solid ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
+        </div>
+        
+  </section>
 
-    <!-- Particle System -->
-    <div class="particles" id="particles"><div class="particle" style="left: 88.0154%; animation-delay: 9.60345s; animation-duration: 15.274s;"></div><div class="particle" style="left: 49.1237%; animation-delay: 4.05474s; animation-duration: 16.702s;"></div><div class="particle" style="left: 21.3549%; animation-delay: 7.49852s; animation-duration: 16.3949s;"></div><div class="particle" style="left: 29.6368%; animation-delay: 3.15226s; animation-duration: 13.0292s;"></div><div class="particle" style="left: 18.3027%; animation-delay: 2.40349s; animation-duration: 11.2905s;"></div><div class="particle" style="left: 33.6854%; animation-delay: 3.38808s; animation-duration: 13.7517s;"></div><div class="particle" style="left: 43.9122%; animation-delay: 4.07938s; animation-duration: 16.9484s;"></div><div class="particle" style="left: 95.8235%; animation-delay: 2.28016s; animation-duration: 18.3616s;"></div><div class="particle" style="left: 6.34782%; animation-delay: 2.44238s; animation-duration: 18.6387s;"></div><div class="particle" style="left: 80.284%; animation-delay: 1.00488s; animation-duration: 19.9222s;"></div><div class="particle" style="left: 57.5991%; animation-delay: 9.49265s; animation-duration: 14.5423s;"></div><div class="particle" style="left: 54.8297%; animation-delay: 1.56037s; animation-duration: 19.631s;"></div><div class="particle" style="left: 16.0498%; animation-delay: 8.79147s; animation-duration: 14.806s;"></div><div class="particle" style="left: 69.444%; animation-delay: 7.9732s; animation-duration: 14.5464s;"></div><div class="particle" style="left: 30.3505%; animation-delay: 2.96078s; animation-duration: 19.7256s;"></div><div class="particle" style="left: 3.17635%; animation-delay: 3.68305s; animation-duration: 10.2372s;"></div><div class="particle" style="left: 76.0406%; animation-delay: 5.35072s; animation-duration: 13.8965s;"></div><div class="particle" style="left: 41.0292%; animation-delay: 3.73748s; animation-duration: 13.3279s;"></div><div class="particle" style="left: 71.5146%; animation-delay: 2.15064s; animation-duration: 19.3301s;"></div><div class="particle" style="left: 2.68841%; animation-delay: 4.12949s; animation-duration: 12.7505s;"></div><div class="particle" style="left: 83.3769%; animation-delay: 1.39373s; animation-duration: 13.372s;"></div><div class="particle" style="left: 68.069%; animation-delay: 5.40482s; animation-duration: 17.382s;"></div><div class="particle" style="left: 55.1871%; animation-delay: 0.386178s; animation-duration: 14.6367s;"></div><div class="particle" style="left: 39.0743%; animation-delay: 0.428176s; animation-duration: 15.1788s;"></div><div class="particle" style="left: 36.3579%; animation-delay: 1.61615s; animation-duration: 19.6896s;"></div><div class="particle" style="left: 80.1743%; animation-delay: 7.93994s; animation-duration: 18.2317s;"></div><div class="particle" style="left: 23.1352%; animation-delay: 3.37535s; animation-duration: 13.2839s;"></div><div class="particle" style="left: 94.2374%; animation-delay: 0.901464s; animation-duration: 16.2004s;"></div><div class="particle" style="left: 11.1015%; animation-delay: 5.43972s; animation-duration: 16.3628s;"></div><div class="particle" style="left: 88.5045%; animation-delay: 3.98415s; animation-duration: 17.6145s;"></div><div class="particle" style="left: 41.2717%; animation-delay: 4.5646s; animation-duration: 15.1945s;"></div><div class="particle" style="left: 3.59043%; animation-delay: 4.25791s; animation-duration: 14.5155s;"></div><div class="particle" style="left: 38.1671%; animation-delay: 4.4879s; animation-duration: 14.6272s;"></div><div class="particle" style="left: 69.707%; animation-delay: 9.58746s; animation-duration: 16.8716s;"></div><div class="particle" style="left: 42.3454%; animation-delay: 4.58093s; animation-duration: 13.5542s;"></div><div class="particle" style="left: 95.744%; animation-delay: 0.690062s; animation-duration: 11.6258s;"></div><div class="particle" style="left: 64.0019%; animation-delay: 9.30207s; animation-duration: 14.9976s;"></div><div class="particle" style="left: 79.0698%; animation-delay: 6.91163s; animation-duration: 18.2405s;"></div><div class="particle" style="left: 56.0185%; animation-delay: 6.14825s; animation-duration: 16.5367s;"></div><div class="particle" style="left: 70.8131%; animation-delay: 4.35523s; animation-duration: 13.0936s;"></div><div class="particle" style="left: 58.5888%; animation-delay: 0.268004s; animation-duration: 12.6254s;"></div><div class="particle" style="left: 28.7416%; animation-delay: 3.52693s; animation-duration: 15.6823s;"></div><div class="particle" style="left: 60.8483%; animation-delay: 7.4327s; animation-duration: 14.7647s;"></div><div class="particle" style="left: 46.8784%; animation-delay: 5.60921s; animation-duration: 17.1962s;"></div><div class="particle" style="left: 25.3709%; animation-delay: 6.41804s; animation-duration: 12.2843s;"></div><div class="particle" style="left: 51.3501%; animation-delay: 7.87022s; animation-duration: 14.2063s;"></div><div class="particle" style="left: 60.2908%; animation-delay: 5.63054s; animation-duration: 15.2193s;"></div><div class="particle" style="left: 18.6802%; animation-delay: 2.16832s; animation-duration: 10.9544s;"></div><div class="particle" style="left: 10.978%; animation-delay: 5.66163s; animation-duration: 12.8689s;"></div><div class="particle" style="left: 60.0271%; animation-delay: 3.89685s; animation-duration: 17.7844s;"></div></div>
+  <!-- How Section (centered, before About) -->
+  <div class="how-section-center">
+    <div class="how-title-flex">
+      <span>How</span>
+    </div>
+    <h2 class="how-main-title">Unlock Your Idea's Potential</h2>
+    <p class="how-desc">Ownersheep's AI-powered idea analysis offers unparalleled insights, providing innovators with a data-driven understanding of their ideas' true potential.</p>
 
-    <!-- Custom Cursor -->
-    <div class="cursor" style="left: 1080px; top: 55px; transform: scale(1);"></div>
-    <div class="cursor-follower" style="left: 1108px; top: 326px; transform: scale(1);"></div>
+    <!-- Ai advantage section added below -->
+    <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div9PQP" data-clientid="Div9PQP" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 560px; position: relative;">
+      <div data-cdhs="up" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivvRya" data-clientid="DivvRya" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
+        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div9wjx" data-clientid="Div9wjx" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
+          <span id="SpangOKg" data-clientid="SpangOKg" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
+            <p>AI Advantage </p>
+            <style id="style-section-Div9wjx-SpangOKg">[data-clientId="SpangOKg"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:500;color:var(--vId-color-token-d);letter-spacing:0px;line-height:26px;padding:0px 0px 0px 0px;text-align:left;opacity:100%;}</style>
+          </span>
+          <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivfAFM" data-clientid="DivfAFM" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
+            <span id="Component 78oXGL" data-displayname="image" class="react-grid-item  false" style="display: block; width: 12px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+              <img class="" data-clientid="Component 78oXGL" id="Component 78oXGL-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-270d9ffa" alt="sl">
+              <style id="style-section-DivfAFM-Component 78oXGL">[data-clientId="Component 78oXGL"]{width:100%;height:100%;object-fit:cover;}</style>
+            </span>
+            <span id="SpanWWm9" data-clientid="SpanWWm9" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
+              <p>AI-Driven Insights </p>
+              <style id="style-section-DivfAFM-SpanWWm9">[data-clientId="SpanWWm9"]{font-family:var(--vId-font-token-a);font-size:13px;font-weight:400;color:#EFEDFD99;letter-spacing:0px;line-height:23px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #BE1DF8 0%, #8F68FF 25%, #487BFF 53.65%, #2EB67D 79.17%, #FC72FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
+            </span>
+            <style id="style-section-Div9wjx-DivfAFM">[data-clientId="DivfAFM"]{padding:5px 12px 5px 12px;flex-direction:row;align-items:center;column-gap:8px;row-gap:0px;border-radius:32px 32px 32px 32px ;}</style>
+          </div>
+          <style id="style-section-DivvRya-Div9wjx">[data-clientId="Div9wjx"]{padding:0px 0px 0px 0px;flex-direction:row;column-gap:0px;row-gap:0px;justify-content:space-between;}</style>
+        </div>
+        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div7bea" data-clientid="Div7bea" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
+          <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivHsg3" data-clientid="DivHsg3" data-displayname="Div" style="display: flex; margin: 0px; height: 5px; width: 5px; position: relative;">
+            <style id="style-section-Div7bea-DivHsg3">[data-clientId="DivHsg3"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;background-color:#FFFFFF3D;border-radius:100px 100px 100px 100px ;}</style>
+          </div>
+          <span id="SpanzD78" data-clientid="SpanzD78" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
+            <p>Smarter, faster valuation. </p>
+            <style id="style-section-Div7bea-SpanzD78">[data-clientId="SpanzD78"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:0px 0px 0px 0px;opacity:100%;}</style>
+          </span>
+          <style id="style-section-DivvRya-Div7bea">[data-clientId="Div7bea"]{padding:0px 0px 0px 0px;flex-direction:row;align-items:center;column-gap:8px;row-gap:0px;border-radius:32px 32px 32px 32px ;}</style>
+        </div>
+        <style id="style-section-DivkuOO-DivvRya">[data-clientId="DivvRya"]{padding:1px 1px 1px 1px;flex-direction:column;justify-content:center;align-items:center;column-gap:100px;row-gap:25px;}</style>
+      </div>
+    </div>
+    <!-- // Ai advantage -->
+
+    <!-- Key Features of AI Valuation (centered, before About) -->
+    <div data-cdhs="up" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init" id="DivorDT" data-clientid="DivorDT" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 950px; position: relative;">
+      <span id="SpanrEC7" data-clientid="SpanrEC7" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
+        <p>Key Features of AI Valuation </p>
+        <style id="style-section-DivorDT-SpanrEC7">
+          [data-clientId="SpanrEC7"]{
+            font-family:var(--vId-font-token-a);
+            font-size:36px;
+            font-weight:600;
+            color:var(--vId-color-token-d);
+            letter-spacing:-1px;
+            line-height:46px;
+            padding:0px 0px 20px 0px;
+            text-align:center;
+            opacity:100%;
+            background:linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+          }
+        </style>
+      </span>
+      <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivZlSc" data-clientid="DivZlSc" data-displayname="Div" style="display: flex; justify-content: center; align-items: center; margin: 0px auto; height: auto; width: 100%; max-width: 1200px; position: relative;">
+        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div8cl0" data-clientid="Div8cl0" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
+          <span id="Component 719eiz" data-displayname="image" class="react-grid-item  false" style="display: block; width: 28px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+            <img class="" data-clientid="Component 719eiz" id="Component 719eiz-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-483f2f39" alt="sl">
+            <style id="style-section-Div8cl0-Component 719eiz">[data-clientId="Component 719eiz"]{width:100%;height:100%;object-fit:contain;}</style>
+          </span>
+          <span id="SpanKHS0" data-clientid="SpanKHS0" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+            <p>Market Analysis </p>
+            <style id="style-section-Div8cl0-SpanKHS0">[data-clientId="SpanKHS0"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
+          </span>
+          <span id="SpanoNdB" data-clientid="SpanoNdB" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
+            <p>Identify opportunities. </p>
+            <style id="style-section-Div8cl0-SpanoNdB">[data-clientId="SpanoNdB"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
+          </span>
+          <style id="style-section-DivZlSc-Div8cl0">[data-clientId="Div8cl0"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 1px 0px 0px ;border-style:none solid none none ;border-color:transparent #ffffff19 transparent transparent ;}</style>
+        </div>
+        <div data-cdhs="left" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivO82g" data-clientid="DivO82g" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
+          <span id="Component 71ePtG" data-displayname="image" class="react-grid-item  false" style="display: block; width: 33px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+            <img class="" data-clientid="Component 71ePtG" id="Component 71ePtG-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-0076a269" alt="sl">
+            <style id="style-section-DivO82g-Component 71ePtG">[data-clientId="Component 71ePtG"]{width:100%;height:100%;object-fit:contain;}</style>
+          </span>
+          <span id="SpanrHTD" data-clientid="SpanrHTD" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+            <p>Risk Assessment </p>
+            <style id="style-section-DivO82g-SpanrHTD">[data-clientId="SpanrHTD"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
+          </span>
+          <span id="Span73GF" data-clientid="Span73GF" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
+            <p>Identify opportunities. </p>
+            <style id="style-section-DivO82g-Span73GF">[data-clientId="Span73GF"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
+          </span>
+          <style id="style-section-DivZlSc-DivO82g">[data-clientId="DivO82g"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;}</style>
+        </div>
+        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivZoKU" data-clientid="DivZoKU" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
+          <span id="Component 71waw0" data-displayname="image" class="react-grid-item  false" style="display: block; width: 48px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+            <img class="" data-clientid="Component 71waw0" id="Component 71waw0-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-ddb0e260" alt="Feasibility Study">
+            <style id="style-section-DivZoKU-Component 71waw0">[data-clientId="Component 71waw0"]{width:100%;height:100%;object-fit:contain;}</style>
+          </span>
+          <span id="SpanJNJZ" data-clientid="SpanJNJZ" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+            <p>Feasibility Study </p>
+            <style id="style-section-DivZoKU-SpanJNJZ">[data-clientId="SpanJNJZ"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
+          </span>
+          <span id="SpanJgwN" data-clientid="SpanJgwN" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
+            <p>Assess practical viability. </p>
+            <style id="style-section-DivZoKU-SpanJgwN">[data-clientId="SpanJgwN"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
+          </span>
+          <style id="style-section-DivZlSc-DivZoKU">[data-clientId="DivZoKU"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 1px 0px 0px ;border-style:solid solid solid solid ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
+        </div>
+        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DiveDKS" data-clientid="DiveDKS" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
+          <span id="Component 71Lj5w" data-displayname="image" class="react-grid-item  false" style="display: block; width: 34px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+            <img class="" data-clientid="Component 71Lj5w" id="Component 71Lj5w-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-5f3127c2" alt="Competitive Intel">
+            <style id="style-section-DiveDKS-Component 71Lj5w">[data-clientId="Component 71Lj5w"]{width:100%;height:100%;object-fit:contain;}</style>
+          </span>
+          <span id="SpantBaR" data-clientid="SpantBaR" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+            <p>Competitive Intel </p>
+            <style id="style-section-DiveDKS-SpantBaR">[data-clientId="SpantBaR"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:#F4F0FF;letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
+          </span>
+          <span id="SpanzWXe" data-clientid="SpanzWXe" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
+            <p>Stay ahead always. </p>
+            <style id="style-section-DiveDKS-SpanzWXe">[data-clientId="SpanzWXe"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
+          </span>
+          <style id="style-section-DivZlSc-DiveDKS">[data-clientId="DiveDKS"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 1px 0px 0px ;border-style:none solid none none ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
+        </div>
+        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivA2Jw" data-clientid="DivA2Jw" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
+          <span id="Component 71GCy3" data-displayname="image" class="react-grid-item  false" style="display: block; width: 36px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+            <img class="" data-clientid="Component 71GCy3" id="Component 71GCy3-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-e9f39c00" alt="Data Security">
+            <style id="style-section-DivA2Jw-Component 71GCy3">[data-clientId="Component 71GCy3"]{width:100%;height:100%;object-fit:contain;}</style>
+          </span>
+          <span id="SpanJZZ8" data-clientid="SpanJZZ8" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+            <p>Data Security </p>
+            <style id="style-section-DivA2Jw-SpanJZZ8">[data-clientId="SpanJZZ8"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
+          </span>
+          <span id="SpanXUCh" data-clientid="SpanXUCh" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
+            <p>Protecting your ideas. </p>
+            <style id="style-section-DivA2Jw-SpanXUCh">[data-clientId="SpanXUCh"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
+          </span>
+          <style id="style-section-DivZlSc-DivA2Jw">[data-clientId="DivA2Jw"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;}</style>
+        </div>
+      </div>
+    </div>
+
+    <!-- Research Highlight Section (centered, responsive, before About) -->
+    <div data-cdhs="up" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivZN7E" data-clientid="DivZN7E" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivWmmj" data-clientid="DivWmmj" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
+        <span id="SpancAG6" data-clientid="SpancAG6" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
+          <p>Read Our </p>
+          <style id="style-section-DivWmmj-SpancAG6">[data-clientId="SpancAG6"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
+        </span>
+        <style id="style-section-DivZN7E-DivWmmj">[data-clientId="DivWmmj"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="DivWmmj"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
+      </div>
+      <span id="SpanLHIB" data-clientid="SpanLHIB" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
+        <p>Secure Digital Ownership </p>
+        <style id="style-section-DivZN7E-SpanLHIB">[data-clientId="SpanLHIB"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
+      </span>
+      <span id="Span1Z2B" data-clientid="Span1Z2B" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; max-width: 660px; text-align: center;">
+        <p>Explore our research section for insightful articles, guides, and resources that empower you to navigate the world of innovation and intellectual property with confidence and clarity. </p>
+        <style id="style-section-DivZN7E-Span1Z2B">[data-clientId="Span1Z2B"]{font-family:var(--vId-font-token-a);font-size:18px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:28px;padding:0px 0px 60px 0px;text-align:center;opacity:70%;}</style>
+      </span>
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivblfD" data-clientid="DivblfD" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 950px; position: relative;">
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Div8WLN" data-clientid="Div8WLN" data-displayname="Div" style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 0px auto; height: auto; width: 100%; max-width: 1200px; position: relative;">
+          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Divu7OH" data-clientid="Divu7OH" data-displayname="Div" style="display: flex; margin: 0px; height: 100px; width: 1px; min-height: 220px; position: relative;">
+            <!-- ...existing code... -->
+          </div>
+          <div data-cdhs="right" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DiviEcF" data-clientid="DiviEcF" data-displayname="Div" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 446px; min-height: 212px; position: relative;">
+            <span id="Component 71EepC" data-displayname="image" class="react-grid-item false" style="display: block; width: 37px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+              <img class="" data-clientid="Component 71EepC" id="Component 71EepC-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-28ed3e9d" alt="sl">
+              <style id="style-section-DiviEcF-Component 71EepC">[data-clientId="Component 71EepC"]{width:100%;height:100%;object-fit:contain;}</style>
+            </span>
+            <span id="SpanWT1U" data-clientid="SpanWT1U" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+              <p>Read Our </p>
+              <style id="style-section-DiviEcF-SpanWT1U">[data-clientId="SpanWT1U"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);padding:12px 0px 6px 0px;letter-spacing:0px;line-height:24px;opacity:100%;}</style>
+            </span>
+            <span id="Span49Sg" data-clientid="Span49Sg" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 365px;">
+              <p>Dive into our collection of articles, guides, and resources. </p>
+              <style id="style-section-DiviEcF-Span49Sg">[data-clientId="Span49Sg"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
+            </span>
+            <style id="style-section-Div8WLN-DiviEcF">[data-clientId="DiviEcF"]{padding:20px 20px 20px 20px;flex-direction:column;justify-content:center;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 0px 0px 0px ;border-style:none solid none none ;border-color:transparent #ffffff19 transparent transparent ;}</style>
+          </div>
+          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Div3oaJ" data-clientid="Div3oaJ" data-displayname="Div" style="display: flex; margin: 0px; height: 100px; width: 1px; min-height: 220px; position: relative;">
+            <!-- ...existing code... -->
+          </div>
+          <div data-cdhs="left" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivyIq6" data-clientid="DivyIq6" data-displayname="Div" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 446px; min-height: 212px; position: relative;">
+            <span id="Component 71AEKC" data-displayname="image" class="react-grid-item false" style="display: block; width: 28px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
+              <img class="" data-clientid="Component 71AEKC" id="Component 71AEKC-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-51cd353e" alt="sl">
+              <style id="style-section-DivyIq6-Component 71AEKC">[data-clientId="Component 71AEKC"]{width:100%;height:100%;object-fit:contain;}</style>
+            </span>
+            <span id="SpanZwYY" data-clientid="SpanZwYY" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+              <p>Case Studies </p>
+              <style id="style-section-DivyIq6-SpanZwYY">[data-clientId="SpanZwYY"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);padding:12px 0px 6px 0px;letter-spacing:0px;line-height:24px;opacity:100%;}</style>
+            </span>
+            <span id="SpanbzYq" data-clientid="SpanbzYq" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 365px;">
+              <p>See how Ownersheep transforms ideas into valuable assets. </p>
+              <style id="style-section-DivyIq6-SpanbzYq">[data-clientId="SpanbzYq"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
+            </span>
+            <style id="style-section-Div8WLN-DivyIq6">[data-clientId="DivyIq6"]{padding:20px 20px 20px 20px;flex-direction:column;justify-content:center;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 0px 0px 0px ;border-style:none solid none none ;border-color:transparent #ffffff19 transparent transparent ;}</style>
+          </div>
+          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivkLAU" data-clientid="DivkLAU" data-displayname="Div" style="display: flex; margin: 0px; height: 100px; width: 1px; min-height: 220px; position: relative;">
+            <!-- ...existing code... -->
+          </div>
+          <style id="style-section-DivblfD-Div8WLN">[data-clientId="Div8WLN"]{padding:0px 0px 0px 0px;flex-direction:row;justify-content:center;column-gap:0px;row-gap:0px;border-style:none none solid none ;border-color:transparent transparent #ffffff19 transparent ;}</style>
+        </div>
+        <style id="style-section-DivZN7E-DivblfD">[data-clientId="DivblfD"]{padding:0px 0px 0px 0px;flex-direction:column;justify-content:center;align-items:center;column-gap:5px;row-gap:0px;}</style>
+      </div>
+      <style id="style-section-DivnMaj-DivZN7E">[data-clientId="DivZN7E"]{padding:50px 50px 50px 50px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-image:linear-gradient(225deg,rgba(3,0,20,0)0%,rgb(0,0,2)100%);background-position:50% 50%;background-size:cover;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
+    </div>
+
+    <!-- Ownership Evolved Section (centered, responsive, before About) -->
+    <div data-type="grid-layout" class="react-grid-item cd-padding" id="DivjJdH" data-clientid="DivjJdH" data-displayname="meetings section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivhmMe" data-clientid="DivhmMe" data-displayname="container" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1200px; margin-bottom: 0px; position: relative;">
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Div9edM" data-clientid="Div9edM" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 1200px; min-height: fit-content; position: relative;">
+          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Divt5ep" data-clientid="Divt5ep" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; position: relative;">
+            <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Divsi1N" data-clientid="Divsi1N" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
+              <span id="Span2t2A" data-clientid="Span2t2A" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
+                <p>Ownership Evolved </p>
+                <style id="style-section-Divsi1N-Span2t2A">[data-clientId="Span2t2A"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
+              </span>
+              <style id="style-section-Divt5ep-Divsi1N">[data-clientId="Divsi1N"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="Divsi1N"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
+            </div>
+            <span id="SpantGV1" data-clientid="SpantGV1" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
+              <p>Secure Your Ideas, Digitally </p>
+              <style id="style-section-Divt5ep-SpantGV1">[data-clientId="SpantGV1"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
+            </span>
+            <span id="SpanOrJ8" data-clientid="SpanOrJ8" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; max-width: 660px; text-align: center;">
+              <p>Our platform offers a seamless and secure way to manage and protect your intellectual property, ensuring that your innovations are recognized and valued in the digital age. </p>
+              <style id="style-section-Divt5ep-SpanOrJ8">[data-clientId="SpanOrJ8"]{font-family:var(--vId-font-token-a);font-size:18px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:28px;padding:0px 0px 0px 0px;text-align:center;opacity:70%;}</style>
+            </span>
+            <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivJ3U8" data-clientid="DivJ3U8" data-displayname="Div" style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 0px auto; height: auto; width: 100%; max-width: 1200px; position: relative;">
+              <span data-cdhs="zoom-out" id="Card 2OQXR" data-displayname="image" class="react-grid-item false cdhs-init" style="display: block; width: 100%; height: fit-content; margin: 0px; position: relative; max-width: 1100px; max-height: 600px;">
+                <img class="" data-clientid="Card 2OQXR" id="Card 2OQXR-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-ea70f642" alt="sl">
+                <style id="style-section-DivJ3U8-Card 2OQXR">[data-clientId="Card 2OQXR"]{width:100%;height:100%;border-radius:10px 10px 10px 10px ;object-fit:contain;}</style>
+              </span>
+              <style id="style-section-Divt5ep-DivJ3U8">[data-clientId="DivJ3U8"]{padding:250px 0px 0px 0px;flex-direction:row;justify-content:center;column-gap:5px;row-gap:0px;}</style>
+            </div>
+            <style id="style-section-Div9edM-Divt5ep">[data-clientId="Divt5ep"]{padding:0px 0px 0px 0px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
+          </div>
+          <style id="style-section-DivhmMe-Div9edM">[data-clientId="Div9edM"]{padding:0px 0px 0px 0px;flex-direction:column;justify-content:flex-start;align-items:center;column-gap:0px;row-gap:0px;background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-83ffc667);background-position:50% 0%;background-size:50 auto;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
+        </div>
+        <style id="style-section-DivjJdH-DivhmMe">[data-clientId="DivhmMe"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
+      </div>
+      <style id="style-DivjJdH">[data-clientId="DivjJdH"]{padding:100px 16px 100px 16px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:var(--vId-color-token-c);}</style>
+    </div>
+
+    <!-- Callout Section (centered, responsive, before About) -->
+    <div data-type="grid-layout" class="react-grid-item cd-padding" id="Div5hnk" data-clientid="Div5hnk" data-displayname="callout section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivODUu" data-clientid="DivODUu" data-displayname="container" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1112px; margin-bottom: 0px; position: relative;">
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivE7Si" data-clientid="DivE7Si" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 1012px; min-height: fit-content; position: relative;">
+          <div data-cdhs="zoom-out" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="Diveiaf" data-clientid="Diveiaf" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 1012px; min-height: 600px; position: relative;">
+            <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivdFkE" data-clientid="DivdFkE" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 810px; min-height: 490px; position: relative;">
+              <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivdiQN" data-clientid="DivdiQN" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
+                <span id="SpanyX2J" data-clientid="SpanyX2J" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
+                  <p>Your Vision </p>
+                  <style id="style-section-DivdiQN-SpanyX2J">[data-clientId="SpanyX2J"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
+                </span>
+                <style id="style-section-DivdFkE-DivdiQN">[data-clientId="DivdiQN"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="DivdiQN"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
+              </div>
+              <span id="SpanXQps" data-clientid="SpanXQps" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
+                <p>Empowering Innovators, Securing Ideas, Digitally </p>
+                <style id="style-section-DivdFkE-SpanXQps">[data-clientId="SpanXQps"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
+              </span>
+              <span id="SpankfMI" data-clientid="SpankfMI" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; max-width: 660px; text-align: center;">
+                <p>We empower innovators by providing cutting-edge tools for idea valuation, secure ownership, and future monetization opportunities. Join us! </p>
+                <style id="style-section-DivdFkE-SpankfMI">[data-clientId="SpankfMI"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:26px;padding:0px 0px 0px 0px;text-align:center;opacity:70%;}</style>
+              </span>
+              <style id="style-section-Diveiaf-DivdFkE">[data-clientId="DivdFkE"]{padding:100px 20px 100px 20px;flex-direction:column;justify-content:center;align-items:center;column-gap:5px;row-gap:0px;background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-451aba87);background-position:50% 50%;background-size:cover;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
+            </div>
+            <style id="style-section-DivE7Si-Diveiaf">[data-clientId="Diveiaf"]{padding:50px 0px 50px 0px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;border-radius:20px 20px 20px 20px ;background:linear-gradient(180.72deg, rgba(3, 0, 20, 0) 63.8%, rgba(52, 37, 130, 0.8) 78.56%, rgba(122, 65, 242, 0.8) 89.1%, rgba(215, 215, 218, 0.8) 100.9%, rgba(255, 255, 255, 0.8) 100.91%);}</style>
+          </div>
+          <style id="style-section-DivODUu-DivE7Si">[data-clientId="DivE7Si"]{padding:0px 0px 0px 0px;flex-direction:column;justify-content:flex-start;align-items:center;column-gap:0px;row-gap:0px;border-radius:20px 20px 20px 20px ;border-width:1px 1px 0px 1px ;border-style:solid solid solid solid ;border-color:#ffffff33 #ffffff33 #ffffff33 #ffffff33 ;}</style>
+        </div>
+        <style id="style-section-Div5hnk-DivODUu">[data-clientId="DivODUu"]{padding:0px 0px 0px 0px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
+      </div>
+      <style id="style-Div5hnk">[data-clientId="Div5hnk"]{padding:100px 16px 100px 16px;flex-direction:column;align-items:center;column-gap:0px;row-gap:25px;background-color:var(--vId-color-token-c);}</style>
+    </div>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2>About Ownersheep</h2>
+      <p>Ownersheep is dedicated to empowering innovators by providing a secure, AI-driven platform for idea valuation, digital ownership, and seamless collaboration. Our mission is to help you protect, develop, and monetize your intellectual property in the digital age.</p>
+    </div>
+  </section>
+
+  <!-- Research Section -->
+  <section id="research" class="research">
+    <div class="container">
+      <h2>Research & Insights</h2>
+      <p>Stay ahead with the latest trends in intellectual property, AI valuation, and digital ownership. Our research hub brings you expert insights and resources to fuel your innovation journey.</p>
+    </div>
+  </section>
+
+
+
+  <!-- FAQ Section -->
+  <div data-type="grid-layout" class="react-grid-item cd-padding" id="DivkuOO" data-clientid="DivkuOO" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
+    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFJMR" data-clientid="DivFJMR" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1200px; margin-bottom: 0px; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivJLDy" data-clientid="DivJLDy" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 400px; margin-bottom: 0px; position: relative;">
+        <span id="SpandZFM" data-clientid="SpandZFM" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+          <p>FAQ Section </p>
+          <style id="style-section-DivJLDy-SpandZFM">[data-clientId="SpandZFM"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:700;color:var(--vId-color-token-d);padding:10px 0px 0px 0px;text-align:center;line-height:60px;opacity:100%;}</style>
+        </span>
+        <style id="style-section-DivFJMR-DivJLDy">[data-clientId="DivJLDy"]{padding:1px 1px 1px 1px;flex-direction:column;align-items:center;column-gap:0px;row-gap:20px;}</style>
+      </div>
+      <style id="style-section-DivkuOO-DivFJMR">[data-clientId="DivFJMR"]{padding:1px 1px 1px 1px;flex-direction:column;justify-content:center;align-items:center;column-gap:100px;row-gap:25px;}</style>
+    </div>
+    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivmrHk" data-clientid="DivmrHk" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 800px; margin-bottom: 0px; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivGx1P" data-clientid="DivGx1P" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative;">
+        <!-- Q1 -->
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivKja1" data-clientid="DivKja1" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
+          <span id="Span5yhU" data-clientid="Span5yhU" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
+            How does Ownersheep value my idea?
+          </span>
+          <span id="SpanlvP9" data-clientid="SpanlvP9" data-displayname="Text 1" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
+            Our AI algorithms analyze market trends, competitive landscape, and feasibility to provide a data-driven valuation.
+          </span>
+        </div>
+        <!-- Q2 -->
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivQK7r" data-clientid="DivQK7r" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
+          <span id="Spandsr1" data-clientid="Spandsr1" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
+            What is digital ownership on Ownersheep?
+          </span>
+          <span id="Spanw5j5" data-clientid="Spanw5j5" data-displayname="Text 2" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
+            It's a secure, verifiable record of your idea's ownership, protected by blockchain technology.
+          </span>
+        </div>
+        <!-- Q3 -->
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFAQ3" data-clientid="DivFAQ3" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
+          <span id="SpanFAQ3Q" data-clientid="SpanFAQ3Q" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
+            Can I collaborate with others?
+          </span>
+          <span id="SpanFAQ3A" data-clientid="SpanFAQ3A" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
+            Absolutely! Ownersheep fosters a community of innovators for collaboration and co-creation.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2>About Ownersheep</h2>
+      <p>Ownersheep is dedicated to empowering innovators by providing a secure, AI-driven platform for idea valuation, digital ownership, and seamless collaboration. Our mission is to help you protect, develop, and monetize your intellectual property in the digital age.</p>
+    </div>
+  </section>
+
+  <!-- Research Section -->
+  <section id="research" class="research">
+    <div class="container">
+      <h2>Research & Insights</h2>
+      <p>Stay ahead with the latest trends in intellectual property, AI valuation, and digital ownership. Our research hub brings you expert insights and resources to fuel your innovation journey.</p>
+    </div>
+  </section>
+
+
+
+  <!-- FAQ Section -->
+  <div data-type="grid-layout" class="react-grid-item cd-padding" id="DivkuOO" data-clientid="DivkuOO" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
+    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFJMR" data-clientid="DivFJMR" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1200px; margin-bottom: 0px; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivJLDy" data-clientid="DivJLDy" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 400px; margin-bottom: 0px; position: relative;">
+        <span id="SpandZFM" data-clientid="SpandZFM" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+          <p>FAQ Section </p>
+          <style id="style-section-DivJLDy-SpandZFM">[data-clientId="SpandZFM"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:700;color:var(--vId-color-token-d);padding:10px 0px 0px 0px;text-align:center;line-height:60px;opacity:100%;}</style>
+        </span>
+        <style id="style-section-DivFJMR-DivJLDy">[data-clientId="DivJLDy"]{padding:1px 1px 1px 1px;flex-direction:column;align-items:center;column-gap:0px;row-gap:20px;}</style>
+      </div>
+      <style id="style-section-DivkuOO-DivFJMR">[data-clientId="DivFJMR"]{padding:1px 1px 1px 1px;flex-direction:column;justify-content:center;align-items:center;column-gap:100px;row-gap:25px;}</style>
+    </div>
+    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivmrHk" data-clientid="DivmrHk" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 800px; margin-bottom: 0px; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivGx1P" data-clientid="DivGx1P" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative;">
+        <!-- Q1 -->
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivKja1" data-clientid="DivKja1" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
+          <span id="Span5yhU" data-clientid="Span5yhU" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
+            How does Ownersheep value my idea?
+          </span>
+          <span id="SpanlvP9" data-clientid="SpanlvP9" data-displayname="Text 1" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
+            Our AI algorithms analyze market trends, competitive landscape, and feasibility to provide a data-driven valuation.
+          </span>
+        </div>
+        <!-- Q2 -->
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivQK7r" data-clientid="DivQK7r" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
+          <span id="Spandsr1" data-clientid="Spandsr1" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
+            What is digital ownership on Ownersheep?
+          </span>
+          <span id="Spanw5j5" data-clientid="Spanw5j5" data-displayname="Text 2" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
+            It's a secure, verifiable record of your idea's ownership, protected by blockchain technology.
+          </span>
+        </div>
+        <!-- Q3 -->
+        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFAQ3" data-clientid="DivFAQ3" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
+          <span id="SpanFAQ3Q" data-clientid="SpanFAQ3Q" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
+            Can I collaborate with others?
+          </span>
+          <span id="SpanFAQ3A" data-clientid="SpanFAQ3A" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
+            Absolutely! Ownersheep fosters a community of innovators for collaboration and co-creation.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   
 
-    <!-- Hero Section -->
-    <!-- <section class="hero" id="home">
-        <div class="hero-content">
-            <!-- Logo and Brand in Hero -->
-            <!-- <div class="hero-badge">✨ Where <span class="highlight">Ideas</span> Become Valuable Assets</div>
-            <div class="hero-title-flex" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
-                
-                <h1 class="glow-text" style="display: flex;"><img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png"
-                     alt="Ownersheep Logo"
-                     style="height:40px; width:40px; border-radius:50%; margin-right:10px; box-shadow:0 2px 12px #0003; object-fit:cover;"> Ownersheep</h1>
-            </div>
-            <p class="subtitle">Own Your <span class="highlight">Ideas</span> as Digital Assets</p>
-            <h2 class="hero-description">Step into the <span class="highlight">AI-powered future</span> where your creativity holds real value.</h2>
-            <p class="hero-tagline">Turn your thoughts into <span class="highlight">tradable assets</span>. Build your brand. Mini-IPOs coming soon.</p>
 
-            <div class="cta-container">
-                <a href="#" class="cta-button download-app-btn">
-                    📱 Download Beta App (.apk)
-                </a>
-                <a href="#features" class="cta-secondary">
-                    🚀 Explore Features
-                </a>
-            </div>
-        </div>
-    </section> -->
 
-    <!-- Mobile-Friendly Hero Section -->
-    <section class="os-hero">
-        <!-- Animated dots background -->
-        <div class="os-hero-dots"></div>
-        <div class="os-hero-content">
-            <div class="os-hero-badge">
-                ✨ Where Ideas Become Valuable Assets
-            </div>
-            <div class="os-hero-logo-wrap">
-                <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png"
-                    alt="Ownersheep Logo"
-                    class="os-hero-logo">
-            </div>
-            <h1 class="os-hero-brand">Ownersheep</h1>
-            <div class="os-hero-subtitle">Own Your Ideas as Digital Assets</div>
-            <h2 class="os-hero-heading">
-                Step into the <span class="os-hero-highlight">AI-powered future</span> where your creativity holds real value.
-            </h2>
-            <p class="os-hero-desc">
-                Turn your thoughts into <span class="os-hero-highlight">tradable assets</span>. Build your brand. Mini-IPOs coming soon.
-            </p>
-            <div class="os-hero-cta">
-                <a href="#" class="os-hero-btn os-hero-btn-primary download-app-btn">📱 Download Beta App (.apk)</a>
-                <a href="#features" class="os-hero-btn os-hero-btn-secondary">🚀 Explore Features</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Modal Popup HTML -->
-    <div id="downloadAppModal" class="ownersheep-modal">
-        <div class="ownersheep-modal-content">
-            <span class="ownersheep-modal-close" id="ownersheepModalClose">&times;</span>
-            <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" style="height:48px;width:48px; border-radius:50%; margin-bottom:12px;">
-            <h2 style="margin-bottom:10px;color:black">Download Ownersheep Beta App?</h2>
-            <p style="font-size:1.08rem; color:#444; margin-bottom:18px;">
-                Ownersheep lets you own and monetize your ideas as digital assets.
-            </p>
-            <div style="display:flex; gap:18px; justify-content:center;">
-                <button id="ownersheepModalYes" class="cta-button" style="padding:10px 28px; font-size:1rem;">Yes, Download</button>
-                <button id="ownersheepModalNo" class="cta-secondary" style="padding:10px 28px; font-size:1rem;">No, Cancel</button>
-            </div>
-        </div>
+
+ 
+  <!-- Ready/Call-to-action Section (centered, after FAQ) -->
+  <div data-type="grid-layout" class="react-grid-item cd-padding" id="Div7P6I" data-clientid="Div7P6I" data-displayname="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
+    <div data-cdhs="zoom-out" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="Div9Ycp" data-clientid="Div9Ycp" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 966px; min-height: 490px; position: relative;">
+      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivnUmc" data-clientid="DivnUmc" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
+        <span id="SpanMnyy" data-clientid="SpanMnyy" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
+          <p>Ready? </p>
+          <style id="style-section-DivnUmc-SpanMnyy">[data-clientId="SpanMnyy"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
+        </span>
+        <style id="style-section-Div9Ycp-DivnUmc">[data-clientId="DivnUmc"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="DivnUmc"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
+      </div>
+      <span id="SpanDkJF" data-clientid="SpanDkJF" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
+        <p>Start Innovating </p>
+        <style id="style-section-Div9Ycp-SpanDkJF">[data-clientId="SpanDkJF"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
+      </span>
+      <span id="Spans6T8" data-clientid="Spans6T8" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
+        <p>Download the Ownersheep app and turn your ideas into reality today! </p>
+        <style id="style-section-Div9Ycp-Spans6T8">[data-clientId="Spans6T8"]{font-family:var(--vId-font-token-a);font-size:20px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:30px;padding:0px 0px 0px 0px;text-align:center;opacity:70%;}</style>
+      </span>
+      <style id="style-section-Div7P6I-Div9Ycp">[data-clientId="Div9Ycp"]{padding:50px 50px 50px 50px;flex-direction:column;justify-content:flex-start;align-items:center;column-gap:5px;row-gap:0px;background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-6c563240);background-position:50% 100%;background-size:contain;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
     </div>
+    <style id="style-Div7P6I">[data-clientId="Div7P6I"]{padding:100px 16px 0px 16px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:var(--vId-color-token-c);background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-d48a34f2);background-position:50% 280px;background-size:50 auto;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
+  </div>
 
-    <!-- Main Content Sections -->
-    <!-- Modern How It Works Section -->
-    <section class="os-section os-howitworks" id="how-it-works">
-    <div class="os-section-dots"></div>
-    <div class="os-section-content">
-        <div class="os-section-badge">How It Works</div>
-        <h2 class="os-section-title" style="text-align:center; margin-bottom:32px;">
-            Turn Ideas Into <span class="os-hero-highlight">Digital Assets</span>
-        </h2>
-        <ol class="os-steps" style="width:100%; max-width:480px; margin:0 auto;">
-            <li style="background:rgba(35,39,58,0.08); margin-bottom:18px; border-radius:18px; box-shadow:0 2px 8px #0002; padding:18px 16px; display:flex; gap:16px;">
-                <span class="os-step-num"></span>
-                <div>
-                    <strong>Submit Your Idea</strong>
-                    <div class="os-step-desc">Start with your original idea, prompt, or concept. Just type it into our chat-based interface — fast and intuitive.</div>
-                </div>
-            </li>
-            <li style="background:rgba(35,39,58,0.08); margin-bottom:18px; border-radius:18px; box-shadow:0 2px 8px #0002; padding:18px 16px; display:flex; gap:16px;">
-                <span class="os-step-num">2</span>
-                <div>
-                    <strong>AI Evaluates & Assigns Value</strong>
-                    <div class="os-step-desc">Our AI instantly analyzes your idea’s uniqueness, trend potential, and market strength — and assigns a valuation.</div>
-                </div>
-            </li>
-            <li style="background:rgba(35,39,58,0.08); margin-bottom:18px; border-radius:18px; box-shadow:0 2px 8px #0002; padding:18px 16px; display:flex; gap:16px;">
-                <span class="os-step-num">3</span>
-                <div>
-                    <strong>Get Ownership of That Value</strong>
-                    <div class="os-step-desc">You get ownership of both the prompt and its AI-generated value. It’s added to your personal IP portfolio with secure access.</div>
-                </div>
-            </li>
-            <li style="background:rgba(35,39,58,0.08); margin-bottom:0; border-radius:18px; box-shadow:0 2px 8px #0002; padding:18px 16px; display:flex; gap:16px;">
-                <span class="os-step-num">4</span>
-                <div>
-                    <strong>Build Value, Prepare to Monetize</strong>
-                    <div class="os-step-desc">Your prompt gains visibility. In future versions, you’ll be able to sell, resell, or launch a Mini-IPO — and turn your idea into real income.</div>
-                </div>
-            </li>
-        </ol>
-    </div>
-</section>
 
-<!-- Modern Features Section -->
-<section class="os-section os-features" id="features">
-    <div class="os-section-dots"></div>
-    <div class="os-section-content">
-        <div class="os-section-badge">Features</div>
-        <h2 class="os-section-title" style="text-align:center; margin-bottom:18px;">
-            Revolutionary <span class="os-hero-highlight">Features</span>
-        </h2>
-        <p class="os-section-desc" style="text-align:center; margin-bottom:32px;">
-            Transform your creative potential into <span class="os-hero-highlight">digital wealth</span> with cutting-edge technology.
-        </p>
-        <div class="os-features-grid" style="margin-bottom:32px;">
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">💎</span>
-                <h3 style="margin-bottom:4px;">Idea Tokenization</h3>
-                <p>Turn your original ideas, prompts, or concepts into unique digital assets. Each submission gets a market-assigned valuation, ownership rights, and visibility on your IP portfolio.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">🚀</span>
-                <h3 style="margin-bottom:4px;">Launch Your Brand</h3>
-                <p>Create your personal brand account and start building your digital reputation. Mini-IPO coming soon.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">💰</span>
-                <h3 style="margin-bottom:4px;">Monetize Creativity</h3>
-                <p>Sell or resell your prompts in the Ownersheep marketplace. High-performing prompts become digital assets with real-world earning potential.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">📊</span>
-                <h3 style="margin-bottom:4px;">Prompt Analytics</h3>
-                <p>Track idea performance — get views, usage stats, rating trends, and engagement graphs through a clean AI-powered analytics dashboard.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">🌍</span>
-                <h3 style="margin-bottom:4px;">Global Marketplace</h3>
-                <p>Your ideas can be viewed by users worldwide through the Explore tab and searchable discovery. Gain visibility beyond your network.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">🤖</span>
-                <h3 style="margin-bottom:4px;">AI-Powered Analysis</h3>
-                <p>When you submit an idea, Ownersheep’s AI evaluates it in real-time for title, valuation, relevance, and trend potential. Smart scoring at your fingertips.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">🔒</span>
-                <h3 style="margin-bottom:4px;">Digital Ownership</h3>
-                <p>Each approved prompt is time-stamped and stored securely under your profile. You can share, reference, or upgrade ownership levels via Boost Packs.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">🌟</span>
-                <h3 style="margin-bottom:4px;">AI Test Lab</h3>
-                <p>Test your own or others’ prompts using AI. Check engagement scores and preview how your ideas might perform. Limited free credits; purchase more to test further.</p>
-            </div>
-            <div class="os-feature-card" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
-                <span style="font-size:2rem; margin-bottom:6px;">💸</span>
-                <h3 style="margin-bottom:4px;">Future Monetization</h3>
-                <p>Buy/Sell prompts and launch your own Mini-IPOs to earn from your creativity.</p>
-            </div>
-        </div>
-        <div class="os-ai-feature" style="margin-top:24px;">
-            <h3 style="display:flex; align-items:center; justify-content:center; gap:10px;"><span>🤖</span> AI-Powered Evaluation (Live)</h3>
-            <p>Our AI analyzes your idea or prompt to determine its uniqueness, relevance, and potential traction. It instantly assigns a title, a value, and key engagement insights — helping you understand how your idea stands in the digital market.</p>
-            <div style="margin-top:32px;">
-                <a href="#" class="os-hero-btn os-hero-btn-primary download-app-btn">📱 Download Beta App (.apk)</a>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Modern Footer Section -->
-<footer class="os-footer">
-    <div class="os-section-dots"></div>
-    <div class="os-footer-content">
-        
-        <h3 class="os-footer-title">Upgrade with <span class="os-hero-highlight">Boost Pack</span></h3>
-        <div class="os-footer-desc">
-            Premium features including <span class="os-hero-highlight">Mind Maps</span>, <span class="os-hero-highlight">SWOT</span>, Use Case PDFs, and <span class="os-hero-highlight">AI Test Credits</span>.
-        </div>
-        
-        <div class="os-footer-copyright" style="margin-top: 20px;">
-            © 2025 Ownersheep. All Rights Reserved. | <a href="#">Terms</a> | <a href="#">Privacy</a>
-        </div>
-    </div>
-</footer>
 
-    <!-- Scripts -->
-    <script>
-// Generate random dots for hero background
-(function() {
-    const dotsContainer = document.querySelector('.os-hero-dots');
-    const dotCount = window.innerWidth < 600 ? 16 : 28;
-    for (let i = 0; i < dotCount; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'os-hero-dot';
-        dot.style.left = (Math.random() * 100) + '%';
-        dot.style.top = (Math.random() * 100) + '%';
-        dot.style.animationDelay = (Math.random() * 8) + 's';
-        dot.style.opacity = (Math.random() * 0.18 + 0.08).toFixed(2);
-        dotsContainer.appendChild(dot);
-    }
-})();
+ 
 
-// Generate random dots for all .os-section-dots
-(function() {
-    document.querySelectorAll('.os-section-dots').forEach(dotsContainer => {
-        const dotCount = window.innerWidth < 600 ? 10 : 18;
-        for (let i = 0; i < dotCount; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'os-section-dot';
-            dot.style.left = (Math.random() * 100) + '%';
-            dot.style.top = (Math.random() * 100) + '%';
-            dot.style.animationDelay = (Math.random() * 8) + 's';
-            dot.style.opacity = (Math.random() * 0.13 + 0.07).toFixed(2);
-            dotsContainer.appendChild(dot);
-        }
-    });
-})();
-
-// Particle System
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
-        });
-
-        // Hover effects for interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .feature-card');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursorFollower.style.transform = 'scale(1.5)';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursorFollower.style.transform = 'scale(1)';
-            });
-        });
-
-        // Scroll Reveal Animation
-        function revealElements() {
-            const reveals = document.querySelectorAll('.reveal');
-            
-            reveals.forEach(reveal => {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveal.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('active');
-                }
-            });
-        }
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Header Scroll Effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(10, 10, 10, 0.95)';
-                header.style.backdropFilter = 'blur(30px)';
-            } else {
-                header.style.background = 'rgba(10, 10, 10, 0.8)';
-                header.style.backdropFilter = 'blur(20px)';
-            }
-            
-            revealElements();
-        });
-
-        // Ripple Effect for Buttons
-        document.querySelectorAll('.cta-button, .cta-secondary').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.animation = 'ripple 0.6s linear';
-                ripple.style.pointerEvents = 'none';
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Parallax Effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.floating-shapes');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            revealElements();
-
-            // Ownersheep Download Modal Logic (move inside DOMContentLoaded)
-            const modal = document.getElementById('downloadAppModal');
-            const modalClose = document.getElementById('ownersheepModalClose');
-            const modalYes = document.getElementById('ownersheepModalYes');
-            const modalNo = document.getElementById('ownersheepModalNo');
-            const downloadButtons = document.querySelectorAll('.download-app-btn');
-            const apkUrl = "https://www.ownersheep.app/download_/OwnerSheep.apk";
-
-            // Show modal on download button click
-            downloadButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    modal.style.display = 'flex';
-                });
-            });
-
-            // Close modal on X or No
-            modalClose.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-            modalNo.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-
-            // Yes: redirect to APK
-            modalYes.addEventListener('click', () => {
-                modal.style.display = 'none';
-                window.location.href = apkUrl;
-            });
-
-            // Optional: close modal on outside click
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        });
-
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Dynamic Text Animation
-        function animateText() {
-            const heroDescription = document.querySelector('.hero-description');
-            const text = heroDescription.textContent;
-            heroDescription.textContent = '';
-            
-            let i = 0;
-            const typeInterval = setInterval(() => {
-                heroDescription.textContent += text[i];
-                i++;
-                if (i >= text.length) {
-                    clearInterval(typeInterval);
-                }
-            }, 50);
-        }
-
-        // Trigger text animation after page loads
-        setTimeout(animateText, 2000);
-    </script>
-
-</body>
-</html>
