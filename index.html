@@ -1,1029 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ownersheep - Ideas valued. Ownership secured.</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ownersheep - AI-Powered Idea Valuation Platform</title>
+    <meta name="description" content="Transform your ideas into valuable digital assets with AI-powered valuation and ownership verification">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="script.js" defer></script>
 </head>
-<style>
-/* --- COLOR TOKENS --- */
-:root {
-  --primary: #5F33B8;
-  --secondary: #BF55F9;
-  --gradient-main: linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);
-  --bg-main: #000002;
-  --bg-secondary: #10002b;
-  --text-main: #fff;
-  --text-muted: #efedfd99;
-  --text-gradient: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.7) 100%);
-  --border: #ffffff19;
-  --panel-bg: rgba(255,255,255,0.05);
-}
-
-/* --- GLOBAL RESETS & TYPOGRAPHY --- */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html, body {
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: var(--bg-main);
-  color: var(--text-main);
-  scroll-behavior: smooth;
-}
-img, video {
-  max-width: 100%;
-  border-radius: 10px;
-}
-a { color: inherit; text-decoration: none; transition: color .2s; }
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-h1, h2, h3, h4, h5 {
-  font-weight: 700;
-  line-height: 1.1;
-}
-h1 {
-  font-size: 2.8rem;
-  letter-spacing: -2px;
-  background: var(--text-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-}
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-p {
-  margin-bottom: 1.2rem;
-  line-height: 1.7;
-  color: #ffffffb2;
-}
-
-/* --- NAVBAR --- */
-.navbar {
-  background: var(--bg-main);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 0;
-  position: sticky; top: 0; z-index: 99;
-}
-.nav-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo {
-  font-size: 2rem;
-  color: var(--text-main);
-  font-weight: 600;
-  letter-spacing: -1px;
-}
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-links a.active,
-.nav-links a:hover {
-  color: var(--primary);
-}
-.btn.primary {
-  background: var(--primary);
-  color: #fff;
-  padding: 12px 36px;
-  border: none;
-  outline: none;
-  border-radius: 100px;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background 0.2s;
-}
-.btn.primary:hover {
-  background: var(--secondary);
-}
-
-/* --- HERO SECTION --- */
-.hero {
-  background: var(--bg-main);
-  padding: 56px 0 56px 0;
-  min-height: 75vh;
-  display: flex;
-  align-items: center;
-}
-.hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 48px;
-}
-.hero-text { flex: 1 1 340px; }
-.hero-btn {
-  margin-top: 20px;
-  background: var(--primary);
-  color: #fff;
-  padding: 12px 36px;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 4px 16px 0 var(--primary)22;
-}
-.hero-btn:hover {
-  background: var(--secondary);
-}
-.hero-video { flex: 1 1 400px; }
-.hero-video video {
-  border-radius: 10px;
-  box-shadow: 0 2px 24px 0 #21034c44;
-  width: 100%;
-  min-height: 270px;
-}
-
-/* --- FEATURE GRID --- */
-.features {
-  background: var(--bg-main);
-  padding: 64px 0;
-}
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 28px;
-}
-.feature {
-  background: #000002;
-  border: 1px solid var(--border);
-  padding: 38px 22px 26px 22px;
-  border-radius: 20px;
-  box-shadow: 0 8px 40px #24124422;
-  text-align: center;
-  transition: background .3s;
-}
-.feature:hover {
-  background: linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, var(--primary) 124.43%, var(--secondary) 155.23%);
-}
-.feature img {
-  height: 40px;
-  margin-bottom: 18px;
-}
-.feature h3 {
-  color: var(--text-main);
-  margin-bottom: 8px;
-  font-size: 1.15rem;
-}
-.feature p {
-  color: var(--text-muted);
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-/* --- GENERIC SECTIONS --- */
-section {
-  padding: 60px 0;
-  background: var(--bg-main);
-}
-.about, .research, .faq, .newsletter, .contact {
-  border-top: 1px solid var(--border);
-}
-section h2 {
-  text-align: center;
-}
-
-.testimonials {
-  background: linear-gradient(225deg,rgba(3,0,20,0)0%,rgb(0,0,2)100%);
-}
-.testimonials-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2.5rem;
-  max-width: 920px;
-  margin: 2rem auto 0 auto;
-}
-blockquote {
-  border-left: 4px solid var(--primary);
-  padding-left: 30px;
-  color: #fff;
-  font-size: 1.1rem;
-}
-blockquote footer {
-  color: var(--text-muted);
-  font-size: 1rem;
-  font-style: italic;
-}
-
-.faq dl {
-  max-width: 680px;
-  margin: 32px auto 0 auto;
-}
-.faq dt {
-  margin-top: 24px;
-  font-weight: bold;
-  color: var(--primary);
-  font-size: 1.15rem;
-}
-.faq dd {
-  color: #ffffffb2;
-  margin-bottom: 12px;
-  font-size: 1rem;
-}
-
-.newsletter form {
-  margin: 2.5rem auto 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  max-width: 500px;
-}
-.newsletter input[type="email"] {
-  padding: 10px 16px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #1a1233;
-  color: #fff;
-  font-size: 1rem;
-  width: 66%;
-}
-.newsletter button.btn {
-  padding: 12px 22px;
-  border-radius: 10px;
-  border: none;
-  background: var(--primary);
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* --- CONTACT SECTION --- */
-.contact form {
-  max-width: 500px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.contact input, .contact textarea {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #1a1233;
-  color: #fff;
-  font-size: 1rem;
-}
-.contact .btn.primary {
-  align-self: flex-end;
-  margin-top: 10px;
-}
-
-/* --- FOOTER --- */
-.footer {
-  background: var(--bg-main);
-  border-top: 1px solid var(--border);
-  padding: 56px 0 44px 0;
-  font-size: 1.05rem;
-}
-.footer-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-}
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.footer-nav {
-  display: flex;
-  gap: 28px;
-}
-.footer-nav a:hover {
-  color: var(--primary);
-}
-
-@media (max-width: 900px) {
-  .hero-content { flex-direction: column; gap: 32px; }
-  .footer-flex { flex-direction: column; gap: 28px; align-items: flex-start; }
-}
-@media (max-width: 650px) {
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.3rem; }
-  .hero, section { padding: 32px 0; }
-  .footer {padding: 36px 0 22px 0;}
-}
-@media (max-width: 420px) {
-  .features-grid { grid-template-columns: 1fr; }
-  .nav-links { gap: 0.7rem; }
-}
-
-/* --- CORE SECTION --- */
-.core-section {
-  background: var(--bg-main);
-  padding: 60px 0;
-  text-align: center;
-}
-.core-title-flex {
-  display: flex;
-  margin: 0px;
-  height: auto;
-  width: 100%;
-  max-width: fit-content;
-  max-height: 35px;
-  position: relative;
-  padding: 5px 12px 5px 12px;
-  flex-direction: column;
-  align-items: center;
-  column-gap: 0px;
-  row-gap: 0px;
-  background-color: #000002;
-  border-radius: 32px;
-  background: linear-gradient(90deg, rgba(229, 156, 255, 0.24) 0.01%, rgba(186, 156, 255, 0.24) 50.01%, rgba(156, 178, 255, 0.24) 100%);
-}
-.core-title-flex h2 {
-  font-size: 1rem;
-  font-weight: 500;
-  margin: 0;
-  text-align: center;
-  letter-spacing: 1px;
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: unset;
-  color: var(--primary);
-}
-.core-section h3 {
-  font-size: 1.4rem;
-  color: var(--primary);
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-.core-section p {
-  max-width: 600px;
-  margin: 0 auto 1.2rem auto;
-  color: #ffffffb2;
-  font-size: 1.08rem;
-}
-
-.how-section-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 0 30px 0;
-  background: var(--bg-main);
-  text-align: center;
-}
-.how-title-flex {
-  display: flex;
-  margin: 0px;
-  height: auto;
-  width: 100%;
-  max-width: fit-content;
-  max-height: 35px;
-  position: relative;
-  padding: 5px 12px 5px 12px;
-  flex-direction: column;
-  align-items: center;
-  column-gap: 0px;
-  row-gap: 0px;
-  background-color: #000002;
-  border-radius: 32px;
-  background: linear-gradient(90deg, rgba(229, 156, 255, 0.24) 0.01%, rgba(186, 156, 255, 0.24) 50.01%, rgba(156, 178, 255, 0.24) 100%);
-}
-.how-title-flex span {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--primary);
-  letter-spacing: 1px;
-}
-.how-main-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 24px 0 12px 0;
-  background: var(--text-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.how-desc {
-  max-width: 600px;
-  margin: 0 auto 1.2rem auto;
-  color: #ffffffb2;
-  font-size: 1.15rem;
-  line-height: 1.7;
-}
-
-/* --- HEADER --- */
-header {
-  position: relative;
-  z-index: 10;
-}
-
-/* --- SERVICE SECTION --- */
-.service-section {
-  padding: 60px 0;
-  background: var(--bg-main);
-}
-.service-title {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.service-title h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-.service-title p {
-  color: #ffffffb2;
-  font-size: 1.1rem;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-.service-item {
-  background: #000002;
-  border: 1px solid var(--border);
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  transition: transform 0.3s, background 0.3s;
-}
-.service-item:hover {
-  transform: translateY(-5px);
-  background: linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, var(--primary) 124.43%, var(--secondary) 155.23%);
-}
-.service-item img {
-  max-width: 80px;
-  margin-bottom: 20px;
-}
-.service-item h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: var(--text-main);
-}
-.service-item p {
-  color: var(--text-muted);
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-</style>
 <body>
-  <!-- Header/Nav -->
-  <header class="navbar">
-    <div class="container nav-flex">
-      <a class="logo" href="#">Ownersheep</a>
-      <nav class="nav-links">
-        <a href="#" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#testimonials">Testimonial</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a href="#contact" class="btn primary">Get Started</a>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container hero-content">
-      <div class="hero-text">
-        <h1>Ideas valued. Ownership secured.</h1>
-        <p>Transform your groundbreaking ideas into tangible assets with Ownersheep. Our AI-powered platform offers valuation, digital ownership, and a future IP marketplace. Unleash your innovation today!</p>
-        <a href="#about" class="btn hero-btn">Know more</a>
-      </div>
-      <div class="hero-video">
-        <video src="https://assets-v2.codedesign.ai/storage/v1/object/public/685a38bb1be5a6957cc7c130_da5ac127/asset-63e44766" autoplay loop muted playsinline poster="https://assets-v2.codedesign.ai/storage/v1/object/public/685a38bb1be5a6957cc7c130_da5ac127/_video-thumbnails/asset-63e44766-thumb"></video>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-    <div class="container features-grid">
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-02f21fb0" alt="AI Valuation" />
-        <h3>AI Valuation</h3>
-        <p>Instant, data-driven insights.</p>
-      </div>
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-e13991e8" alt="Digital Ownership" />
-        <h3>Digital Ownership</h3>
-        <p>Secure, verifiable, transparent.</p>
-      </div>
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-ce8813ed" alt="Prompt Lab" />
-        <h3>Prompt Lab</h3>
-        <p>Experiment, refine, innovate.</p>
-      </div>
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-8c4baa73" alt="IP Marketplace" />
-        <h3>IP Marketplace</h3>
-        <p>Trade ideas seamlessly.</p>
-      </div>
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-6a381056" alt="Future-Proofing" />
-        <h3>Future-Proofing</h3>
-        <p>Innovate with confidence.</p>
-      </div>
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-dac8cb4f" alt="Idea Submission" />
-        <h3>Idea Submission</h3>
-        <p>Share your vision.</p>
-      </div>
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-df49d662" alt="Collaboration" />
-        <h3>Collaboration</h3>
-        <p>Connect with innovators.</p>
-      </div>
-      <div class="feature">
-        <img src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-6154ff4b" alt="Monetization" />
-        <h3>Monetization</h3>
-        <p>Unlock your idea's potential.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Core Section (centered, new) -->
-  <section class="core-section">
-    <div class="container">
-      <div class="core-title-flex" style="margin-left:auto; margin-right:auto;">
-        <h2>Our Core</h2>
-      </div>
-      <h2 class="how-main-title">What We Offer</h2>
-      <p>Ownersheep provides a suite of services designed to empower innovators. From AI-driven idea valuation to secure digital ownership and a future IP marketplace, we're here to support your journey.</p>
-      <div data-cdhs="zoom-out" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivY5K3" data-clientid="DivY5K3" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
-        <div data-cdhs="right" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init" id="DivpvH2" data-clientid="DivpvH2" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 470px; position: relative;">
-          <span id="q-f6418f24.pngGZnt" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 100%; height: 230px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="q-f6418f24.pngGZnt" id="q-f6418f24.pngGZnt-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-8ca5effd" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="q-f6418f24.pngGZnt" cssobj="[object Object]" cssstring="[object Object]" parent_id="DivpvH2" name="q-f6418f24.png" componentstyle="[object Object]"><style id="style-section-DivpvH2-q-f6418f24.pngGZnt">[data-clientId="q-f6418f24.pngGZnt"]{width:100%;height:100%;object-fit:cover;}</style></span>
-          <div data-type="grid-layout" class="react-grid-item  false  cd-padding      " id="DiveCKH" data-clientid="DiveCKH" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
-            <span id="Icon (1)qqqh" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 37px; height: 30px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="Icon (1)qqqh" id="Icon (1)qqqh-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-c9dbb061" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="Icon (1)qqqh" cssobj="[object Object]" cssstring="[object Object]" parent_id="DiveCKH" name="Icon (1)" componentstyle="[object Object]"><style id="style-section-DiveCKH-Icon (1)qqqh">[data-clientId="Icon (1)qqqh"]{width:100%;height:100%;object-fit:contain;}</style></span>
-            <span id="Spanq4zf" data-clientid="Spanq4zf" data-displayname="Text" class="react-grid-item  false   " style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
-              <p>Our AI-powered valuation service analyzes your idea's market potential, competitive landscape, and feasibility, providing you with a comprehensive report to understand its true worth. </p> <style id="style-section-DiveCKH-Spanq4zf">[data-clientId="Spanq4zf"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:400;color:#FFFFFFB2;letter-spacing:0px;line-height:24px;padding:12px 0px 0px 0px;text-align:left;opacity:100%;}</style>
-            </span>
-            <style id="style-section-DivpvH2-DiveCKH">[data-clientId="DiveCKH"]{padding:24px 24px 24px 24px;flex-direction:column;column-gap:0px;row-gap:0px;}</style>
-          </div>
-          <style id="style-section-DivY5K3-DivpvH2">[data-clientId="DivpvH2"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;border-width:1px 1px 1px 1px ;border-style:solid solid solid solid ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
-        </div>
-        <div data-cdhs="left" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init" id="Dive3jY" data-clientid="Dive3jY" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 470px; position: relative;">
-          <span id="q-f6418f24.pngYqzF" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 100%; height: 230px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="q-f6418f24.pngYqzF" id="q-f6418f24.pngYqzF-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-f419ce7e" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="q-f6418f24.pngYqzF" cssobj="[object Object]" cssstring="[object Object]" parent_id="Dive3jY" name="q-f6418f24.png" componentstyle="[object Object]"><style id="style-section-Dive3jY-q-f6418f24.pngYqzF">[data-clientId="q-f6418f24.pngYqzF"]{width:100%;height:100%;object-fit:cover;}</style></span>
-          <div data-type="grid-layout" class="react-grid-item  false  cd-padding      " id="DivQqgU" data-clientid="DivQqgU" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
-            <span id="Icon (1)MZ9t" data-displayname="image" class="react-grid-item  false   " style="display: block; width: 37px; height: 30px; margin: 0px; position: relative; max-width: 600px; max-height: 600px;"><img class="" data-clientid="Icon (1)MZ9t" id="Icon (1)MZ9t-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-2fda06a0" alt="sl" currentiteratingcomponent="[object Object]" compprops="[object Object]" type="page" clientid="Icon (1)MZ9t" cssobj="[object Object]" cssstring="[object Object]" parent_id="DivQqgU" name="Icon (1)" componentstyle="[object Object]"><style id="style-section-DivQqgU-Icon (1)MZ9t">[data-clientId="Icon (1)MZ9t"]{width:100%;height:100%;object-fit:contain;}</style></span>
-            <span id="SpanXY1r" data-clientid="SpanXY1r" data-displayname="Text" class="react-grid-item  false   " style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
-              <p>Our digital ownership service ensures that your ideas are securely registered and protected, providing you with verifiable proof of ownership in the digital realm. </p> <style id="style-section-DivQqgU-SpanXY1r">[data-clientId="SpanXY1r"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:400;color:#FFFFFFB2;letter-spacing:0px;line-height:24px;padding:12px 0px 0px 0px;text-align:left;opacity:100%;}</style>
-            </span>
-            <style id="style-section-Dive3jY-DivQqgU">[data-clientId="DivQqgU"]{padding:24px 24px 24px 24px;flex-direction:column;column-gap:0px;row-gap:0px;}</style>
-          </div>
-          <style id="style-section-DivY5K3-Dive3jY">[data-clientId="Dive3jY"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;border-width:1px 1px 1px 1px ;border-style:solid solid solid solid ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
-        </div>
-        
-  </section>
-
-  <!-- How Section (centered, before About) -->
-  <div class="how-section-center">
-    <div class="how-title-flex">
-      <span>How</span>
-    </div>
-    <h2 class="how-main-title">Unlock Your Idea's Potential</h2>
-    <p class="how-desc">Ownersheep's AI-powered idea analysis offers unparalleled insights, providing innovators with a data-driven understanding of their ideas' true potential.</p>
-
-    <!-- Ai advantage section added below -->
-    <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div9PQP" data-clientid="Div9PQP" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 560px; position: relative;">
-      <div data-cdhs="up" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivvRya" data-clientid="DivvRya" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
-        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div9wjx" data-clientid="Div9wjx" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; position: relative;">
-          <span id="SpangOKg" data-clientid="SpangOKg" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
-            <p>AI Advantage </p>
-            <style id="style-section-Div9wjx-SpangOKg">[data-clientId="SpangOKg"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:500;color:var(--vId-color-token-d);letter-spacing:0px;line-height:26px;padding:0px 0px 0px 0px;text-align:left;opacity:100%;}</style>
-          </span>
-          <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivfAFM" data-clientid="DivfAFM" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
-            <span id="Component 78oXGL" data-displayname="image" class="react-grid-item  false" style="display: block; width: 12px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-              <img class="" data-clientid="Component 78oXGL" id="Component 78oXGL-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-270d9ffa" alt="sl">
-              <style id="style-section-DivfAFM-Component 78oXGL">[data-clientId="Component 78oXGL"]{width:100%;height:100%;object-fit:cover;}</style>
-            </span>
-            <span id="SpanWWm9" data-clientid="SpanWWm9" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
-              <p>AI-Driven Insights </p>
-              <style id="style-section-DivfAFM-SpanWWm9">[data-clientId="SpanWWm9"]{font-family:var(--vId-font-token-a);font-size:13px;font-weight:400;color:#EFEDFD99;letter-spacing:0px;line-height:23px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #BE1DF8 0%, #8F68FF 25%, #487BFF 53.65%, #2EB67D 79.17%, #FC72FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
-            </span>
-            <style id="style-section-Div9wjx-DivfAFM">[data-clientId="DivfAFM"]{padding:5px 12px 5px 12px;flex-direction:row;align-items:center;column-gap:8px;row-gap:0px;border-radius:32px 32px 32px 32px ;}</style>
-          </div>
-          <style id="style-section-DivvRya-Div9wjx">[data-clientId="Div9wjx"]{padding:0px 0px 0px 0px;flex-direction:row;column-gap:0px;row-gap:0px;justify-content:space-between;}</style>
-        </div>
-        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div7bea" data-clientid="Div7bea" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
-          <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivHsg3" data-clientid="DivHsg3" data-displayname="Div" style="display: flex; margin: 0px; height: 5px; width: 5px; position: relative;">
-            <style id="style-section-Div7bea-DivHsg3">[data-clientId="DivHsg3"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;background-color:#FFFFFF3D;border-radius:100px 100px 100px 100px ;}</style>
-          </div>
-          <span id="SpanzD78" data-clientid="SpanzD78" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
-            <p>Smarter, faster valuation. </p>
-            <style id="style-section-Div7bea-SpanzD78">[data-clientId="SpanzD78"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:0px 0px 0px 0px;opacity:100%;}</style>
-          </span>
-          <style id="style-section-DivvRya-Div7bea">[data-clientId="Div7bea"]{padding:0px 0px 0px 0px;flex-direction:row;align-items:center;column-gap:8px;row-gap:0px;border-radius:32px 32px 32px 32px ;}</style>
-        </div>
-        <style id="style-section-DivkuOO-DivvRya">[data-clientId="DivvRya"]{padding:1px 1px 1px 1px;flex-direction:column;justify-content:center;align-items:center;column-gap:100px;row-gap:25px;}</style>
-      </div>
-    </div>
-    <!-- // Ai advantage -->
-
-    <!-- Key Features of AI Valuation (centered, before About) -->
-    <div data-cdhs="up" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init" id="DivorDT" data-clientid="DivorDT" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 950px; position: relative;">
-      <span id="SpanrEC7" data-clientid="SpanrEC7" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
-        <p>Key Features of AI Valuation </p>
-        <style id="style-section-DivorDT-SpanrEC7">
-          [data-clientId="SpanrEC7"]{
-            font-family:var(--vId-font-token-a);
-            font-size:36px;
-            font-weight:600;
-            color:var(--vId-color-token-d);
-            letter-spacing:-1px;
-            line-height:46px;
-            padding:0px 0px 20px 0px;
-            text-align:center;
-            opacity:100%;
-            background:linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-          }
-        </style>
-      </span>
-      <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivZlSc" data-clientid="DivZlSc" data-displayname="Div" style="display: flex; justify-content: center; align-items: center; margin: 0px auto; height: auto; width: 100%; max-width: 1200px; position: relative;">
-        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="Div8cl0" data-clientid="Div8cl0" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
-          <span id="Component 719eiz" data-displayname="image" class="react-grid-item  false" style="display: block; width: 28px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-            <img class="" data-clientid="Component 719eiz" id="Component 719eiz-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-483f2f39" alt="sl">
-            <style id="style-section-Div8cl0-Component 719eiz">[data-clientId="Component 719eiz"]{width:100%;height:100%;object-fit:contain;}</style>
-          </span>
-          <span id="SpanKHS0" data-clientid="SpanKHS0" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-            <p>Market Analysis </p>
-            <style id="style-section-Div8cl0-SpanKHS0">[data-clientId="SpanKHS0"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
-          </span>
-          <span id="SpanoNdB" data-clientid="SpanoNdB" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
-            <p>Identify opportunities. </p>
-            <style id="style-section-Div8cl0-SpanoNdB">[data-clientId="SpanoNdB"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
-          </span>
-          <style id="style-section-DivZlSc-Div8cl0">[data-clientId="Div8cl0"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 1px 0px 0px ;border-style:none solid none none ;border-color:transparent #ffffff19 transparent transparent ;}</style>
-        </div>
-        <div data-cdhs="left" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivO82g" data-clientid="DivO82g" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
-          <span id="Component 71ePtG" data-displayname="image" class="react-grid-item  false" style="display: block; width: 33px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-            <img class="" data-clientid="Component 71ePtG" id="Component 71ePtG-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-0076a269" alt="sl">
-            <style id="style-section-DivO82g-Component 71ePtG">[data-clientId="Component 71ePtG"]{width:100%;height:100%;object-fit:contain;}</style>
-          </span>
-          <span id="SpanrHTD" data-clientid="SpanrHTD" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-            <p>Risk Assessment </p>
-            <style id="style-section-DivO82g-SpanrHTD">[data-clientId="SpanrHTD"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
-          </span>
-          <span id="Span73GF" data-clientid="Span73GF" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
-            <p>Identify opportunities. </p>
-            <style id="style-section-DivO82g-Span73GF">[data-clientId="Span73GF"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
-          </span>
-          <style id="style-section-DivZlSc-DivO82g">[data-clientId="DivO82g"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;}</style>
-        </div>
-        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivZoKU" data-clientid="DivZoKU" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
-          <span id="Component 71waw0" data-displayname="image" class="react-grid-item  false" style="display: block; width: 48px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-            <img class="" data-clientid="Component 71waw0" id="Component 71waw0-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-ddb0e260" alt="Feasibility Study">
-            <style id="style-section-DivZoKU-Component 71waw0">[data-clientId="Component 71waw0"]{width:100%;height:100%;object-fit:contain;}</style>
-          </span>
-          <span id="SpanJNJZ" data-clientid="SpanJNJZ" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-            <p>Feasibility Study </p>
-            <style id="style-section-DivZoKU-SpanJNJZ">[data-clientId="SpanJNJZ"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
-          </span>
-          <span id="SpanJgwN" data-clientid="SpanJgwN" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
-            <p>Assess practical viability. </p>
-            <style id="style-section-DivZoKU-SpanJgwN">[data-clientId="SpanJgwN"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
-          </span>
-          <style id="style-section-DivZlSc-DivZoKU">[data-clientId="DivZoKU"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 1px 0px 0px ;border-style:solid solid solid solid ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
-        </div>
-        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DiveDKS" data-clientid="DiveDKS" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
-          <span id="Component 71Lj5w" data-displayname="image" class="react-grid-item  false" style="display: block; width: 34px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-            <img class="" data-clientid="Component 71Lj5w" id="Component 71Lj5w-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-5f3127c2" alt="Competitive Intel">
-            <style id="style-section-DiveDKS-Component 71Lj5w">[data-clientId="Component 71Lj5w"]{width:100%;height:100%;object-fit:contain;}</style>
-          </span>
-          <span id="SpantBaR" data-clientid="SpantBaR" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-            <p>Competitive Intel </p>
-            <style id="style-section-DiveDKS-SpantBaR">[data-clientId="SpantBaR"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:#F4F0FF;letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
-          </span>
-          <span id="SpanzWXe" data-clientid="SpanzWXe" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
-            <p>Stay ahead always. </p>
-            <style id="style-section-DiveDKS-SpanzWXe">[data-clientId="SpanzWXe"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
-          </span>
-          <style id="style-section-DivZlSc-DiveDKS">[data-clientId="DiveDKS"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 1px 0px 0px ;border-style:none solid none none ;border-color:#ffffff19 #ffffff19 #ffffff19 #ffffff19 ;}</style>
-        </div>
-        <div data-type="grid-layout" class="react-grid-item  false  cd-padding" id="DivA2Jw" data-clientid="DivA2Jw" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 300px; position: relative;">
-          <span id="Component 71GCy3" data-displayname="image" class="react-grid-item  false" style="display: block; width: 36px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-            <img class="" data-clientid="Component 71GCy3" id="Component 71GCy3-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-e9f39c00" alt="Data Security">
-            <style id="style-section-DivA2Jw-Component 71GCy3">[data-clientId="Component 71GCy3"]{width:100%;height:100%;object-fit:contain;}</style>
-          </span>
-          <span id="SpanJZZ8" data-clientid="SpanJZZ8" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-            <p>Data Security </p>
-            <style id="style-section-DivA2Jw-SpanJZZ8">[data-clientId="SpanJZZ8"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:24px;padding:12px 0px 6px 0px;opacity:100%;}</style>
-          </span>
-          <span id="SpanXUCh" data-clientid="SpanXUCh" data-displayname="Text" class="react-grid-item  false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: none;">
-            <p>Protecting your ideas. </p>
-            <style id="style-section-DivA2Jw-SpanXUCh">[data-clientId="SpanXUCh"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
-          </span>
-          <style id="style-section-DivZlSc-DivA2Jw">[data-clientId="DivA2Jw"]{padding:20px 20px 20px 20px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;}</style>
-        </div>
-      </div>
-    </div>
-
-    <!-- Research Highlight Section (centered, responsive, before About) -->
-    <div data-cdhs="up" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivZN7E" data-clientid="DivZN7E" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivWmmj" data-clientid="DivWmmj" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
-        <span id="SpancAG6" data-clientid="SpancAG6" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
-          <p>Read Our </p>
-          <style id="style-section-DivWmmj-SpancAG6">[data-clientId="SpancAG6"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
-        </span>
-        <style id="style-section-DivZN7E-DivWmmj">[data-clientId="DivWmmj"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="DivWmmj"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
-      </div>
-      <span id="SpanLHIB" data-clientid="SpanLHIB" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
-        <p>Secure Digital Ownership </p>
-        <style id="style-section-DivZN7E-SpanLHIB">[data-clientId="SpanLHIB"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
-      </span>
-      <span id="Span1Z2B" data-clientid="Span1Z2B" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; max-width: 660px; text-align: center;">
-        <p>Explore our research section for insightful articles, guides, and resources that empower you to navigate the world of innovation and intellectual property with confidence and clarity. </p>
-        <style id="style-section-DivZN7E-Span1Z2B">[data-clientId="Span1Z2B"]{font-family:var(--vId-font-token-a);font-size:18px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:28px;padding:0px 0px 60px 0px;text-align:center;opacity:70%;}</style>
-      </span>
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivblfD" data-clientid="DivblfD" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 950px; position: relative;">
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Div8WLN" data-clientid="Div8WLN" data-displayname="Div" style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 0px auto; height: auto; width: 100%; max-width: 1200px; position: relative;">
-          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Divu7OH" data-clientid="Divu7OH" data-displayname="Div" style="display: flex; margin: 0px; height: 100px; width: 1px; min-height: 220px; position: relative;">
-            <!-- ...existing code... -->
-          </div>
-          <div data-cdhs="right" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DiviEcF" data-clientid="DiviEcF" data-displayname="Div" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 446px; min-height: 212px; position: relative;">
-            <span id="Component 71EepC" data-displayname="image" class="react-grid-item false" style="display: block; width: 37px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-              <img class="" data-clientid="Component 71EepC" id="Component 71EepC-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-28ed3e9d" alt="sl">
-              <style id="style-section-DiviEcF-Component 71EepC">[data-clientId="Component 71EepC"]{width:100%;height:100%;object-fit:contain;}</style>
-            </span>
-            <span id="SpanWT1U" data-clientid="SpanWT1U" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-              <p>Read Our </p>
-              <style id="style-section-DiviEcF-SpanWT1U">[data-clientId="SpanWT1U"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);padding:12px 0px 6px 0px;letter-spacing:0px;line-height:24px;opacity:100%;}</style>
-            </span>
-            <span id="Span49Sg" data-clientid="Span49Sg" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 365px;">
-              <p>Dive into our collection of articles, guides, and resources. </p>
-              <style id="style-section-DiviEcF-Span49Sg">[data-clientId="Span49Sg"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:22px;padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
-            </span>
-            <style id="style-section-Div8WLN-DiviEcF">[data-clientId="DiviEcF"]{padding:20px 20px 20px 20px;flex-direction:column;justify-content:center;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 0px 0px 0px ;border-style:none solid none none ;border-color:transparent #ffffff19 transparent transparent ;}</style>
-          </div>
-          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Div3oaJ" data-clientid="Div3oaJ" data-displayname="Div" style="display: flex; margin: 0px; height: 100px; width: 1px; min-height: 220px; position: relative;">
-            <!-- ...existing code... -->
-          </div>
-          <div data-cdhs="left" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="DivyIq6" data-clientid="DivyIq6" data-displayname="Div" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 446px; min-height: 212px; position: relative;">
-            <span id="Component 71AEKC" data-displayname="image" class="react-grid-item false" style="display: block; width: 28px; height: fit-content; margin: 0px; position: relative; max-width: 600px; max-height: 600px;">
-              <img class="" data-clientid="Component 71AEKC" id="Component 71AEKC-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-51cd353e" alt="sl">
-              <style id="style-section-DivyIq6-Component 71AEKC">[data-clientId="Component 71AEKC"]{width:100%;height:100%;object-fit:contain;}</style>
-            </span>
-            <span id="SpanZwYY" data-clientid="SpanZwYY" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-              <p>Case Studies </p>
-              <style id="style-section-DivyIq6-SpanZwYY">[data-clientId="SpanZwYY"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);padding:12px 0px 6px 0px;letter-spacing:0px;line-height:24px;opacity:100%;}</style>
-            </span>
-            <span id="SpanbzYq" data-clientid="SpanbzYq" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 365px;">
-              <p>See how Ownersheep transforms ideas into valuable assets. </p>
-              <style id="style-section-DivyIq6-SpanbzYq">[data-clientId="SpanbzYq"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:300;color:var(--vId-color-token-d);padding:0px 0px 0px 0px;text-align:center;opacity:60%;}</style>
-            </span>
-            <style id="style-section-Div8WLN-DivyIq6">[data-clientId="DivyIq6"]{padding:20px 20px 20px 20px;flex-direction:column;justify-content:center;align-items:center;column-gap:0px;row-gap:0px;background-color:#03001405;border-width:0px 0px 0px 0px ;border-style:none solid none none ;border-color:transparent #ffffff19 transparent transparent ;}</style>
-          </div>
-          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivkLAU" data-clientid="DivkLAU" data-displayname="Div" style="display: flex; margin: 0px; height: 100px; width: 1px; min-height: 220px; position: relative;">
-            <!-- ...existing code... -->
-          </div>
-          <style id="style-section-DivblfD-Div8WLN">[data-clientId="Div8WLN"]{padding:0px 0px 0px 0px;flex-direction:row;justify-content:center;column-gap:0px;row-gap:0px;border-style:none none solid none ;border-color:transparent transparent #ffffff19 transparent ;}</style>
-        </div>
-        <style id="style-section-DivZN7E-DivblfD">[data-clientId="DivblfD"]{padding:0px 0px 0px 0px;flex-direction:column;justify-content:center;align-items:center;column-gap:5px;row-gap:0px;}</style>
-      </div>
-      <style id="style-section-DivnMaj-DivZN7E">[data-clientId="DivZN7E"]{padding:50px 50px 50px 50px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-image:linear-gradient(225deg,rgba(3,0,20,0)0%,rgb(0,0,2)100%);background-position:50% 50%;background-size:cover;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
-    </div>
-
-    <!-- Ownership Evolved Section (centered, responsive, before About) -->
-    <div data-type="grid-layout" class="react-grid-item cd-padding" id="DivjJdH" data-clientid="DivjJdH" data-displayname="meetings section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivhmMe" data-clientid="DivhmMe" data-displayname="container" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1200px; margin-bottom: 0px; position: relative;">
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Div9edM" data-clientid="Div9edM" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 1200px; min-height: fit-content; position: relative;">
-          <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Divt5ep" data-clientid="Divt5ep" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; position: relative;">
-            <div data-type="grid-layout" class="react-grid-item false cd-padding" id="Divsi1N" data-clientid="Divsi1N" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
-              <span id="Span2t2A" data-clientid="Span2t2A" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
-                <p>Ownership Evolved </p>
-                <style id="style-section-Divsi1N-Span2t2A">[data-clientId="Span2t2A"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
-              </span>
-              <style id="style-section-Divt5ep-Divsi1N">[data-clientId="Divsi1N"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="Divsi1N"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
-            </div>
-            <span id="SpantGV1" data-clientid="SpantGV1" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
-              <p>Secure Your Ideas, Digitally </p>
-              <style id="style-section-Divt5ep-SpantGV1">[data-clientId="SpantGV1"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
-            </span>
-            <span id="SpanOrJ8" data-clientid="SpanOrJ8" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; max-width: 660px; text-align: center;">
-              <p>Our platform offers a seamless and secure way to manage and protect your intellectual property, ensuring that your innovations are recognized and valued in the digital age. </p>
-              <style id="style-section-Divt5ep-SpanOrJ8">[data-clientId="SpanOrJ8"]{font-family:var(--vId-font-token-a);font-size:18px;font-weight:300;color:var(--vId-color-token-d);letter-spacing:0px;line-height:28px;padding:0px 0px 0px 0px;text-align:center;opacity:70%;}</style>
-            </span>
-            <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivJ3U8" data-clientid="DivJ3U8" data-displayname="Div" style="display: flex; flex-direction: row; justify-content: center; align-items: center; margin: 0px auto; height: auto; width: 100%; max-width: 1200px; position: relative;">
-              <span data-cdhs="zoom-out" id="Card 2OQXR" data-displayname="image" class="react-grid-item false cdhs-init" style="display: block; width: 100%; height: fit-content; margin: 0px; position: relative; max-width: 1100px; max-height: 600px;">
-                <img class="" data-clientid="Card 2OQXR" id="Card 2OQXR-id" src="https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-ea70f642" alt="sl">
-                <style id="style-section-DivJ3U8-Card 2OQXR">[data-clientId="Card 2OQXR"]{width:100%;height:100%;border-radius:10px 10px 10px 10px ;object-fit:contain;}</style>
-              </span>
-              <style id="style-section-Divt5ep-DivJ3U8">[data-clientId="DivJ3U8"]{padding:250px 0px 0px 0px;flex-direction:row;justify-content:center;column-gap:5px;row-gap:0px;}</style>
-            </div>
-            <style id="style-section-Div9edM-Divt5ep">[data-clientId="Divt5ep"]{padding:0px 0px 0px 0px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
-          </div>
-          <style id="style-section-DivhmMe-Div9edM">[data-clientId="Div9edM"]{padding:0px 0px 0px 0px;flex-direction:column;justify-content:flex-start;align-items:center;column-gap:0px;row-gap:0px;background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-83ffc667);background-position:50% 0%;background-size:50 auto;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
-        </div>
-        <style id="style-section-DivjJdH-DivhmMe">[data-clientId="DivhmMe"]{padding:0px 0px 0px 0px;flex-direction:column;column-gap:0px;row-gap:0px;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
-      </div>
-      <style id="style-DivjJdH">[data-clientId="DivjJdH"]{padding:100px 16px 100px 16px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:var(--vId-color-token-c);}</style>
-    </div>
-
-    <!-- Callout Section (centered, responsive, before About) -->
-    <div data-type="grid-layout" class="react-grid-item cd-padding" id="Div5hnk" data-clientid="Div5hnk" data-displayname="callout section" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivODUu" data-clientid="DivODUu" data-displayname="container" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1112px; margin-bottom: 0px; position: relative;">
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivE7Si" data-clientid="DivE7Si" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 1012px; min-height: fit-content; position: relative;">
-          <div data-cdhs="zoom-out" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="Diveiaf" data-clientid="Diveiaf" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 1012px; min-height: 600px; position: relative;">
-            <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivdFkE" data-clientid="DivdFkE" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: 810px; min-height: 490px; position: relative;">
-              <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivdiQN" data-clientid="DivdiQN" data-displayname="Div" style="display: flex; flex-direction: column; align-items: center; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
-                <span id="SpanyX2J" data-clientid="SpanyX2J" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
-                  <p>Your Vision </p>
-                  <style id="style-section-DivdiQN-SpanyX2J">[data-clientId="SpanyX2J"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="css-icon">
+                  <img src="https://raw.githubusercontent.com/confuse57/ownersheep-landing/refs/heads/main/ownersheep_1.png" alt="Ownersheep Logo" class="css-icon" style="
+    height: 40px;
+    width: 40px;
+    display: flex;
+    margin-top: -7px;
+    margin-left: -10px;
+">
                 </span>
-                <style id="style-section-DivdFkE-DivdiQN">[data-clientId="DivdiQN"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="DivdiQN"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
-              </div>
-              <span id="SpanXQps" data-clientid="SpanXQps" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; text-align: center;">
-                <p>Empowering Innovators, Securing Ideas, Digitally </p>
-                <style id="style-section-DivdFkE-SpanXQps">[data-clientId="SpanXQps"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
-              </span>
-              <span id="SpankfMI" data-clientid="SpankfMI" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px auto; min-height: 10px; min-width: 16px; position: relative; max-width: 660px; text-align: center;">
-                <p>We empower innovators by providing cutting-edge tools for idea valuation, secure ownership, and future monetization opportunities. Join us! </p>
-                <style id="style-section-DivdFkE-SpankfMI">[data-clientId="SpankfMI"]{font-family:var(--vId-font-token-a);font-size:16px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:26px;padding:0px 0px 0px 0px;text-align:center;opacity:70%;}</style>
-              </span>
-              <style id="style-section-Diveiaf-DivdFkE">[data-clientId="DivdFkE"]{padding:100px 20px 100px 20px;flex-direction:column;justify-content:center;align-items:center;column-gap:5px;row-gap:0px;background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-451aba87);background-position:50% 50%;background-size:cover;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
+                <span>Ownersheep</span>
             </div>
-            <style id="style-section-DivE7Si-Diveiaf">[data-clientId="Diveiaf"]{padding:50px 0px 50px 0px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;border-radius:20px 20px 20px 20px ;background:linear-gradient(180.72deg, rgba(3, 0, 20, 0) 63.8%, rgba(52, 37, 130, 0.8) 78.56%, rgba(122, 65, 242, 0.8) 89.1%, rgba(215, 215, 218, 0.8) 100.9%, rgba(255, 255, 255, 0.8) 100.91%);}</style>
-          </div>
-          <style id="style-section-DivODUu-DivE7Si">[data-clientId="DivE7Si"]{padding:0px 0px 0px 0px;flex-direction:column;justify-content:flex-start;align-items:center;column-gap:0px;row-gap:0px;border-radius:20px 20px 20px 20px ;border-width:1px 1px 0px 1px ;border-style:solid solid solid solid ;border-color:#ffffff33 #ffffff33 #ffffff33 #ffffff33 ;}</style>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <style id="style-section-Div5hnk-DivODUu">[data-clientId="DivODUu"]{padding:0px 0px 0px 0px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background:radial-gradient(51.73% 51.73% at 50% 50%, rgba(255, 255, 255, 0) 5.61%, #000002 100%);}</style>
-      </div>
-      <style id="style-Div5hnk">[data-clientId="Div5hnk"]{padding:100px 16px 100px 16px;flex-direction:column;align-items:center;column-gap:0px;row-gap:25px;background-color:var(--vId-color-token-c);}</style>
-    </div>
+    </nav>
 
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Ownersheep</h2>
-      <p>Ownersheep is dedicated to empowering innovators by providing a secure, AI-driven platform for idea valuation, digital ownership, and seamless collaboration. Our mission is to help you protect, develop, and monetize your intellectual property in the digital age.</p>
-    </div>
-  </section>
-
-  <!-- Research Section -->
-  <section id="research" class="research">
-    <div class="container">
-      <h2>Research & Insights</h2>
-      <p>Stay ahead with the latest trends in intellectual property, AI valuation, and digital ownership. Our research hub brings you expert insights and resources to fuel your innovation journey.</p>
-    </div>
-  </section>
-
-
-
-  <!-- FAQ Section -->
-  <div data-type="grid-layout" class="react-grid-item cd-padding" id="DivkuOO" data-clientid="DivkuOO" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
-    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFJMR" data-clientid="DivFJMR" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1200px; margin-bottom: 0px; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivJLDy" data-clientid="DivJLDy" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 400px; margin-bottom: 0px; position: relative;">
-        <span id="SpandZFM" data-clientid="SpandZFM" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-          <p>FAQ Section </p>
-          <style id="style-section-DivJLDy-SpandZFM">[data-clientId="SpandZFM"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:700;color:var(--vId-color-token-d);padding:10px 0px 0px 0px;text-align:center;line-height:60px;opacity:100%;}</style>
-        </span>
-        <style id="style-section-DivFJMR-DivJLDy">[data-clientId="DivJLDy"]{padding:1px 1px 1px 1px;flex-direction:column;align-items:center;column-gap:0px;row-gap:20px;}</style>
-      </div>
-      <style id="style-section-DivkuOO-DivFJMR">[data-clientId="DivFJMR"]{padding:1px 1px 1px 1px;flex-direction:column;justify-content:center;align-items:center;column-gap:100px;row-gap:25px;}</style>
-    </div>
-    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivmrHk" data-clientid="DivmrHk" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 800px; margin-bottom: 0px; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivGx1P" data-clientid="DivGx1P" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative;">
-        <!-- Q1 -->
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivKja1" data-clientid="DivKja1" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
-          <span id="Span5yhU" data-clientid="Span5yhU" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
-            How does Ownersheep value my idea?
-          </span>
-          <span id="SpanlvP9" data-clientid="SpanlvP9" data-displayname="Text 1" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
-            Our AI algorithms analyze market trends, competitive landscape, and feasibility to provide a data-driven valuation.
-          </span>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-grid"></div>
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
         </div>
-        <!-- Q2 -->
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivQK7r" data-clientid="DivQK7r" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
-          <span id="Spandsr1" data-clientid="Spandsr1" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
-            What is digital ownership on Ownersheep?
-          </span>
-          <span id="Spanw5j5" data-clientid="Spanw5j5" data-displayname="Text 2" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
-            It's a secure, verifiable record of your idea's ownership, protected by blockchain technology.
-          </span>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Transform Your Ideas Into
+                    <span class="gradient-text">Digital Assets</span>
+                </h1>
+                <p class="hero-subtitle">
+                    The world's first AI-powered platform for idea valuation, ownership verification, and intellectual property management. Turn your creativity into valuable digital assets.
+                </p>
+                <div class="hero-cta">
+                    <a href="#download" class="btn btn-primary">
+                        <span class="css-icon rocket"></span>
+                        Get Started Today
+                    </a>
+                    <a href="#how-it-works" class="btn btn-secondary">
+                        <span class="css-icon brain"></span>
+                        See How It Works
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>10K+</h3>
+                        <p>Ideas Valued</p>
+                    </div>
+                    <div class="stat">
+                        <h3>98%</h3>
+                        <p>Accuracy Rate</p>
+                    </div>
+                    <div class="stat">
+                        <h3>$2M+</h3>
+                        <p>Total Valuation</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Q3 -->
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFAQ3" data-clientid="DivFAQ3" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
-          <span id="SpanFAQ3Q" data-clientid="SpanFAQ3Q" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
-            Can I collaborate with others?
-          </span>
-          <span id="SpanFAQ3A" data-clientid="SpanFAQ3A" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
-            Absolutely! Ownersheep fosters a community of innovators for collaboration and co-creation.
-          </span>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Four simple steps to transform your ideas into valuable digital assets</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">
+                        <span class="css-icon large brain"></span>
+                        <span class="step-number">01</span>
+                    </div>
+                    <div class="step-content">
+                        <h3>Submit Your Idea</h3>
+                        <p>Upload your original concept, invention, or creative work to our secure platform with detailed descriptions and supporting materials.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <span class="css-icon large chart"></span>
+                        <span class="step-number">02</span>
+                    </div>
+                    <div class="step-content">
+                        <h3>AI Analysis</h3>
+                        <p>Our advanced AI algorithms analyze market potential, uniqueness, feasibility, and commercial viability to provide comprehensive valuation.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <span class="css-icon large shield"></span>
+                        <span class="step-number">03</span>
+                    </div>
+                    <div class="step-content">
+                        <h3>Digital Ownership</h3>
+                        <p>Receive blockchain-verified ownership certificates and detailed valuation reports that establish your intellectual property rights.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <span class="css-icon large rocket"></span>
+                        <span class="step-number">04</span>
+                    </div>
+                    <div class="step-content">
+                        <h3>Marketplace Ready</h3>
+                        <p>List your validated ideas on our IP marketplace or use our prompt testing lab to refine and enhance your concepts.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Ownersheep</h2>
-      <p>Ownersheep is dedicated to empowering innovators by providing a secure, AI-driven platform for idea valuation, digital ownership, and seamless collaboration. Our mission is to help you protect, develop, and monetize your intellectual property in the digital age.</p>
-    </div>
-  </section>
-
-  <!-- Research Section -->
-  <section id="research" class="research">
-    <div class="container">
-      <h2>Research & Insights</h2>
-      <p>Stay ahead with the latest trends in intellectual property, AI valuation, and digital ownership. Our research hub brings you expert insights and resources to fuel your innovation journey.</p>
-    </div>
-  </section>
-
-
-
-  <!-- FAQ Section -->
-  <div data-type="grid-layout" class="react-grid-item cd-padding" id="DivkuOO" data-clientid="DivkuOO" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
-    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFJMR" data-clientid="DivFJMR" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 1200px; margin-bottom: 0px; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivJLDy" data-clientid="DivJLDy" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 400px; margin-bottom: 0px; position: relative;">
-        <span id="SpandZFM" data-clientid="SpandZFM" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-          <p>FAQ Section </p>
-          <style id="style-section-DivJLDy-SpandZFM">[data-clientId="SpandZFM"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:700;color:var(--vId-color-token-d);padding:10px 0px 0px 0px;text-align:center;line-height:60px;opacity:100%;}</style>
-        </span>
-        <style id="style-section-DivFJMR-DivJLDy">[data-clientId="DivJLDy"]{padding:1px 1px 1px 1px;flex-direction:column;align-items:center;column-gap:0px;row-gap:20px;}</style>
-      </div>
-      <style id="style-section-DivkuOO-DivFJMR">[data-clientId="DivFJMR"]{padding:1px 1px 1px 1px;flex-direction:column;justify-content:center;align-items:center;column-gap:100px;row-gap:25px;}</style>
-    </div>
-    <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivmrHk" data-clientid="DivmrHk" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: center; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; max-width: 800px; margin-bottom: 0px; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivGx1P" data-clientid="DivGx1P" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative;">
-        <!-- Q1 -->
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivKja1" data-clientid="DivKja1" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
-          <span id="Span5yhU" data-clientid="Span5yhU" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
-            How does Ownersheep value my idea?
-          </span>
-          <span id="SpanlvP9" data-clientid="SpanlvP9" data-displayname="Text 1" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
-            Our AI algorithms analyze market trends, competitive landscape, and feasibility to provide a data-driven valuation.
-          </span>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">Advanced tools to maximize the value of your intellectual property</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="css-icon large brain"></span>
+                    </div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Advanced machine learning algorithms evaluate market potential, technical feasibility, and commercial viability with 98% accuracy.</p>
+                    <ul class="feature-list">
+                        <li><span class="css-icon check"></span> Market trend analysis</li>
+                        <li><span class="css-icon check"></span> Competitive landscape mapping</li>
+                        <li><span class="css-icon check"></span> Revenue projection modeling</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="css-icon large shield"></span>
+                    </div>
+                    <h3>Digital Ownership</h3>
+                    <p>Blockchain-based ownership verification provides immutable proof of your intellectual property rights and creation timestamps.</p>
+                    <ul class="feature-list">
+                        <li><span class="css-icon check"></span> Blockchain certificates</li>
+                        <li><span class="css-icon check"></span> Timestamp verification</li>
+                        <li><span class="css-icon check"></span> Legal documentation</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="css-icon large chart"></span>
+                    </div>
+                    <h3>Prompt Testing Lab</h3>
+                    <p>Refine and test your ideas with our credit-based system. Experiment with variations and improvements before final submission.</p>
+                    <ul class="feature-list">
+                        <li><span class="css-icon check"></span> A/B testing capabilities</li>
+                        <li><span class="css-icon check"></span> Performance metrics</li>
+                        <li><span class="css-icon check"></span> Optimization suggestions</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="css-icon large users"></span>
+                    </div>
+                    <h3>IP Marketplace</h3>
+                    <p>Connect with investors, buyers, and collaborators in our curated marketplace for intellectual property and innovative ideas.</p>
+                    <ul class="feature-list">
+                        <li><span class="css-icon check"></span> Verified buyer network</li>
+                        <li><span class="css-icon check"></span> Secure transactions</li>
+                        <li><span class="css-icon check"></span> Royalty management</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <!-- Q2 -->
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivQK7r" data-clientid="DivQK7r" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
-          <span id="Spandsr1" data-clientid="Spandsr1" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
-            What is digital ownership on Ownersheep?
-          </span>
-          <span id="Spanw5j5" data-clientid="Spanw5j5" data-displayname="Text 2" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
-            It's a secure, verifiable record of your idea's ownership, protected by blockchain technology.
-          </span>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Choose Your Plan</h2>
+                <p class="section-subtitle">Flexible pricing options to match your innovation journey</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">0</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p>Perfect for individual creators</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="css-icon check"></span> 3 idea submissions per month</li>
+                        <li><span class="css-icon check"></span> Basic AI valuation</li>
+                        <li><span class="css-icon check"></span> Digital ownership certificate</li>
+                        <li><span class="css-icon check"></span> Community support</li>
+                        <li><span class="css-icon" style="background: #ef4444; border-radius: 50%;"></span> Prompt testing lab</li>
+                        <li><span class="css-icon" style="background: #ef4444; border-radius: 50%;"></span> Marketplace access</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Start Free</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">29</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p>For serious innovators</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="css-icon check"></span> 25 idea submissions per month</li>
+                        <li><span class="css-icon check"></span> Advanced AI analysis</li>
+                        <li><span class="css-icon check"></span> Blockchain verification</li>
+                        <li><span class="css-icon check"></span> 100 testing lab credits</li>
+                        <li><span class="css-icon check"></span> Marketplace access</li>
+                        <li><span class="css-icon check"></span> Priority support</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">99</span>
+                            <span class="period">/month</span>
+                        </div>
+                        <p>For teams and organizations</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="css-icon check"></span> Unlimited submissions</li>
+                        <li><span class="css-icon check"></span> Custom AI models</li>
+                        <li><span class="css-icon check"></span> Team collaboration</li>
+                        <li><span class="css-icon check"></span> Unlimited lab credits</li>
+                        <li><span class="css-icon check"></span> White-label solution</li>
+                        <li><span class="css-icon check"></span> Dedicated support</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Contact Sales</a>
+                </div>
+            </div>
         </div>
-        <!-- Q3 -->
-        <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivFAQ3" data-clientid="DivFAQ3" data-displayname="Flex - Horizontal" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-left: 0px; height: auto; width: 100%; margin-bottom: 0px; position: relative; border-bottom: 1px solid #ffffff1a;">
-          <span id="SpanFAQ3Q" data-clientid="SpanFAQ3Q" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:22px; font-weight:700; color:var(--vId-color-token-d); line-height:32px; margin-bottom:8px;">
-            Can I collaborate with others?
-          </span>
-          <span id="SpanFAQ3A" data-clientid="SpanFAQ3A" data-displayname="Text" class="react-grid-item false" style="display: block; font-size:16px; font-weight:400; color:var(--vId-color-token-d); line-height:26px; margin-bottom:18px;">
-            Absolutely! Ownersheep fosters a community of innovators for collaboration and co-creation.
-          </span>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Ownersheep</h2>
+                    <p class="about-intro">We're revolutionizing the way ideas are valued, protected, and monetized in the digital age.</p>
+                    <p>Founded in 2024, Ownersheep emerged from the need to bridge the gap between creative minds and commercial success. Our AI-powered platform combines cutting-edge machine learning algorithms with blockchain technology to provide unprecedented accuracy in idea valuation and ownership verification.</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <h3>50K+</h3>
+                            <p>Ideas Processed</p>
+                        </div>
+                        <div class="about-stat">
+                            <h3>98.7%</h3>
+                            <p>Accuracy Rate</p>
+                        </div>
+                        <div class="about-stat">
+                            <h3>$50M+</h3>
+                            <p>Total Valuations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="about-graphic">
+                        <div class="about-circle"></div>
+                        <div class="about-circle"></div>
+                        <div class="about-circle"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <span class="css-icon large envelope"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Us</h4>
+                            <p>hello@ownersheep.com</p>
+                            <p>support@ownersheep.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <span class="css-icon large phone"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Call Us</h4>
+                            <p>+1 (555) 123-4567</p>
+                            <p>Mon-Fri 9AM-6PM EST</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <span class="css-icon large location"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Visit Us</h4>
+                            <p>123 Innovation Drive</p>
+                            <p>San Francisco, CA 94102</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a topic</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="sales">Sales Question</option>
+                            <option value="partnership">Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="download" class="cta">
+        <div class="cta-background">
+            <div class="cta-pattern"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Monetize Your Ideas?</h2>
+                <p class="cta-subtitle">Join thousands of innovators who've already transformed their creativity into valuable digital assets.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary btn-large">
+                        <span class="css-icon rocket"></span>
+                        Download for iOS
+                    </a>
+                    <a href="#" class="btn btn-primary btn-large">
+                        <span class="css-icon rocket"></span>
+                        Download for Android
+                    </a>
+                </div>
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <span class="css-icon check"></span>
+                        <span>Free to start</span>
+                    </div>
+                    <div class="cta-feature">
+                        <span class="css-icon check"></span>
+                        <span>Instant valuation</span>
+                    </div>
+                    <div class="cta-feature">
+                        <span class="css-icon check"></span>
+                        <span>Secure & private</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-brain"></i>
+                        <span>Ownersheep</span>
+                    </div>
+                    <p class="footer-description">
+                        Empowering innovators worldwide to transform their ideas into valuable digital assets through AI-powered valuation and blockchain ownership verification.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><span class="css-icon twitter"></span></a>
+                        <a href="#" class="social-link"><span class="css-icon linkedin"></span></a>
+                        <a href="#" class="social-link"><span class="css-icon facebook"></span></a>
+                        <a href="#" class="social-link"><span class="css-icon instagram"></span></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="privacy-policy.html#cookies">Cookie Policy</a></li>
+                        <li><a href="ip-policy.html">IP Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ownersheep. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="terms-of-service.html">Terms</a>
+                    <a href="privacy-policy.html">Privacy</a>
+                    <a href="ip-policy.html">IP Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Terms of Service Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms of Service</h2>
+                <span class="close" onclick="closeModal('termsModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>1. Acceptance of Terms</h3>
+                <p>By accessing and using Ownersheep's services, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                
+                <h3>2. Use License</h3>
+                <p>Permission is granted to temporarily download one copy of Ownersheep's materials for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+                <ul>
+                    <li>modify or copy the materials;</li>
+                    <li>use the materials for any commercial purpose or for any public display;</li>
+                    <li>attempt to reverse engineer any software contained on Ownersheep's website;</li>
+                    <li>remove any copyright or other proprietary notations from the materials.</li>
+                </ul>
+                
+                <h3>3. Idea Submission</h3>
+                <p>When you submit ideas to our platform, you retain ownership of your intellectual property. Ownersheep provides valuation and verification services but does not claim ownership of submitted ideas.</p>
+                
+                <h3>4. Privacy</h3>
+                <p>Your privacy is important to us. Please review our Privacy Policy, which also governs your use of the Service, to understand our practices.</p>
+                
+                <h3>5. Prohibited Uses</h3>
+                <p>You may not use our service:</p>
+                <ul>
+                    <li>for any unlawful purpose or to solicit others to perform illegal acts;</li>
+                    <li>to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances;</li>
+                    <li>to infringe upon or violate our intellectual property rights or the intellectual property rights of others;</li>
+                    <li>to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate;</li>
+                    <li>to submit false or misleading information.</li>
+                </ul>
+                
+                <h3>6. Service Availability</h3>
+                <p>Our service is provided "as is" and on an "as available" basis. We do not warrant that the service will be uninterrupted or error-free.</p>
+                
+                <h3>7. Limitation of Liability</h3>
+                <p>In no event shall Ownersheep or its suppliers be liable for any damages arising out of the use or inability to use the materials on Ownersheep's website.</p>
+                
+                <h3>8. Governing Law</h3>
+                <p>These terms and conditions are governed by and construed in accordance with the laws of California and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+                
+                <p><strong>Last updated:</strong> January 2025</p>
+            </div>
+        </div>
     </div>
-  </div>
 
-  
-
-
-
-
-
- 
-  <!-- Ready/Call-to-action Section (centered, after FAQ) -->
-  <div data-type="grid-layout" class="react-grid-item cd-padding" id="Div7P6I" data-clientid="Div7P6I" data-displayname="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0px auto; height: auto; width: 100%; max-width: 1980px; position: relative;">
-    <div data-cdhs="zoom-out" data-type="grid-layout" class="react-grid-item false cd-padding cdhs-init cdhs-inview" id="Div9Ycp" data-clientid="Div9Ycp" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: 966px; min-height: 490px; position: relative;">
-      <div data-type="grid-layout" class="react-grid-item false cd-padding" id="DivnUmc" data-clientid="DivnUmc" data-displayname="Div" style="display: flex; margin: 0px; height: auto; width: 100%; max-width: fit-content; max-height: 35px; position: relative;">
-        <span id="SpanMnyy" data-clientid="SpanMnyy" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 189px;">
-          <p>Ready? </p>
-          <style id="style-section-DivnUmc-SpanMnyy">[data-clientId="SpanMnyy"]{font-family:var(--vId-font-token-a);font-size:14px;font-weight:500;color:#EFEDFD99;letter-spacing:0px;line-height:20px;padding:0px 0px 0px 0px;opacity:100%;background:linear-gradient(90deg, #E59CFF 0.01%, #BA9CFF 50.01%, #9CB2FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}</style>
-        </span>
-        <style id="style-section-Div9Ycp-DivnUmc">[data-clientId="DivnUmc"]{padding:5px 12px 5px 12px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:#ffffff19;border-radius:32px 32px 32px 32px ;}  [data-clientId="DivnUmc"]:hover{background:linear-gradient(180deg, rgba(3, 0, 20, 0) 5.9%, #5F33B8 124.43%, #BF55F9 155.23%);}</style>
-      </div>
-      <span id="SpanDkJF" data-clientid="SpanDkJF" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative;">
-        <p>Start Innovating </p>
-        <style id="style-section-Div9Ycp-SpanDkJF">[data-clientId="SpanDkJF"]{font-family:var(--vId-font-token-a);font-size:50px;font-weight:600;color:var(--vId-color-token-d);letter-spacing:-2px;line-height:60px;padding:20px 0px 16px 0px;text-align:center;opacity:100%;}</style>
-      </span>
-      <span id="Spans6T8" data-clientid="Spans6T8" data-displayname="Text" class="react-grid-item false" style="display: block; z-index: 1; width: fit-content; height: fit-content; margin: 0px; min-height: 10px; min-width: 16px; position: relative; max-width: 660px;">
-        <p>Download the Ownersheep app and turn your ideas into reality today! </p>
-        <style id="style-section-Div9Ycp-Spans6T8">[data-clientId="Spans6T8"]{font-family:var(--vId-font-token-a);font-size:20px;font-weight:400;color:var(--vId-color-token-d);letter-spacing:0px;line-height:30px;padding:0px 0px 0px 0px;text-align:center;opacity:70%;}</style>
-      </span>
-      <style id="style-section-Div7P6I-Div9Ycp">[data-clientId="Div9Ycp"]{padding:50px 50px 50px 50px;flex-direction:column;justify-content:flex-start;align-items:center;column-gap:5px;row-gap:0px;background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-6c563240);background-position:50% 100%;background-size:contain;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>1. Information We Collect</h3>
+                <p>We collect information you provide directly to us, such as when you create an account, submit ideas, or contact us for support.</p>
+                
+                <h3>2. How We Use Your Information</h3>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide, maintain, and improve our services;</li>
+                    <li>Process transactions and send related information;</li>
+                    <li>Send technical notices, updates, security alerts, and support messages;</li>
+                    <li>Respond to your comments, questions, and customer service requests;</li>
+                    <li>Communicate with you about products, services, offers, and events.</li>
+                </ul>
+                
+                <h3>3. Information Sharing</h3>
+                <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy.</p>
+                
+                <h3>4. Data Security</h3>
+                <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+                
+                <h3>5. AI Processing</h3>
+                <p>Your submitted ideas are processed by our AI algorithms for valuation purposes. This processing is done securely and your ideas remain confidential.</p>
+                
+                <h3>6. Blockchain Technology</h3>
+                <p>Ownership certificates are recorded on blockchain networks. While this provides immutable proof of ownership, blockchain records are public by nature.</p>
+                
+                <h3>7. Cookies</h3>
+                <p>We use cookies and similar technologies to enhance your experience on our platform. You can control cookie settings through your browser.</p>
+                
+                <h3>8. Your Rights</h3>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access the personal information we hold about you;</li>
+                    <li>Request correction of inaccurate information;</li>
+                    <li>Request deletion of your personal information;</li>
+                    <li>Object to processing of your personal information;</li>
+                    <li>Request data portability.</li>
+                </ul>
+                
+                <h3>9. Contact Us</h3>
+                <p>If you have questions about this Privacy Policy, please contact us at privacy@ownersheep.com.</p>
+                
+                <p><strong>Last updated:</strong> January 2025</p>
+            </div>
+        </div>
     </div>
-    <style id="style-Div7P6I">[data-clientId="Div7P6I"]{padding:100px 16px 0px 16px;flex-direction:column;align-items:center;column-gap:0px;row-gap:0px;background-color:var(--vId-color-token-c);background-image:url(https://assets-v2.codedesign.ai/storage/v1/object/public/6881f7b8781d1a3a96ff9f81_2c03f2c0/asset-d48a34f2);background-position:50% 280px;background-size:50 auto;background-repeat:no-repeat no-repeat;background-attachment:scroll;background-clip:border-box;background-origin:padding-box;}</style>
-  </div>
 
+    <!-- Cookie Policy Modal -->
+    <div id="cookieModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cookie Policy</h2>
+                <span class="close" onclick="closeModal('cookieModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>What Are Cookies</h3>
+                <p>Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and provide information to website owners.</p>
+                
+                <h3>How We Use Cookies</h3>
+                <p>We use cookies for several purposes:</p>
+                <ul>
+                    <li><strong>Essential Cookies:</strong> These are necessary for the website to function properly;</li>
+                    <li><strong>Performance Cookies:</strong> These help us understand how visitors interact with our website;</li>
+                    <li><strong>Functionality Cookies:</strong> These enable enhanced functionality and personalization;</li>
+                    <li><strong>Targeting Cookies:</strong> These may be set through our site by advertising partners.</li>
+                </ul>
+                
+                <h3>Types of Cookies We Use</h3>
+                <table class="cookie-table">
+                    <tr>
+                        <th>Cookie Type</th>
+                        <th>Purpose</th>
+                        <th>Duration</th>
+                    </tr>
+                    <tr>
+                        <td>Session Cookies</td>
+                        <td>Essential for website functionality</td>
+                        <td>Session only</td>
+                    </tr>
+                    <tr>
+                        <td>Authentication</td>
+                        <td>Remember your login status</td>
+                        <td>30 days</td>
+                    </tr>
+                    <tr>
+                        <td>Preferences</td>
+                        <td>Remember your settings</td>
+                        <td>1 year</td>
+                    </tr>
+                    <tr>
+                        <td>Analytics</td>
+                        <td>Understand website usage</td>
+                        <td>2 years</td>
+                    </tr>
+                </table>
+                
+                <h3>Managing Cookies</h3>
+                <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+                
+                <h3>Third-Party Cookies</h3>
+                <p>We may also use trusted third-party services that track this information on our behalf. These third parties may place cookies on your device.</p>
+                
+                <h3>Contact Us</h3>
+                <p>If you have any questions about our use of cookies, please contact us at privacy@ownersheep.com.</p>
+                
+                <p><strong>Last updated:</strong> January 2025</p>
+            </div>
+        </div>
+    </div>
 
-
-
- 
-
+    <!-- IP Policy Modal -->
+    <div id="ipModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Intellectual Property Policy</h2>
+                <span class="close" onclick="closeModal('ipModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>1. Your Intellectual Property Rights</h3>
+                <p>You retain all ownership rights to the ideas, inventions, and intellectual property you submit to Ownersheep. Our platform provides valuation and verification services without claiming ownership.</p>
+                
+                <h3>2. License to Use Our Service</h3>
+                <p>By submitting content to our platform, you grant Ownersheep a limited, non-exclusive license to:</p>
+                <ul>
+                    <li>Process and analyze your submissions using our AI algorithms;</li>
+                    <li>Generate valuation reports and ownership certificates;</li>
+                    <li>Store your submissions securely for verification purposes;</li>
+                    <li>Provide marketplace services for your intellectual property.</li>
+                </ul>
+                
+                <h3>3. Confidentiality</h3>
+                <p>We treat all submitted ideas and intellectual property as confidential. We do not share, publish, or disclose your submissions without your explicit consent.</p>
+                
+                <h3>4. Originality Requirement</h3>
+                <p>You warrant that all submissions are original works created by you and do not infringe on the intellectual property rights of others.</p>
+                
+                <h3>5. Blockchain Ownership Records</h3>
+                <p>Ownership certificates are recorded on blockchain networks to provide immutable proof of creation and ownership. These records are cryptographically secured.</p>
+                
+                <h3>6. Copyright Protection</h3>
+                <p>All content on the Ownersheep platform, including text, graphics, logos, and software, is protected by copyright laws and belongs to Ownersheep or its licensors.</p>
+                
+                <h3>7. DMCA Compliance</h3>
+                <p>We respect intellectual property rights and comply with the Digital Millennium Copyright Act (DMCA). If you believe content on our platform infringes your copyright, please contact us.</p>
+                
+                <h3>8. Patent Considerations</h3>
+                <p>While our platform provides valuation services, it does not constitute patent application or legal advice. Consult with qualified professionals for patent protection.</p>
+                
+                <h3>9. Trade Secret Protection</h3>
+                <p>Information you mark as confidential or trade secret will be handled with appropriate security measures to maintain its confidential nature.</p>
+                
+                <h3>10. Dispute Resolution</h3>
+                <p>Any intellectual property disputes will be resolved through binding arbitration in accordance with the rules of the American Arbitration Association.</p>
+                
+                <h3>Contact for IP Issues</h3>
+                <p>For intellectual property concerns, contact us at ip@ownersheep.com.</p>
+                
+                <p><strong>Last updated:</strong> January 2025</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
